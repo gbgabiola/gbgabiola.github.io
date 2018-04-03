@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.landing-page {
+  /* Sizing */
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  text-align: center;
+  color: white;
+
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('../img/workspace.jpeg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.landing-page h1 {
+  font-size: 4em;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.landing-page .btn {
+  display: block;
+  width: 175px;
+  
+  padding: 0.5em;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+
+  color: white;
+  text-decoration: none;
+  font-size: 1.5em;
+
+  border: 3px solid black;
+  border-radius: 20px;
+  background-color: rgba(147, 112, 219, 0.8);
+}
