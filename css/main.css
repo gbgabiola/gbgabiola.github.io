@@ -1,0 +1,529 @@
+/* ==========================================================================
+Base styles
+========================================================================== */
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 1.15px;
+  color: #555555;
+}
+
+img {
+  max-width: 100%;
+}
+
+a:link, a:visited {
+  outline: 0;
+}
+
+a:hover, a:active {
+  text-decoration: none;
+}
+
+a img {
+  border: 0;
+}
+
+.section-header {
+  text-align: center;
+}
+
+.section-header p {
+  font-size: 1.5em;
+}
+
+.section-title {
+  font-size: 3em;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-align: center;
+  color: #555555;
+  text-transform: uppercase;
+  padding: 20px 0;
+}
+
+#page-contact .section-title {
+  font-size: 1.5em;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-align: center;
+  color: #555555;
+  text-transform: uppercase;
+  padding: 20px 0;
+}
+
+
+/* ==========================================================================
+Navigation
+========================================================================== */
+.navbar {
+  width: 100vw;
+}
+
+.navbar-default {
+  background: #FFF;
+  border: none;
+  color: #333;
+  text-transform: uppercase;
+  display: inline-block;
+  text-align: center;
+  position: fixed;
+}
+
+.navbar-nav {
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: inline-block;
+  float: none;
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+.navbar-nav li a {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+  background-color: #FFF;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+  background: none;
+}
+
+
+/* ==========================================================================
+Layout
+========================================================================== */
+#background-img {
+  z-index: -2;
+  width: 100vw;
+  height: 100% !important;
+  position: fixed;
+  text-align: center;
+  background: url('../img/bg.jpg') no-repeat center right;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#page-welcome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100% !important;
+  background-color: rgba(51, 54, 64, .9);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: scroll;
+}
+
+#page-welcome header {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  color: #FFF;
+}
+
+#page-welcome header h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 7em;
+  font-weight: 900;
+  line-height: 1em;
+  text-transform: uppercase;
+}
+
+#page-welcome header h1 span {
+  color: #5FE2D1;
+}
+
+#page-welcome header p {
+  font-size: 1.25em;
+  font-weight: 300;
+  display: inline-block;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  letter-spacing: 1.15px;
+  padding: 0 8px;
+}
+
+#page-welcome header p i {
+  margin-left: 12px;
+  margin-right: 12px;
+  color: #5FE2D1;
+}
+
+#page-welcome .about-me {
+  margin: 50px 15px;
+}
+
+#page-about {
+  padding: 75px 0 95px 0;
+  background: #fff;
+}
+
+#page-about .profile {
+  margin-top: 5px;
+}
+
+#page-about .profile-bio {
+  font-size: 17px;
+}
+
+#page-design {
+  padding: 55px 0 95px 0;
+  background: #f2f2f2;
+}
+
+#page-design .design-group-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#page-design .design-group {
+  height: 250px;
+  width: 350px;
+  margin: 0 10px;
+  border: 1px solid #e2e2e2;
+}
+
+#page-design img {
+  width: 100%;
+  height: auto;
+}
+
+#page-code {
+  padding: 55px 0 75px 0;
+  background: #fff;
+}
+
+#page-code .project {
+  margin-bottom: 20px;
+}
+
+#page-code .project p {
+  font-size: 16px;
+}
+
+#page-code .project-tools {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#page-code .project-tools .project-tools-item {
+  border-radius: 4px;
+  background-color: #55a996;
+  font-size: 12px;
+  color: #fff;
+  margin-right: 5px;
+  padding: 5px 8px;
+}
+
+#page-contact {
+  padding: 55px 0 75px 0;
+  background: rgb(51, 54, 64);
+}
+
+#page-contact header {
+  margin-bottom: 20px;
+}
+
+#page-contact header .section-title {
+  color: #fff;
+}
+
+#page-contact .contact-email {
+  font-size: 20px;
+  color: #fff;
+}
+
+#page-footer {
+  background: #55a996;
+  padding: 35px 0;
+  text-align: center;
+  color: #fff;
+}
+
+#page-footer a {
+  color: #fff;
+}
+
+
+/* ==========================================================================
+Portfolio hover effect
+========================================================================== */
+.hovereffect {
+  width: 100%;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  cursor: default;
+}
+
+.hovereffect .overlay {
+  position: absolute;
+  overflow: hidden;
+  width: 80%;
+  height: 80%;
+  left: 10%;
+  top: 10%;
+  border-bottom: 1px solid #FFF;
+  border-top: 1px solid #FFF;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: scale(0,1);
+  -ms-transform: scale(0,1);
+  transform: scale(0,1);
+}
+
+.hovereffect:hover .overlay {
+  opacity: 1;
+  cursor: zoom-in;
+  filter: alpha(opacity=100);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.hovereffect img {
+  display: block;
+  position: relative;
+  -webkit-transition: all 0.35s;
+  transition: all 0.35s;
+}
+
+.hovereffect:hover img {
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="0.3" /><feFuncG type="linear" slope="0.3" /><feFuncB type="linear" slope="0.3" /></feComponentTransfer></filter></svg>#filter');
+  filter: brightness(0.3);
+  -webkit-filter: brightness(0.3);
+}
+
+.hovereffect h2 {
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  background-color: transparent;
+  color: #FFF;
+  padding: 1em 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: translate3d(0,-100%,0);
+  transform: translate3d(0,-100%,0);
+}
+
+.hovereffect a, hovereffect p {
+  font-size: 16px;
+  letter-spacing: 1.15px;
+  color: #FFF;
+  padding: 1em 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: translate3d(0,100%,0);
+  transform: translate3d(0,100%,0);
+}
+
+.hovereffect:hover a, .hovereffect:hover p, .hovereffect:hover h2 {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.hovereffect .info {
+  color: #fff;
+}
+
+/* ==========================================================================
+Featherlight Overrides
+========================================================================== */
+.featherlight .featherlight-content {
+  padding: 0;
+  border: 0;
+}
+
+.featherlight .featherlight-previous {
+  top: 0;
+  left: 0;
+  right: 85%;
+}
+
+.featherlight .featherlight-next {
+  top: 0;
+  left: 85%;
+  right: 0;
+}
+
+.featherlight .featherlight-previous:hover,
+.featherlight .featherlight-next:hover {
+  background: rgba(54, 54, 54, 0.5);
+}
+
+.featherlight .featherlight-previous span,
+.featherlight .featherlight-next span {
+  width: 80%;
+  font-size: 36px;
+}
+
+
+/* ==========================================================================
+Buttons
+========================================================================== */
+.btn.btn-default {
+  margin: 40px auto;
+  background: transparent;
+  position: relative;
+  color: #fff;
+  font-size: 1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+  padding: 12px 26px 12px;
+  cursor: pointer;
+  border: 2px solid #4cddf3;
+  border-radius: 0;
+  letter-spacing: 2px;
+  pointer-events: auto;
+  border-color: #fff;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+.btn.btn-contact {
+  margin: 40px auto 0;
+  background: #444c5c;
+  position: relative;
+  color: #fff;
+  font-size: 1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+  padding: 12px 26px 12px;
+  cursor: pointer;
+  border: 2px solid #444c5c;
+  border-radius: 0;
+  letter-spacing: 2px;
+  pointer-events: auto;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+.btn.btn-default:hover, .btn.btn-default:active {
+  background: #fff;
+  border-color: #fff;
+  color: fff;
+}
+
+
+/* ==========================================================================
+Helper classes
+========================================================================== */
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.centered {
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
+}
+
+.spacer {
+  width: 100px;
+  height: 2px;
+  margin: auto;
+}
+
+.addBottomPad {
+  padding-bottom: 20px;
+}
+
+.section-subtitle {
+  text-align: center;
+  padding: 30px 0;
+}
+
+/* ==========================================================================
+Responsive Settings
+========================================================================== */
+
+@media (max-width:992px) {
+  #page-about .profile {
+    margin: 0 auto 30px auto;
+  }
+  #page-design img {
+    margin-top: 15px;
+  }
+}
+@media (max-width:768px) {
+  #page-code .project {
+    padding: 20px;
+  }
+}
+@media (max-width: 479px) {
+  #page-welcome header h1 {
+    padding-top: 50px;
+    font-size: 2em;
+  }
+  #page-welcome header p {
+    font-size: 1em;
+    line-height: 3em;
+  }
+  .section-title {
+    font-size: 1.5em;
+  }
+  .section-header p {
+    font-size: 1.2em;
+  }
+  #page-about, #page-skills, #page-code, #page-experience {
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+  }
+  #page-code .project-tools {
+    align-items: center;
+    justify-content: center;
+  }
+  #grid {
+    text-align: center;
+  }
+  #page-about .profile {
+    margin: 0 auto 20px auto;
+  }
+  #page-design img {
+    margin-top: 15px;
+  }
+  #page-footer {
+    padding: 15px 0;
+  }
+}
