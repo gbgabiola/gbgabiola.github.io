@@ -5,9 +5,9 @@ import SEO from '../components/seo'
 import { Content } from '../components/common'
 import WorksGrid from '../components/WorksGrid'
 
-import imgStratus from '../images/stratus.png'
-import img630 from '../images/630.png'
-import imgBg from '../images/bg.png'
+import bridgeLedger from '../images/bridgeledger.png'
+import TechNews from '../images/technews.png'
+import tinderPet from '../images/tinderpet.png'
 
 const Heading = styled.h1`
   font-size: 24px;
@@ -16,9 +16,9 @@ const Heading = styled.h1`
 `
 
 const works = [
-  { name: 'Status Gas', img: imgStratus, link: 'http://stratusgas.com/' },
-  { name: '6:30 Partners', img: img630, link: 'http://6-30partners.com/' },
-  { name: 'Brightgreen', img: imgBg, link: 'https://brightgreen.com/' },
+  { name: 'bridgeLedger', img: bridgeLedger, link: 'https://bridgeledger.netlify.com/' },
+  { name: 'TechNews', img: TechNews, link: 'https://tech-news.netlify.com/' },
+  { name: 'tinderPet', img: tinderPet, link: 'https://tinderpet.netlify.com/' },
 ]
 
 const Works = () => (
