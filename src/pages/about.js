@@ -49,6 +49,12 @@ const professionalExp = [
       'As a Freelance Developer, I do all sorts of front-end projects ranging from Design to HTML/CSS Convertion, Static Site Development with Gatsby, Front-end troubleshooting, and UI prototype development.',
   },
   {
+    company: 'Wideout Workforces Inc. - Creative Developer',
+    info: 'March 2020 - May 2020 (Remote - Makati City, Philippines)',
+    description:
+      'Convert raw assets provided by the clients into rich media ad executions. Translate requirements, graphic designs, and specifications into working ads using core technologies used by the client. Ensuring that all units sent to clients are 100% functional and up to specs. Testing for functionality in different browsers and at different resolutions, and fixing errors when necessary. Embrace and apply company core values – Agility, Quality, and Accountability.',
+  },
+  {
     company: 'TwistResources - QA Engineer',
     info: 'November 2014 - November 2015 (Clark Pampanga, Philippines)',
     description:
@@ -109,7 +115,7 @@ const About = () => (
         <p>
           {`My passion is user experience and creating real business value with a particular goal of understanding the human side of software development. In the words of `}
           <a href="https://blog.codinghorror.com/about-me">Jeff Atwood</a>
-          {`, "Computers are fascinating machines, but they're mostly a reflection of the people using them... you have to study the people `} 
+          {`, "Computers are fascinating machines, but they're mostly a reflection of the people using them... you have to study the people `}
           <em>behind</em>
           {` the software, too."`}
         </p>
