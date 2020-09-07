@@ -28,7 +28,7 @@ const TypistText = styled.h1`
   }
 
   span:not(.Cursor) {
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
   }
 
   .Cursor {
@@ -58,8 +58,8 @@ const ButtonLink = styled(Link)`
   max-width: 100%;
 
   button {
-    color: ${props => props.theme.colors.mainBackground};
-    background-color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.mainBackground};
+    background-color: ${(props) => props.theme.colors.primary};
     height: 60px;
     width: 400px;
     max-width: 100%;
@@ -82,7 +82,7 @@ const ButtonLink = styled(Link)`
   }
 `
 const LearnMoreLink = styled(Link)`
-  color: ${props => props.theme.colors.base};
+  color: ${(props) => props.theme.colors.base};
   font-size: 18px;
   margin-top: 26px;
 `
@@ -131,7 +131,9 @@ const IndexPage = () => (
           {'.'}
         </Typist>
       </TypistText>
-      <p>Want an App? Let&apos;s work together and make your dream into reality.</p>
+      <p>
+        Want an App? Let&apos;s work together and make your dream into reality.
+      </p>
       <ButtonLink to="/contact">
         <button type="button">
           {`YES! I AM AVAILABLE TO HIRE! `}

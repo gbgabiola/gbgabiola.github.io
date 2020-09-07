@@ -5,7 +5,7 @@ import { PrimaryText } from './common'
 
 const Footer = styled.footer`
   min-height: 60px;
-  padding: 0 ${props => props.theme.contentPadding};
+  padding: 0 ${(props) => props.theme.contentPadding};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,7 +16,7 @@ const Footer = styled.footer`
   }
 
   a {
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
   }
 `
 
@@ -30,9 +30,17 @@ const MainFooter = () => (
       {` by `}
       <PrimaryText>Genesis Gabiola</PrimaryText>
       {` using `}
-      <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer">React</a>
+      <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer">
+        React
+      </a>
       {` and `}
-      <a href="https://www.gatsbyjs.org/" target="_blank" rel="noopener noreferrer">Gatsby</a>
+      <a
+        href="https://www.gatsbyjs.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Gatsby
+      </a>
       {`.`}
     </p>
   </Footer>

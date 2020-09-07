@@ -16,7 +16,11 @@ const Heading = styled.h1`
 `
 
 const works = [
-  { name: 'bridgeLedger', img: bridgeLedger, link: 'https://bridgeledger.netlify.com/' },
+  {
+    name: 'bridgeLedger',
+    img: bridgeLedger,
+    link: 'https://bridgeledger.netlify.com/',
+  },
   { name: 'TechNews', img: TechNews, link: 'https://tech-news.netlify.com/' },
   { name: 'tinderPet', img: tinderPet, link: 'https://tinderpet.netlify.com/' },
 ]

@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   margin-bottom: 70px;
 `
 const Name = styled.h1`
-  color: ${props => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primary};
   font-size: 24px;
   font-weight: 900;
   margin-top: 30px;

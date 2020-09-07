@@ -1,7 +1,11 @@
 import React, { Fragment } from 'react'
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTwitter, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import {
+  faTwitter,
+  faGithub,
+  faLinkedin,
+} from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope, faDownload } from '@fortawesome/free-solid-svg-icons'
 import Typist from 'react-typist'
 import 'react-typist/dist/Typist.css'
@@ -16,7 +20,7 @@ const CustomContent = styled(Content)`
   align-items: center;
 
   a {
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
   }
 `
 
@@ -63,8 +67,8 @@ const ButtonLink = styled(Link)`
   max-width: 100%;
 
   button {
-    color: ${props => props.theme.colors.mainBackground};
-    background-color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.mainBackground};
+    background-color: ${(props) => props.theme.colors.primary};
     height: 30px;
     width: 150px;
     max-width: 100%;
@@ -133,7 +137,10 @@ const Contact = () => (
         <ParagraphContainer>
           <p>
             Hey! I am very grateful that you came to this page for my contact
-            information. I am available and currently accepting offers for full-time/part-time remote postions as a Front-end/Full Stack Developer. Let me know if you’re interested, I will be more than happy to help you!
+            information. I am available and currently accepting offers for
+            full-time/part-time remote postions as a Front-end/Full Stack
+            Developer. Let me know if you’re interested, I will be more than
+            happy to help you!
           </p>
           <p>
             {`Know more `}

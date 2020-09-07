@@ -8,10 +8,10 @@ const Experience = styled.div`
     font-size: 18px;
     margin: 0;
     line-height: 1.5;
-    color: ${props => props.theme.colors.highlighted};
+    color: ${(props) => props.theme.colors.highlighted};
 
     & + p {
-      color: ${props => props.theme.colors.highlighted};
+      color: ${(props) => props.theme.colors.highlighted};
       font-style: italic;
       margin: 0 0 1em 0;
     }
