@@ -12,7 +12,7 @@ const Section = styled.section`
 
 const SectionTitle = styled.h2`
   font-size: 24px;
-  color: ${props => props.theme.colors.highlighted};
+  color: ${(props) => props.theme.colors.highlighted};
   margin-top: 0;
   margin-bottom: 1em;
 `
@@ -29,7 +29,7 @@ const SkillsGroup = styled.div`
 const SkillGroupTitle = styled.h3`
   font-size: 18px;
   margin-bottom: 0;
-  color: ${props => props.theme.colors.highlighted};
+  color: ${(props) => props.theme.colors.highlighted};
 `
 
 const personalStuff = [
@@ -104,7 +104,7 @@ const About = () => (
         <SectionTitle>About Me</SectionTitle>
         <p>
           {
-            'Hi! My name is Genesis and I\'m a Full Stack Developer.I live in the City of San Fernando, Pampanga Philippines'
+            "Hi! My name is Genesis and I'm a Full Stack Developer.I live in the City of San Fernando, Pampanga Philippines"
           }
           <span role="img" aria-label="Philippines">
             {' '}
@@ -124,7 +124,7 @@ const About = () => (
         </p>
         <p>For personal things, I:</p>
         <ul>
-          {personalStuff.map(stuff => (
+          {personalStuff.map((stuff) => (
             <li key={stuff}>
               <p>{stuff}</p>
             </li>
@@ -134,7 +134,7 @@ const About = () => (
 
       <Section>
         <SectionTitle>Professional Experience</SectionTitle>
-        {professionalExp.map(profExp => (
+        {professionalExp.map((profExp) => (
           <ProfessionalExperience
             key={profExp.company}
             company={profExp.company}
@@ -149,14 +149,14 @@ const About = () => (
         <SkillGroupTitle>General Development Skills</SkillGroupTitle>
         <SkillsGroup>
           <ul>
-            {skills.set1.map(skill => (
+            {skills.set1.map((skill) => (
               <li key={skill}>
                 <p>{skill}</p>
               </li>
             ))}
           </ul>
           <ul>
-            {skills.set2.map(skill => (
+            {skills.set2.map((skill) => (
               <li key={skill}>
                 <p>{skill}</p>
               </li>
@@ -166,14 +166,14 @@ const About = () => (
         <SkillGroupTitle>React.js Related Skills and Libraries</SkillGroupTitle>
         <SkillsGroup>
           <ul>
-            {skills.set3.map(skill => (
+            {skills.set3.map((skill) => (
               <li key={skill}>
                 <p>{skill}</p>
               </li>
             ))}
           </ul>
           <ul>
-            {skills.set4.map(skill => (
+            {skills.set4.map((skill) => (
               <li key={skill}>
                 <p>
                   {skill}

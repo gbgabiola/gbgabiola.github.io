@@ -14,8 +14,8 @@ const NavBar = styled.nav`
   right: 0;
   height: 100vh;
   width: 280px;
-  background: ${props => props.theme.colors.mainBackground};
-  transform: translateX(${props => (props.isNavVisible ? '0%' : '100%')});
+  background: ${(props) => props.theme.colors.mainBackground};
+  transform: translateX(${(props) => (props.isNavVisible ? '0%' : '100%')});
   transition: all 0.3s ease-in-out;
   ${mq[1]} {
     position: static;
@@ -40,7 +40,7 @@ const NavBar = styled.nav`
     li > a {
       display: block;
       text-decoration: none;
-      color: ${props => props.theme.colors.base};
+      color: ${(props) => props.theme.colors.base};
       font-size: 20px;
       font-weight: bold;
       padding: 0 15px;
@@ -48,15 +48,15 @@ const NavBar = styled.nav`
       transition: all 0.2s ease-in-out;
 
       ${mq[1]} {
-        font-size: ${props => (props.isScrolled ? '16px' : '20px')};
+        font-size: ${(props) => (props.isScrolled ? '16px' : '20px')};
         line-height: 2em;
       }
 
       &.active,
       &:hover,
       &:focus {
-        color: ${props => props.theme.colors.primary};
-        box-shadow: inset 12px 0 0px -7px ${props => props.theme.colors.primary};
+        color: ${(props) => props.theme.colors.primary};
+        box-shadow: inset 12px 0 0px -7px ${(props) => props.theme.colors.primary};
         ${mq[1]} {
           box-shadow: none;
         }
@@ -66,7 +66,7 @@ const NavBar = styled.nav`
 `
 
 const NavOverlay = styled.div`
-  display: ${props => (props.isNavVisible ? 'block' : 'none')};
+  display: ${(props) => (props.isNavVisible ? 'block' : 'none')};
   position: fixed;
   z-index: 9998;
   top: 0;
@@ -75,7 +75,7 @@ const NavOverlay = styled.div`
   right: 0;
   width: 100vw;
   height: 100vh;
-  background-color: ${props => props.theme.colors.highlighted};
+  background-color: ${(props) => props.theme.colors.highlighted};
   opacity: 0.6;
   ${mq[1]} {
     display: none;
@@ -84,7 +84,7 @@ const NavOverlay = styled.div`
 
 const Close = styled.button`
   font-size: 24px;
-  color: ${props => props.theme.colors.highlighted};
+  color: ${(props) => props.theme.colors.highlighted};
   background: transparent;
   border: none;
   padding: 0 15px;

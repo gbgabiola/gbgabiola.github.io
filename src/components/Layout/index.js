@@ -12,15 +12,15 @@ import themes from './theme'
 
 const Wrapper = styled.div`
   min-height: 100vh;
-  background-color: ${props => props.theme.colors.mainBackground};
-  padding-top: ${props => (props.isScrolled ? '70px' : '100px')};
-  color: ${props => props.theme.colors.base};
+  background-color: ${(props) => props.theme.colors.mainBackground};
+  padding-top: ${(props) => (props.isScrolled ? '70px' : '100px')};
+  color: ${(props) => props.theme.colors.base};
 `
 
 const useThemeSwitcher = () => {
   const [theme, setTheme] = useState('dark')
 
-  const onChangeTheme = selectedTheme => {
+  const onChangeTheme = (selectedTheme) => {
     if (typeof window !== `undefined`) {
       window.localStorage.setItem('theme', selectedTheme)
       setTheme(selectedTheme)

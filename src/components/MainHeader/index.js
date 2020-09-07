@@ -11,18 +11,18 @@ import ThemeSwitch from '../ThemeSwitch'
 import mq from '../../utils/breakpoints'
 
 const Header = styled.header`
-  height: ${props => (props.isScrolled ? '70px' : '100px')};
+  height: ${(props) => (props.isScrolled ? '70px' : '100px')};
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 ${props => props.theme.contentPadding};
+  padding: 0 ${(props) => props.theme.contentPadding};
   position: fixed;
   z-index: 9999;
   top: 0;
   left: 0;
   right: 0;
-  background-color: ${props => props.theme.colors.mainBackground};
-  box-shadow: ${props =>
+  background-color: ${(props) => props.theme.colors.mainBackground};
+  box-shadow: ${(props) =>
     props.isScrolled && `0px 0px 10px ${props.theme.colors.headerShadow}`};
   transition: all 0.3s ease-in-out;
 
@@ -46,7 +46,7 @@ const Hamburger = styled.button`
   background: transparent;
   border: none;
   padding: 0 15px;
-  color: ${props => props.theme.colors.highlighted};
+  color: ${(props) => props.theme.colors.highlighted};
   order: 2;
   ${mq[1]} {
     display: none;

@@ -3,8 +3,8 @@ import styled from '@emotion/styled'
 import MyPhoto from '../images/my-image.jpg'
 
 const Avatar = styled.img`
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   border-radius: 50%;
 `
 

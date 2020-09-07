@@ -18,12 +18,12 @@ const Grid = styled.div`
 
 const GridItem = styled.div`
   height: 250px;
-  background-image: url(${props => props.img});
+  background-image: url(${(props) => props.img});
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top left;
   position: relative;
-  border: 1px solid ${props => props.theme.colors.base};
+  border: 1px solid ${(props) => props.theme.colors.base};
   padding-top: 250px;
   margin-bottom: 3rem;
   ${mq[1]} {
@@ -51,13 +51,13 @@ const GridItem = styled.div`
     }
 
     a {
-      color: ${props => props.theme.colors.primary};
+      color: ${(props) => props.theme.colors.primary};
       ${mq[1]} {
-        color: ${props => props.theme.colors.mainBackground};
+        color: ${(props) => props.theme.colors.mainBackground};
         text-decoration: none;
         font-weight: 600;
         font-size: 18px;
-        background-color: ${props => props.theme.colors.primary};
+        background-color: ${(props) => props.theme.colors.primary};
         padding: 0 1.5em;
         line-height: 2.5em;
         text-align: center;
@@ -79,7 +79,7 @@ const GridItem = styled.div`
 
 const InfoGrid = styled.div`
   height: 250px;
-  background-color: ${props => props.theme.colors.mainBackground};
+  background-color: ${(props) => props.theme.colors.mainBackground};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,7 +87,7 @@ const InfoGrid = styled.div`
   text-align: center;
 
   a {
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
   }
 `
 
@@ -106,7 +106,7 @@ const infoStyles = {
 
 const WorksGrid = ({ works }) => (
   <Grid>
-    {works.map(work => (
+    {works.map((work) => (
       <GridItem key={work.name} img={work.img}>
         <div>
           <a href={work.link}>
