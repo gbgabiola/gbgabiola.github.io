@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import styled from '@emotion/styled'
-import { keyframes } from '@emotion/core'
+import { keyframes } from '@emotion/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import Typist from 'react-typist'
@@ -127,8 +127,7 @@ const IndexPage = () => (
           {`I am `}
           <span>Genesis</span>
           {', a '}
-          <span>Front-End Developer</span>
-          .
+          <span>Front-End Developer</span>.
         </Typist>
       </TypistText>
       <p>

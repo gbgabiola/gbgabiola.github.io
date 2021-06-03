@@ -1,4 +1,4 @@
-import { css } from '@emotion/core'
+import { css } from '@emotion/react'
 
 export default css`
   /*! sanitize.css v8.0.0 | CC0 License | github.com/csstools/sanitize.css */

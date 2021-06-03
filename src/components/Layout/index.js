@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Global } from '@emotion/core'
-import { ThemeProvider } from 'emotion-theming'
+import { Global, ThemeProvider } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Scroll } from 'react-fns'
 

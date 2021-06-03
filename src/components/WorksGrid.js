@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import styled from '@emotion/styled'
-import { css } from '@emotion/core'
+import { css } from '@emotion/react'
 
 import { PrimaryText } from './common'
 import mq from '../utils/breakpoints'
