@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
@@ -97,7 +97,7 @@ const Close = styled.button`
 `
 
 const Navigation = ({ isScrolled, isNavVisible, toggleNavigation }) => (
-  <Fragment>
+  <>
     <NavBar isScrolled={isScrolled} isNavVisible={isNavVisible}>
       <Close onClick={toggleNavigation}>
         <FontAwesomeIcon icon={faTimes} />
@@ -130,7 +130,7 @@ const Navigation = ({ isScrolled, isNavVisible, toggleNavigation }) => (
       </ul>
     </NavBar>
     <NavOverlay isNavVisible={isNavVisible} onClick={toggleNavigation} />
-  </Fragment>
+  </>
 )
 
 Navigation.propTypes = {

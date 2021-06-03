@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
 import styled from '@emotion/styled'
 import { keyframes } from '@emotion/core'
@@ -40,7 +40,7 @@ const shake = keyframes`
   10%, 90% {
     transform: translate3d(-1px, 0, 0);
   }
-  
+
   20%, 80% {
     transform: translate3d(2px, 0, 0);
   }
@@ -92,7 +92,7 @@ const Icon = styled(FontAwesomeIcon)`
 `
 
 const IndexPage = () => (
-  <Fragment>
+  <>
     <SEO
       title="Home"
       keywords={[
@@ -110,25 +110,25 @@ const IndexPage = () => (
         <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 0 }}>
           {`I build `}
           <span>websites</span>
-          {'.'}
+          .
           <Typist.Backspace count={9} delay={800} />
           <span>web applications</span>
-          {'.'}
+          .
           <Typist.Backspace count={25} delay={800} />
           {'I love '}
           <span>Node.js</span>
           {' and '}
           <span>React</span>
-          {'.'}
+          .
           <Typist.Backspace count={18} delay={800} />
           <span>project-collaboration</span>
-          {'.'}
+          .
           <Typist.Backspace count={30} delay={800} />
           {`I am `}
           <span>Genesis</span>
           {', a '}
-          <span>Full Stack Developer</span>
-          {'.'}
+          <span>Front-End Developer</span>
+          .
         </Typist>
       </TypistText>
       <p>
@@ -142,7 +142,7 @@ const IndexPage = () => (
       </ButtonLink>
       <LearnMoreLink to="/about">Learn more about me</LearnMoreLink>
     </CustomContent>
-  </Fragment>
+  </>
 )
 
 export default IndexPage

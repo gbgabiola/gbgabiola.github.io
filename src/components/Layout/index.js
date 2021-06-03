@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Global } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
@@ -42,7 +42,7 @@ const Layout = ({ children }) => {
   useThemeEffect()
   return (
     <ThemeProvider theme={themes[theme]}>
-      <Fragment>
+      <>
         <Global styles={globalStyles} />
         <Scroll
           render={({ y }) => {
@@ -56,7 +56,7 @@ const Layout = ({ children }) => {
             )
           }}
         />
-      </Fragment>
+      </>
     </ThemeProvider>
   )
 }

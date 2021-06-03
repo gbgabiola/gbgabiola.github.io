@@ -41,7 +41,7 @@ const MainFooter = () => (
       >
         Gatsby
       </a>
-      {`.`}
+      .
     </p>
   </Footer>
 )

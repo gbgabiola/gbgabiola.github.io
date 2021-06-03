@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 
 import SEO from '../components/seo'
@@ -26,13 +26,13 @@ const works = [
 ]
 
 const Works = () => (
-  <Fragment>
+  <>
     <SEO title="Works" />
     <Content>
       <Heading>Here are some of my recent projects!</Heading>
       <WorksGrid works={works} />
     </Content>
-  </Fragment>
+  </>
 )
 
 export default Works

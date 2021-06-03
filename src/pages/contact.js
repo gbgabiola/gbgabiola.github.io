@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -96,51 +96,50 @@ const Icon = styled(FontAwesomeIcon)`
 `
 
 const Contact = () => (
-  <Fragment>
+  <>
     <SEO title="Contact" />
     <CustomContent>
       <div>
         <TypistText>
           <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 0 }}>
-            {`Awesome! You made a great decision!`}
+            Awesome! You made a great decision!
             <Typist.Backspace count={35} delay={800} />
-            {`Let's have a chat!`}
+            Let&apos;s have a chat!
           </Typist>
         </TypistText>
         <Subtext>Get in touch with me through these contacts:</Subtext>
 
-        <ContactLink href="mailto:genesisbritanicogabiola@gmail.com">
+        <ContactLink href="mailto:gbgabiola@gmail.com">
           <span>
             <FontAwesomeIcon icon={faEnvelope} />
           </span>
-          genesisbritanicogabiola@gmail.com
+          gbgabiola@gmail.com
         </ContactLink>
-        <ContactLink href="https://www.linkedin.com/in/genesisgabiola/">
+        <ContactLink href="https://www.linkedin.com/in/gbgabiola/">
           <span>
             <FontAwesomeIcon icon={faLinkedin} />
           </span>
-          genesisgabiola
+          gbgabiola
         </ContactLink>
-        <ContactLink href="https://twitter.com/genesisgabiola">
+        <ContactLink href="https://twitter.com/gbgabiola">
           <span>
             <FontAwesomeIcon icon={faTwitter} />
           </span>
-          @genesisgabiola
+          @gbgabiola
         </ContactLink>
-        <ContactLink href="https://github.com/genesisgabiola">
+        <ContactLink href="https://github.com/gbgabiola">
           <span>
             <FontAwesomeIcon icon={faGithub} />
           </span>
-          genesisgabiola
+          gbgabiola
         </ContactLink>
 
         <ParagraphContainer>
           <p>
             Hey! I am very grateful that you came to this page for my contact
             information. I am available and currently accepting offers for
-            full-time/part-time remote postions as a Front-end/Full Stack
-            Developer. Let me know if you’re interested, I will be more than
-            happy to help you!
+            full-time/part-time remote postions as a Front-End Developer. Let me
+            know if you’re interested, I will be more than happy to help you!
           </p>
           <p>
             {`Know more `}
@@ -152,19 +151,19 @@ const Contact = () => (
           <p>
             <strong>
               <PrimaryText>Genesis Gabiola</PrimaryText>
-              {` - Full Stack Developer`}
+              {` - Front-End Developer`}
             </strong>
           </p>
           <ButtonLink to="/contact">
             <button type="button">
-              {`DOWNLOAD RESUME!`}
+              DOWNLOAD RESUME!
               <Icon icon={faDownload} />
             </button>
           </ButtonLink>
         </ParagraphContainer>
       </div>
     </CustomContent>
-  </Fragment>
+  </>
 )
 
 export default Contact

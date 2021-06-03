@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Genesis Gabiola's Portfolio Website`,
+    title: `Genesis Gabiola - Front-End Developer`,
     description: `Genesis Gabiola, a Front-end Developer, builds aesthetic and performant websites and web applications for your business or personal needs.`,
     author: `Genesis Gabiola`,
   },
@@ -18,8 +18,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `genesisgabiola-portfolio-website`,
-        short_name: `genesisgabiola-site`,
+        name: `genesisgabiola-portfolio`,
+        short_name: `genesisgabiola`,
         start_url: `/`,
         background_color: `#FFFFFF`,
         theme_color: `#FF3B3F`,

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 
 import SEO from '../components/seo'
@@ -92,25 +92,24 @@ const skills = {
 }
 
 const About = () => (
-  <Fragment>
+  <>
     <SEO title="About" />
     <Content>
       <Profile
         name="Genesis Gabiola"
-        title="Front-end | Full Stack | Developer | Engineer | Programmer | Coder"
+        title="Programmer | Coder | Engineer | IT | Front-End Developer"
       />
 
       <Section>
         <SectionTitle>About Me</SectionTitle>
         <p>
-          {
-            "Hi! My name is Genesis and I'm a Full Stack Developer.I live in the City of San Fernando, Pampanga Philippines"
-          }
+          Hi! My name is Genesis and I&apos;m a Front-End Developer. I live in
+          the City of San Fernando, Pampanga Philippines
           <span role="img" aria-label="Philippines">
             {' '}
             🇵🇭
           </span>
-          {`.`}
+          .
         </p>
         <p>
           {`My passion is user experience and creating real business value with a particular goal of understanding the human side of software development. In the words of `}
@@ -120,7 +119,9 @@ const About = () => (
           {` the software, too."`}
         </p>
         <p>
-          {`I want to use the technology based solutions, to help solve real world challenges. I want to work with you on improving your business by creating software, website or apps that works for you.`}
+          I want to use the technology based solutions, to help solve real world
+          challenges. I want to work with you on improving your business by
+          creating software, website or apps that works for you.
         </p>
         <p>For personal things, I:</p>
         <ul>
@@ -185,7 +186,7 @@ const About = () => (
         </SkillsGroup>
       </Section>
     </Content>
-  </Fragment>
+  </>
 )
 
 export default About
