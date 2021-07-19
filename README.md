@@ -1,14 +1,14 @@
-# Personal Website
+# Personal Portfolio Website
 
 
-The site was created with with HTML, CSS, & bootstrap followed by some media queries for other devices.
+Personal Portfolio Website is a kodego's challenge project to contain all the projects I created.
 
-## Additional improvements on the future
 
-- Add a blog site
-- Add a navigation
-- Add a hamburger-style navigation on the mobile version
-- Add more projects
-- Add interactive animation
+## Built With
+
+- HTML5
+- CSS3
+
+Visit the [live site](https://gbgabiola.github.io/).
 
 Feel free to email me for any feedback for this site, I would really appreciate it. Thanks!
