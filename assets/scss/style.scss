@@ -1,0 +1,134 @@
+$color-primary: #4ecdc4;
+$color-secondary: #ff6b6b;
+$color-tertiary: #ffe66d;
+/* hover .6 */
+$color-light: #f7fff7;
+$color-dark: #292f36;
+$max-width: 1100px;
+
+$ff-primary: 'Lato', sans-serif; // 'Roboto', sans-serif;
+$ff-accent: 'Playfair Display', serif;
+$shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
+$shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.06);
+
+/* Core */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  // font-size: 62.5%;
+  font-size: 55%;
+}
+
+body {
+  font-family: $ff-primary;
+  font-size: 1.8rem;
+}
+
+h1 {
+  font-size: 6rem;
+}
+
+h2 {
+  font-size: 4.2rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Utilities */
+
+/* Nav */
+#navbar {
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    opacity: 0.9;
+
+    li {
+      padding: 1.6rem 1.5rem;
+      font-size: 1.6rem;
+      white-space: nowrap;
+    }
+
+    // .logo {
+    //   flex: 1;
+    // }
+
+    .logo,
+    .toggle {
+      a {
+        font-size: 2rem;
+      }
+    }
+
+    .toggle {
+      cursor: pointer;
+    }
+
+    .nav-item {
+      display: none;
+      order: 2;
+
+      &.active {
+        display: block;
+      }
+    }
+
+    .bars {
+      position: relative;
+      display: inline-block;
+      width: 18px;
+      height: 2px;
+      background-color: $color-secondary;
+    }
+
+    .bars::before,
+    .bars::after {
+      position: absolute;
+      display: block;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background-color: $color-tertiary;
+    }
+
+    .bars::before {
+      top: 5px;
+    }
+
+    .bars::after {
+      top: -5px;
+    }
+  }
+}
+
+/* About */
+
+/* Projects */
+
+/* Contact */
+
+/* Footer */
