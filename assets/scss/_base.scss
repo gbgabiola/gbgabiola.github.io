@@ -1,0 +1,49 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: $color-light;
+  color: $color-dark;
+  font-family: $ff-primary;
+  font-size: 1.8rem;
+}
+
+h1 {
+  font-size: 6rem;
+  font-weight: 900;
+}
+
+h2 {
+  font-size: 4.2rem;
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  color: $color-dark;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+section {
+  padding: 10rem 2rem;
+  text-align: center;
+}

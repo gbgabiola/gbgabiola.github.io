@@ -1,0 +1,48 @@
+// Variables
+$color-primary: #4ecdc4;
+$color-secondary: #ff6b6b;
+$color-tertiary: #ffe66d;
+$color-light: #f4f4f4;
+$color-medium: #ccc;
+$color-dark: #292f36; // #333
+
+$ff-primary: 'Lato', sans-serif; // 'Roboto', sans-serif;
+$ff-accent: 'Playfair Display', serif;
+$shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
+$shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.06);
+
+$width-website: 1280px;
+$bg-image: url('../img/bg.jpg');
+
+// Function: Set Text Color
+@function set-text-color($color) {
+  @if (lightness($color) > 50) {
+    @return $color-dark; // #000
+  } @else {
+    @return $color-light; // #fff;
+  }
+}
+
+// Mixin: Breakpoint
+@mixin respond($breakpoint) {
+  @if $breakpoint == mobile {
+    @media only screen and (max-width: 28.75em) {
+      @content;
+    } // 460px
+  }
+  @if $breakpoint == tablet {
+    @media only screen and (max-width: 61.25em) {
+      @content;
+    } // 980px
+  }
+  @if $breakpoint == laptop {
+    @media only screen and (max-width: 75em) {
+      @content;
+    } // 1200px
+  }
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    } // 1800px
+  }
+}

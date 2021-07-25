@@ -1,0 +1,214 @@
+/* Nav */
+#navbar {
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    background-color: $color-dark;
+    opacity: 0.9;
+  }
+
+  li {
+    padding: 1.6rem 1.5rem;
+    font-size: 1.6rem;
+    white-space: nowrap;
+  }
+
+  .logo {
+    flex: 1;
+  }
+
+  .logo,
+  .toggle {
+    a {
+      font-size: 2rem;
+    }
+  }
+
+  .toggle {
+    cursor: pointer;
+  }
+
+  .nav-item {
+    // display: none;
+    // order: 2;
+    display: block;
+    width: auto;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  a {
+    color: $color-light;
+  }
+}
+
+// Home
+#home {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: $bg-image no-repeat center center/cover;
+  color: $color-light;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: '';
+    background-color: #000;
+    // background-color: $color-dark;
+    opacity: 0.7;
+  }
+
+  * {
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+}
+
+/* About */
+#about {
+  h2 {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Projects */
+#projects {
+  h2 {
+    margin-bottom: 2rem;
+  }
+}
+
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 4rem;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-bottom: 6rem;
+}
+
+.project {
+  max-width: 500px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.06);
+  }
+
+  h3 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Contact */
+#contact {
+  padding: 5rem 2rem;
+  h2 {
+    margin-bottom: 1rem;
+  }
+  .contact__list {
+    display: flex;
+    justify-content: center;
+
+    li {
+      margin: 2rem 2rem;
+      font-size: 3rem;
+    }
+
+    a {
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+}
+
+/* Footer */
+footer {
+  padding: 2rem;
+  a {
+    color: $color-light;
+  }
+}
+
+/* Mobile: 460px / 16px = 28.75em */
+@include respond(mobile) {
+  html {
+    font-size: 55%;
+  }
+
+  .nav-item {
+    display: none;
+    width: 100%;
+    text-align: center;
+    order: 2;
+  }
+
+  /* Toggle Nav */
+  .toggle {
+    cursor: pointer;
+  }
+
+  .bars {
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    height: 2px;
+    background-color: $color-secondary;
+    transition: background-color 0.2s ease-out;
+
+    &::before,
+    &::after {
+      position: absolute;
+      display: block;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background-color: $color-tertiary;
+      transition: all 0.2s ease-out;
+    }
+
+    &::before {
+      top: 5px;
+    }
+
+    &::after {
+      top: -5px;
+    }
+  }
+
+  #projects {
+    h2 {
+      font-size: 4rem;
+      padding-bottom: 2rem;
+    }
+  }
+}

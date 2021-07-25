@@ -1,0 +1,110 @@
+.container {
+  max-width: $width-website;
+  padding: 0 1.5rem;
+  margin: auto;
+  overflow: hidden;
+}
+
+// Buttons
+%btn-shared {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border: none;
+  cursor: pointer;
+
+  // transition: all .5s;
+}
+
+.btn {
+  @extend %btn-shared;
+  background-color: $color-primary;
+  color: set-text-color($color-primary);
+  transition: all 0.3s ease-out;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: $color-secondary;
+    color: set-text-color($color-secondary);
+
+    & > i {
+      transform: translateX(2px);
+    }
+  }
+
+  & > i {
+    margin-left: 10px;
+    transform: translateX(0);
+    transition: transform 0.3s ease-out;
+  }
+
+  &-light {
+    @extend %btn-shared;
+    background-color: $color-light;
+    color: set-text-color($color-light);
+  }
+
+  &-dark {
+    @extend %btn-shared;
+    background-color: $color-dark;
+    color: set-text-color($color-dark);
+
+    &:hover {
+      background-color: $color-light;
+      color: set-text-color($color-light);
+    }
+  }
+}
+
+button[class^='btn-']:hover,
+a[class^='btn-']:hover,
+input[class^='btn-']:hover {
+  background-color: $color-primary;
+  color: set-text-color($color-primary);
+}
+
+// Backgrounds
+.bg {
+  &-primary {
+    background-color: $color-primary;
+    color: set-text-color($color-primary);
+  }
+
+  &-secondary {
+    background-color: $color-secondary;
+    color: set-text-color($color-secondary);
+  }
+
+  &-dark {
+    background-color: $color-dark;
+    color: set-text-color($color-dark);
+  }
+
+  &-light {
+    background-color: $color-light;
+    color: set-text-color($color-light);
+  }
+
+  &-medium {
+    background-color: $color-medium;
+    color: set-text-color($color-medium);
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.section-title {
+  display: block;
+  padding-bottom: 1rem;
+  font-size: 3rem;
+  text-transform: uppercase;
+}
+
+.bottom-line {
+  display: block;
+  width: 3rem;
+  height: 2px;
+  margin: 0 auto 1rem auto;
+  background-color: $color-primary;
+}
