@@ -27,111 +27,124 @@
     />
     <title>Genesis Gabiola | Front-End Developer</title>
     <link rel="shortcut icon" href="./favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
     <!-- Nav -->
     <nav id="navbar">
       <ul class="nav-menu">
-        <li class="nav-brand">
+        <li class="logo">
+          <a href="#">Genesis Gabiola</a>
           <!-- <a href="#home"><img src="./assets/img/profile.jpg" alt="Profile Image" /></a> -->
         </li>
-        <li class="nav-item"><a href="#home">Home</a></li>
+        <!-- <li class="nav-item"><a href="#home">Home</a></li> -->
         <li class="nav-item"><a href="#about">About</a></li>
         <li class="nav-item"><a href="#projects">Projects</a></li>
         <li class="nav-item"><a href="#contact">Contact</a></li>
+        <li class="toggle"><span class="bars"></span></li>
       </ul>
     </nav>
     <!-- nav#navbar -->
 
     <!-- Home -->
-    <header id="home">
-      <h1>I am Genesis, a Front-End Developer.</h1>
+    <header id="home" class="text-center">
+      <h1>I am <span class="primary">Genesis</span>, a <span>Front&nbsp;End Developer</span>.</h1>
       <p>Want an App? Let's work together and make your dream into reality.</p>
-      <a href="#contact">Hire me</a>
+      <a href="#contact" class="btn">Hire me</a>
     </header>
     <!-- header#home -->
 
     <!-- About -->
-    <section id="about">
-      <p>
-        Hi! My name is Genesis and I'm a Front-End Developer. I live in the City of San Fernando, Pampanga Philippines
-        🇵🇭.
-      </p>
+    <section id="about" class="bg-light">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="bottom-line"></div>
+        <p>
+          Hi! My name is Genesis and I'm a Front-End Developer. I live in the City of San Fernando, Pampanga Philippines
+          🇵🇭.
+        </p>
 
-      <p>
-        My passion is user experience and creating real business value with a particular goal of understanding the human
-        side of software development. In the words of Jeff Atwood, "Computers are fascinating machines, but they're
-        mostly a reflection of the people using them... you have to study the people behind the software, too."
-      </p>
+        <p>
+          My passion is user experience and creating real business value with a particular goal of understanding the
+          human side of software development. In the words of Jeff Atwood, "Computers are fascinating machines, but
+          they're mostly a reflection of the people using them... you have to study the people behind the software,
+          too."
+        </p>
 
-      <p>
-        I want to use the technology based solutions, to help solve real world challenges. I want to work with you on
-        improving your business by creating software, website or apps that works for you.
-      </p>
+        <p>
+          I want to use the technology based solutions, to help solve real world challenges. I want to work with you on
+          improving your business by creating software, website or apps that works for you.
+        </p>
+      </div>
     </section>
     <!-- section#about -->
 
     <!-- Projects -->
-    <section id="projects">
-      <h2>Here are some of my recent projects!</h2>
-      <div class="projects-container">
-        <div class="project">
-          <a href="" class="project__tile">
-            <h3 class="project__title">Project 1</h3>
-            <img src="./assets/img/projects/project1.png" alt="Project 1" class="project__img" />
-          </a>
+    <section id="projects" class="bg-dark">
+      <div class="container">
+        <h2 class="section-title">Here are some of my recent projects!</h2>
+        <div class="bottom-line"></div>
+        <div class="projects-container">
+          <div class="project">
+            <a href="" class="project__tile">
+              <h3 class="project__title">Project 1</h3>
+              <img src="./assets/img/projects/project1.png" alt="Project 1" class="project__img" />
+            </a>
+          </div>
+
+          <div class="project">
+            <a href="" class="project__tile">
+              <h3 class="project__title">Project 2</h3>
+              <img src="./assets/img/projects/project2.png" alt="Project 2" class="project__img" />
+            </a>
+          </div>
+
+          <div class="project">
+            <a href="" class="project__tile">
+              <h3 class="project__title">Project 3</h3>
+              <img src="./assets/img/projects/project3.png" alt="Project 3" class="project__img" />
+            </a>
+          </div>
         </div>
 
-        <div class="project">
-          <a href="" class="project__tile">
-            <h3 class="project__title">Project 2</h3>
-            <img src="./assets/img/projects/project2.png" alt="Project 2" class="project__img" />
-          </a>
-        </div>
-
-        <div class="project">
-          <a href="" class="project__tile">
-            <h3 class="project__title">Project 3</h3>
-            <img src="./assets/img/projects/project3.png" alt="Project 3" class="project__img" />
-          </a>
-        </div>
+        <a href="https://github.com/gbgabiola?tab=repositories" class="btn" target="_blank"
+          >See more <i class="fas fa-chevron-right"></i
+        ></a>
       </div>
-
-      <a href="https://github.com/gbgabiola?tab=repositories" class="btn btn-dark" target="_blank"
-        >See more <i class="fas fa-chevron-right"></i
-      ></a>
     </section>
     <!-- section#projects -->
 
     <!-- Contact -->
-    <section id="contact" class="contact">
-      <h2>Let's have a chat!</h2>
-      <p>Get in touch with me through these contacts:</p>
-      <ul id="contact__list">
-        <li>
-          <a href="https://github.com/gbgabiola"><i class="fab fa-github"></i></a>
-        </li>
-        <li>
-          <a href="https://www.linkedin.com/in/gbgabiola"><i class="fab fa-linkedin"></i></a>
-        </li>
-        <li>
-          <a href="https://twitter.com/gbgabiola"><i class="fab fa-twitter"></i></a>
-        </li>
-        <li>
-          <a href="https://instagram.com/gbgabiola/"><i class="fab fa-instagram"></i></a>
-        </li>
-        <li>
-          <a href="https://facebook.com/gbgabiola"><i class="fab fa-facebook"></i></a>
-        </li>
-      </ul>
+    <section id="contact" class="bg-light">
+      <div class="container">
+        <h2 class="section-title">Let's have a chat!</h2>
+        <div class="bottom-line"></div>
+        <p>Get in touch with me through these contacts:</p>
+        <ul class="contact__list">
+          <li>
+            <a href="https://github.com/gbgabiola"><i class="fab fa-github"></i></a>
+          </li>
+          <li>
+            <a href="https://linkedin.com/in/gbgabiola"><i class="fab fa-linkedin"></i></a>
+          </li>
+          <li>
+            <a href="https://twitter.com/gbgabiola"><i class="fab fa-twitter"></i></a>
+          </li>
+          <li>
+            <a href="https://instagram.com/gbgabiola/"><i class="fab fa-instagram"></i></a>
+          </li>
+          <li>
+            <a href="https://facebook.com/gbgabiola"><i class="fab fa-facebook"></i></a>
+          </li>
+        </ul>
+      </div>
     </section>
     <!-- section#contact -->
 
     <!-- Footer -->
-    <footer>
+    <footer class="bg-dark text-center">
       <p>Made with ❤️ by <a href="https://genesisgabiola.tech/">Genesis Gabiola</a> using HTML5 and CSS3</p>
     </footer>
 
