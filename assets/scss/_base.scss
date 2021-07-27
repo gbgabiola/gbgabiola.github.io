@@ -3,35 +3,50 @@
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 
 html {
-  box-sizing: border-box;
-  font-size: 62.5%;
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: $color-light;
-  color: $color-dark;
+  background-color: $clr-grey-10;
+  color: $clr-grey-1;
+  font-family: $ff-secondary;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: $spacing;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
   font-family: $ff-primary;
-  font-size: 1.8rem;
 }
 
 h1 {
-  font-size: 6rem;
-  font-weight: 900;
+  font-size: 3rem;
 }
 
 h2 {
-  font-size: 4.2rem;
-  font-weight: 700;
+  font-size: 2rem;
 }
 
-a {
-  text-decoration: none;
-  color: $color-dark;
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 0.875rem;
+}
+
+p {
+  margin-bottom: 1.25rem;
+  color: $clr-grey-5;
 }
 
 ul {
@@ -39,11 +54,46 @@ ul {
 }
 
 img {
-  max-width: 100%;
   display: block;
+
+  &:not(.logo) {
+    width: 100%;
+  }
 }
 
-section {
-  padding: 10rem 2rem;
-  text-align: center;
+a {
+  text-decoration: none;
+}
+
+@include mq(tablet) {
+  body {
+    font-size: 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+
+  p {
+    margin-bottom: 2rem;
+  }
 }
