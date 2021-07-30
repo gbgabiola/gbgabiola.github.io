@@ -65,6 +65,10 @@ a {
   text-decoration: none;
 }
 
+span {
+  color: $clr-secondary;
+}
+
 @include mq(tablet) {
   body {
     font-size: 1rem;

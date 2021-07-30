@@ -64,6 +64,10 @@ a {
   text-decoration: none;
 }
 
+span {
+  color: #40cfd4;
+}
+
 @media only screen and (min-width: 48em) {
   body {
     font-size: 1rem;
@@ -261,9 +265,6 @@ header {
 .container h1 {
   color: #fff;
 }
-.container h1 span {
-  color: #40cfd4;
-}
 .container p {
   color: #fff;
   max-width: 25rem;
@@ -274,9 +275,6 @@ header {
 .section__title h2 {
   text-align: center;
   text-transform: uppercase;
-}
-.section__title span {
-  color: #40cfd4;
 }
 
 #about,

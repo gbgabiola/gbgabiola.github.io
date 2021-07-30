@@ -85,10 +85,6 @@ header {
   h1 {
     color: $clr-light;
     // text-transform: uppercase;
-
-    span {
-      color: $clr-secondary;
-    }
   }
 
   p {
@@ -103,10 +99,6 @@ header {
   h2 {
     text-align: center;
     text-transform: uppercase;
-  }
-
-  span {
-    color: $clr-secondary;
   }
 }
 
