@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/gbgabiola
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://gbgabiola.github.io
+  * I am gbgabiola (https://keybase.io/gbgabiola) on keybase.
+  * I have a public key ASCyxuqg-DnSn9q7ks1yMcNiHaeaPUlKlCGJR7Qc6ykVTwo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0101e0b37e7aeae295bd713fa439299e95592fd1d8e832d877856d869db33c1fb9bd0a",
+      "host": "keybase.io",
+      "kid": "0120b2c6eaa0f839d29fdabb92cd7231c3621da79a3d494a94218947b41ceb29154f0a",
+      "uid": "f86ded5395dd0816af7823cf438fdf19",
+      "username": "gbgabiola"
+    },
+    "merkle_root": {
+      "ctime": 1643296021,
+      "hash": "cc72cd1079dd20debd4911b235f1f1d5eb0514cafdabe8e6dfacf0c012ec1a7dd15389c80add0419f5fd9a471ffcf02c8e922499f0b361d13d10a9d2a206e40d",
+      "hash_meta": "101ad184b7103025c1bbaeea99d54eb5d5e3b7e5eb7ab91f169d0f81c0dcf075",
+      "seqno": 21735902
+    },
+    "service": {
+      "entropy": "tRthudzHTFdul4S1yJDXHOMw",
+      "hostname": "gbgabiola.github.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.9.0"
+  },
+  "ctime": 1643296042,
+  "expire_in": 504576000,
+  "prev": "fff8b3c82ca1aaa8d71f83537144e7736574ea88b51452f6775380ba854852f8",
+  "seqno": 14,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgssbqoPg50p/au5LNcjHDYh2nmj1JSpQhiUe0HOspFU8Kp3BheWxvYWTESpcCDsQg//izyCyhqqjXH4NTcUTnc2V06oi1FFL2d1OAuoVIUvjEIITkJMViZm5wbH9SM/YGzP5k7LCqjHAYf368dJYP1rslAgHCo3NpZ8RAPr2eNDiOg54FMeR7MJxYKF84VV8BBg9bToyQAkWCfY2Ht4tLQGDrXqWVjinkhhyNhRAz3Yf3mulEW2RqBTQ/CqhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIBhythT+acO76DxBlekEXYcpy2cX5UEwTzwk46NRiJylo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/gbgabiola
+
+==================================================================
