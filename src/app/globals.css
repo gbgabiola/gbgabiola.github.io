@@ -1,0 +1,309 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+  --background: #292929;
+  --foreground: #fff;
+  --primary: #5fe2d1;
+  --border: #686868;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --background: #fff;
+  --foreground: #111;
+  --primary: #c82026;
+  --border: #ccc;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family:
+    'Lato',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+a {
+  color: var(--primary);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 0.15em;
+}
+
+button,
+.button {
+  font: inherit;
+}
+
+button {
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+.header {
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: auto;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.navigation a {
+  color: var(--foreground);
+}
+
+.navigation a[aria-current='page'] {
+  color: var(--primary);
+  text-decoration-thickness: 0.15em;
+}
+
+.content {
+  max-width: 840px;
+  margin: auto;
+  padding: 3rem 1.25rem;
+  min-height: calc(100svh - 190px);
+}
+
+.content section + section {
+  margin-top: 2.5rem;
+}
+
+.footer {
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+}
+
+.hero {
+  min-height: 60svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.hero-title {
+  color: var(--primary);
+  font-size: clamp(2rem, 6vw, 4rem);
+  min-height: 3.75em;
+  margin: 0;
+  width: 100%;
+}
+
+.button {
+  display: inline-block;
+  padding: 1rem 1.5rem;
+  border-radius: 0.4rem;
+  background: var(--primary);
+  color: var(--background);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.profile {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.profile h1 {
+  color: var(--primary);
+}
+
+.experience {
+  margin-bottom: 2rem;
+}
+
+.experience h3 {
+  margin-bottom: 0;
+}
+
+.experience .period {
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+.skills,
+.projects {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.skills ul {
+  padding-left: 1.25rem;
+}
+
+.project {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.project a {
+  display: block;
+}
+
+.project h2 {
+  padding: 0 1rem;
+}
+
+.project-image {
+  width: 100%;
+  aspect-ratio: 1.5;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+.project-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.contacts {
+  list-style: none;
+  padding: 0;
+}
+
+.contacts li {
+  margin-bottom: 0.75rem;
+}
+
+.theme-light {
+  display: none;
+}
+
+[data-theme='light'] .theme-light {
+  display: inline;
+}
+
+[data-theme='light'] .theme-dark {
+  display: none;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  transform: translateY(-150%);
+  padding: 0.75rem;
+  background: var(--background);
+  z-index: 10;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .skills,
+  .projects {
+    grid-template-columns: 1fr;
+  }
+
+  .header-inner nav {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .navigation {
+    justify-content: space-between;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
