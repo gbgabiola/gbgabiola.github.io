@@ -1,44 +1,53 @@
 import Link from 'next/link';
 
 import { pageMetadata } from '../../lib/metadata';
+import { profile } from '../../data/profile';
+import ResumeLink from '../../components/resume-link';
 
 export const metadata = pageMetadata('Contact');
-
-const contacts = [
-  ['mailto:gbgabiola@gmail.com', 'gbgabiola@gmail.com'],
-  ['https://www.linkedin.com/in/gbgabiola/', 'LinkedIn: gbgabiola'],
-  ['https://twitter.com/gbgabiola', 'Twitter: @gbgabiola'],
-  ['https://github.com/gbgabiola', 'GitHub: gbgabiola'],
-];
 
 export default function ContactPage() {
   return (
     <>
-      <h1>Let’s have a chat!</h1>
+      <h1>Let’s build something useful.</h1>
 
-      <p>Get in touch with me through these contacts:</p>
-
-      <ul className="contacts">
-        {contacts.map(([href, label]) => (
-          <li key={href}>
-            <a href={href}>{label}</a>
-          </li>
-        ))}
-      </ul>
+      <p>{profile.availability}</p>
 
       <p>
-        I am available and currently accepting offers for part-time remote positions as a Full Stack Developer. Let me
-        know if you’re interested; I will be happy to help!
+        Tell me about your project, the problem you want to solve, and where you need support. I’m interested in work
+        across frontend and backend development.
       </p>
 
-      <p>
-        Know more <Link href="/about">about me</Link>.
-      </p>
+      <section aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Get in touch</h2>
 
-      <p>Thank you,</p>
+        <p>
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
+        </p>
+
+        <ul className="contacts">
+          {profile.socialLinks.map(link => (
+            <li key={link.href}>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="resume-heading">
+        <h2 id="resume-heading">Experience at a glance</h2>
+
+        <p>Download my resume for an overview of my experience and technical background.</p>
+
+        <ResumeLink />
+
+        <p>
+          Prefer to read it online? <a href={profile.resume.viewUrl}>View resume on Google Drive</a>.
+        </p>
+      </section>
 
       <p>
-        <strong>Genesis Gabiola — Software Engineer</strong>
+        Learn more <Link href="/about">about my experience</Link> or explore <Link href="/works">my projects</Link>.
       </p>
     </>
   );

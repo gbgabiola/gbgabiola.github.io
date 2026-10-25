@@ -1,66 +1,49 @@
 import Image from 'next/image';
 
 import { pageMetadata } from '../../lib/metadata';
+import { profile } from '../../data/profile';
+import { interests, professionalExp, skillGroups } from '../../data/about';
+import ResumeLink from '../../components/resume-link';
 import photo from '../../images/my-image.jpg';
-import { personalStuff, professionalExp, skills } from '../../data/about';
 
 export const metadata = pageMetadata('About');
-
-const groups = [
-  ['General Development Skills', [...skills.set1, ...skills.set2]],
-  ['React.js Related Skills and Libraries', [...skills.set3, ...skills.set4]],
-];
 
 export default function AboutPage() {
   return (
     <>
       <header className="profile">
-        <Image src={photo} alt="Genesis Gabiola" width={150} height={150} className="avatar" />
+        <Image src={photo} alt={profile.name} width={150} height={150} className="avatar" />
 
-        <h1>Genesis Gabiola</h1>
+        <h1>{profile.name}</h1>
 
-        <p>Programmer | Coder | Software Engineer | IT | Full Stack Developer</p>
+        <p>
+          {profile.role} · {profile.specialization}
+        </p>
+
+        <p>{profile.location}</p>
+
+        <ResumeLink />
       </header>
 
-      <section>
-        <h2>About Me</h2>
+      <section aria-labelledby="about-heading">
+        <h2 id="about-heading">About me</h2>
+
+        <p>{profile.summary}</p>
 
         <p>
-          Hi! My name is Genesis and I&apos;m a Full Stack Developer. I live in the City of San Fernando, Pampanga
-          Philippines
-          <span role="img" aria-label="Philippines">
-            {' '}
-            🇵🇭
-          </span>
-          .
+          I work across frontend and backend development, with experience in financial services workflows, shared
+          frontend tooling, and automated deployments. My goal is to turn business requirements into clear, practical
+          software that teams can maintain and improve.
         </p>
 
         <p>
-          {`My passion is user experience and creating real business value with a particular goal of understanding the human side of software development. In the words of `}
-          <a href="https://blog.codinghorror.com/about-me">Jeff Atwood</a>
-          {`, "Computers are fascinating machines, but they're mostly a reflection of the people using them... you have to study the people `}
-          <em>behind</em>
-          {` the software, too."`}
+          I value the human side of engineering: understanding the people using a product, collaborating with the team
+          building it, and making technical decisions that serve both.
         </p>
-
-        <p>
-          I want to use the technology based solutions, to help solve real world challenges. I want to work with you on
-          improving your business by creating software, website or apps that works for you.
-        </p>
-
-        <p>For personal things, I:</p>
-
-        <ul>
-          {personalStuff.map(stuff => (
-            <li key={stuff}>
-              <p>{stuff}</p>
-            </li>
-          ))}
-        </ul>
       </section>
 
-      <section>
-        <h2>Professional Experience</h2>
+      <section aria-labelledby="experience-heading">
+        <h2 id="experience-heading">Professional Experience</h2>
 
         {professionalExp.map(experience => (
           <article className="experience" key={experience.company}>
@@ -71,22 +54,32 @@ export default function AboutPage() {
         ))}
       </section>
 
-      <section>
-        <h2>Skills and Proficiency</h2>
+      <section aria-labelledby="skills-heading">
+        <h2 id="skills-heading">Technical skills</h2>
 
         <div className="skills">
-          {groups.map(([title, items]) => (
-            <section key={title}>
-              <h3>{title}</h3>
+          {skillGroups.map(group => (
+            <section key={group.title}>
+              <h3>{group.title}</h3>
 
               <ul>
-                {items.map(skill => (
+                {group.items.map(skill => (
                   <li key={skill}>{skill}</li>
                 ))}
               </ul>
             </section>
           ))}
         </div>
+      </section>
+
+      <section aria-labelledby="interests-heading">
+        <h2 id="interests-heading">Beyond the code</h2>
+
+        <ul>
+          {interests.map(interest => (
+            <li key={interest}>{interest}</li>
+          ))}
+        </ul>
       </section>
     </>
   );

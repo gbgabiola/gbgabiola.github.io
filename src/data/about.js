@@ -1,19 +1,4 @@
-export const personalStuff = [
-  'love reading useful matierials like coding resources and docs.',
-  'teach tech stuff to interesting people and career-shifters.',
-  'love the tools related to react/gatsby and node.js.',
-  'motivated to do Open-Source!',
-  'am a traveler.',
-  'only have one woman.',
-];
-
 export const professionalExp = [
-  {
-    company: 'Freelance Full Stack Developer',
-    info: 'Present (Remote / Part-time)',
-    description:
-      'As a Freelance Full-Stack Developer, I deliver end-to-end web applications by bridging the gap between pixel-perfect user experiences and robust backend architecture.',
-  },
   {
     company: 'Samsung Electronic Philippines Corporation - Server System Design (CL2-2)',
     info: 'February 2025 - Present (Hybrid - Taguig City, Philippines)',
@@ -26,19 +11,36 @@ export const professionalExp = [
     description:
       'Engineered robust backend and frontend upgrades to modern architectures, ensuring seamless digital workflows, policy processing, and performance optimizations for thousands of active financial agents.',
   },
+  {
+    company: 'Freelance Full Stack Developer',
+    info: 'Present (Remote / Part-time)',
+    description:
+      'As a Freelance Full-Stack Developer, I deliver end-to-end web applications by bridging the gap between pixel-perfect user experiences and robust backend architecture.',
+  },
 ];
 
-export const skills = {
-  set1: ['Git and Github', 'HTML5 / CSS3', 'Responsive Web Design', 'SASS', 'Basic Design Skills (Figma)'],
-  set2: ['Javascript (ES6)', 'React.js', 'JQuery', 'Basic Node.js'],
-  set3: ['React Router', 'React-Apollo', 'Formik', 'Styled-Components / Emotion', 'Ant-Design', 'Recompose', 'Lodash'],
-  set4: [
-    'Gatsby',
-    'React Testing Library / Enzyme',
-    'Jest',
-    'Redux',
-    'Render Props and HOC patterns',
-    'React Context API',
-    'React Hooks',
-  ],
-};
+export const skillGroups = [
+  {
+    title: 'Frontend development',
+    items: ['JavaScript', 'React', 'HTML and CSS', 'Responsive web design', 'Sass', 'Emotion and Styled Components'],
+  },
+  {
+    title: 'Backend and integration',
+    items: ['Node.js', 'API documentation with Swagger', 'npm package development'],
+  },
+  {
+    title: 'Delivery and collaboration',
+    items: ['Git and GitHub', 'GitHub Actions', 'Azure deployment workflows', 'Kubernetes'],
+  },
+  {
+    title: 'Testing and application state',
+    items: ['Jest', 'React Testing Library', 'Redux', 'React Context and Hooks'],
+  },
+];
+
+export const interests = [
+  'Reading technical documentation and exploring new development tools.',
+  'Sharing technical knowledge with learners and career shifters.',
+  'Exploring opportunities to contribute to open source and collaborate with other developers.',
+  'Traveling and finding inspiration beyond the screen.',
+];
