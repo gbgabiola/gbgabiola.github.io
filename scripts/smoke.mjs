@@ -22,6 +22,17 @@ for (const [path, title, content] of routes) {
 
   assert.ok(html.includes('aria-current="page"'), `${path}: active navigation`);
 
+  if (['/', '/about', '/contact'].includes(path)) {
+    assert.ok(
+      html.includes('https://drive.google.com/uc?export=download&amp;id=1hTHzS47SGcKx9G50nIK1U4YjYjQBdCYf'),
+      `${path}: resume download`,
+    );
+  }
+
+  if (path === '/works') {
+    assert.ok(html.includes('href="https://gbgabiola.github.io/uniflix"'), 'UniFlix uses an absolute HTTPS URL');
+  }
+
   console.log(`PASS ${path}`);
 }
 

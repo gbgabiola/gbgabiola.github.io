@@ -22,14 +22,14 @@ const projects = [
   {
     name: 'UniFlix',
     image: uniflix,
-    href: 'gbgabiola.github.io/uniflix',
+    href: 'https://gbgabiola.github.io/uniflix',
   },
 ];
 
 export default function WorksPage() {
   return (
     <>
-      <h1>Here are some of my recent projects!</h1>
+      <h1>Selected projects</h1>
 
       <div className="projects">
         {projects.map(project => (
@@ -48,8 +48,8 @@ export default function WorksPage() {
         ))}
 
         <section className="project project-more">
-          <h2>You like it?</h2>
-          <p>I’ve got some more stuff up my sleeves.</p>
+          <h2>Have a project in mind?</h2>
+          <p>Let’s discuss what you want to build.</p>
           <Link href="/contact">Let’s talk</Link>
         </section>
       </div>
