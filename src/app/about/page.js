@@ -19,7 +19,7 @@ export default function AboutPage() {
 
         <h1>Genesis Gabiola</h1>
 
-        <p>Programmer | Coder | Engineer | IT | Full Stack Developer</p>
+        <p>Programmer | Coder | Software Engineer | IT | Full Stack Developer</p>
       </header>
 
       <section>
