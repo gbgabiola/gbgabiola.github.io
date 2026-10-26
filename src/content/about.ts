@@ -1,6 +1,15 @@
-export const professionalExp = [
+export type Experience = {
+  company: string;
+  info: string;
+  description: string;
+};
+
+type SkillGroup = { title: string; items: string[] };
+
+export const experiences: Experience[] = [
   {
-    company: 'Samsung Electronic Philippines Corporation - Server System Design (CL2-2)',
+    company:
+      'Samsung Electronic Philippines Corporation - Server System Design (CL2-2)',
     info: 'February 2025 - Present (Hybrid - Taguig City, Philippines)',
     description:
       'Implemented internal Samsung npm packages to standardize cross-team frontend development. Automated CI/CD pipelines using GitHub Actions and Azure workflows for seamless containerized deployments via Kubernetes. Documented architecture using Swagger and implemented comprehensive testing to ensure robust backend reliability.',
@@ -19,22 +28,43 @@ export const professionalExp = [
   },
 ];
 
-export const skillGroups = [
+export const skillGroups: SkillGroup[] = [
   {
     title: 'Frontend development',
-    items: ['JavaScript', 'React', 'HTML and CSS', 'Responsive web design', 'Sass', 'Emotion and Styled Components'],
+    items: [
+      'JavaScript',
+      'React',
+      'HTML and CSS',
+      'Responsive web design',
+      'Sass',
+      'Emotion and Styled Components',
+    ],
   },
   {
     title: 'Backend and integration',
-    items: ['Node.js', 'API documentation with Swagger', 'npm package development'],
+    items: [
+      'Node.js',
+      'API documentation with Swagger',
+      'npm package development',
+    ],
   },
   {
     title: 'Delivery and collaboration',
-    items: ['Git and GitHub', 'GitHub Actions', 'Azure deployment workflows', 'Kubernetes'],
+    items: [
+      'Git and GitHub',
+      'GitHub Actions',
+      'Azure deployment workflows',
+      'Kubernetes',
+    ],
   },
   {
     title: 'Testing and application state',
-    items: ['Jest', 'React Testing Library', 'Redux', 'React Context and Hooks'],
+    items: [
+      'Jest',
+      'React Testing Library',
+      'Redux',
+      'React Context and Hooks',
+    ],
   },
 ];
 

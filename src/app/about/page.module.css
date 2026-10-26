@@ -1,0 +1,62 @@
+.profile {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.profile h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+.profile p {
+  margin: 0.25rem 0;
+  color: var(--muted);
+}
+.portrait {
+  border-radius: 50%;
+  object-fit: cover;
+}
+.section {
+  margin-bottom: 3.5rem;
+}
+.timeline {
+  list-style: none;
+  padding: 0 0 0 1.5rem;
+  border-left: 2px solid var(--border);
+}
+.timeline li {
+  margin-bottom: 2rem;
+}
+.timeline h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.period {
+  color: var(--muted);
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+.skills {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+.skills section {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+.skills h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.skills ul {
+  padding-left: 1.25rem;
+  margin-bottom: 0;
+}
+@media (max-width: 640px) {
+  .skills {
+    grid-template-columns: 1fr;
+  }
+}
