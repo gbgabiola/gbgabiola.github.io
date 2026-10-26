@@ -33,6 +33,12 @@ for (const [path, title, content] of routes) {
     assert.ok(html.includes('href="https://gbgabiola.github.io/uniflix"'), 'UniFlix uses an absolute HTTPS URL');
   }
 
+  assert.equal((html.match(/<h1\b/g) || []).length, 1, `${path}: one primary heading`);
+  if (path === '/' || path === '/works') {
+    for (const href of ['https://caffeinawa.pages.dev', 'https://gbgabiola.github.io/omnifood', 'https://gbgabiola.github.io/uniflix']) {
+      assert.ok(html.includes(`href="${href}"`), `${path}: project link ${href}`);
+    }
+  }
   console.log(`PASS ${path}`);
 }
 
