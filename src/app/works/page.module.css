@@ -1,0 +1,11 @@
+.intro {
+  margin-bottom: 2.5rem;
+}
+.intro p {
+  color: var(--muted);
+}
+.callout {
+  margin-top: 3rem;
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+}

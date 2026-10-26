@@ -1,0 +1,52 @@
+name: Next.js validation
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop, feat/nextjs-v4]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run lint
+
+      - run: npm run typecheck
+
+      - run: npm run build
+
+      - name: Check production routes
+        shell: bash
+        run: |
+          npm start > /tmp/portfolio-next.log 2>&1 &
+          server_pid=$!
+
+          trap 'kill "$server_pid" || true' EXIT
+
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:3000/ > /dev/null; then
+              break
+            fi
+
+            sleep 1
+          done
+
+          npm run test:smoke

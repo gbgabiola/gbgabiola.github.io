@@ -1,0 +1,29 @@
+.intro {
+  margin-bottom: 2.5rem;
+}
+.intro p {
+  color: var(--muted);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.card {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 1rem;
+}
+.card ul {
+  padding-left: 1.25rem;
+}
+.card li {
+  margin-bottom: 0.5rem;
+}
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
