@@ -1,0 +1,11 @@
+.intro {
+  margin-bottom: 2.5rem;
+}
+.intro h1 {
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+}
+.callout {
+  margin-top: 3rem;
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+}

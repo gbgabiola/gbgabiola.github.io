@@ -1,0 +1,32 @@
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 0.75rem;
+  max-width: var(--container);
+  width: 100%;
+  margin-inline: auto;
+  padding: 0.8rem var(--gutter);
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.footer p,
+.footer ul {
+  margin: 0;
+}
+
+.footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.65rem;
+  list-style: none;
+  padding: 0;
+}
+
+@media (max-height: 500px) {
+  .footer {
+    padding-block: 0.5rem;
+  }
+}
