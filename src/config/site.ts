@@ -10,6 +10,7 @@ export const site = {
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/works', label: 'Works' },
+    { href: '/blog', label: 'Blog' },
     { href: '/contact', label: 'Contact' },
   ],
 };

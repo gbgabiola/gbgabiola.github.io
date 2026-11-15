@@ -10,6 +10,8 @@ const routes = [
   ['/about', 'About', 'Professional Experience'],
   ['/works', 'Works', 'Caffeinawa'],
   ['/contact', 'Contact', 'mailto:gbgabiola@gmail.com'],
+  ['/blog', 'Blog', 'Designing portfolio pages to fit the viewport'],
+  ['/blog/portfolio-pages-that-fit', 'Designing portfolio pages to fit the viewport', 'Test the edges'],
 ];
 
 for (const [path, title, content] of routes) {
@@ -36,7 +38,8 @@ for (const [path, title, content] of routes) {
   assert.ok(html.includes(content), `${path}: content`);
   assert.ok(html.includes(`>Portfolio v${version}</p>`), `${path}: portfolio version`);
 
-  assert.ok(html.includes('aria-current="page"'), `${path}: active navigation`);
+  const current = path.startsWith('/blog/') ? 'location' : 'page';
+  assert.ok(html.includes(`aria-current="${current}"`), `${path}: active navigation`);
 
   if (['/', '/about', '/contact'].includes(path)) {
     assert.ok(
@@ -65,6 +68,9 @@ const missing = await fetch(new URL('/this-page-does-not-exist', base));
 
 assert.equal(missing.status, 404);
 assert.ok((await missing.text()).includes('Page not found'));
+
+const missingPost = await fetch(new URL('/blog/unknown-post', base));
+assert.equal(missingPost.status, 404);
 
 const manifestResponse = await fetch(new URL('/manifest.webmanifest', base));
 

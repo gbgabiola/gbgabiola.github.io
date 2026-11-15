@@ -54,7 +54,7 @@ test('theme persists across navigation and reload', async ({ page }) => {
 });
 
 test('portfolio routes pass automated accessibility checks', async ({ page }) => {
-  for (const path of ['/', '/about', '/works', '/contact']) {
+  for (const path of ['/', '/about', '/works', '/contact', '/blog', '/blog/portfolio-pages-that-fit']) {
     await page.goto(path);
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])

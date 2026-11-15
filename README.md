@@ -1,4 +1,4 @@
-# G’s portfolio — v4
+# G’s portfolio and blog — v4
 
 Next.js App Router, React, TypeScript, CSS Modules, and next-themes.
 Node 24 is required. npm is the package manager; commit package-lock.json.
@@ -54,6 +54,14 @@ navigation live in src/config/site.ts.
 Resume downloads use Google Drive. Confirm Anyone with the link → Viewer sharing
 and test signed out. Drive may show its own download confirmation page.
 
+## Blog
+
+Add a Markdown file in `src/content/blog/` and an entry in
+`src/content/posts.ts` with the matching slug, a title, an ISO date, and a
+summary. Use level-two headings in articles. The page supplies the main
+heading. Posts are built with the site and listed in the sitemap. Use a branch
+preview to check an article before publishing it.
+
 ## Deployment and version history
 
 Vercel uses the Next.js preset, Node 24, npm ci, npm run build, and the default
@@ -88,5 +96,8 @@ normal PR flow so the branch and deployed site converge. Keep existing release
 tags on their original commits.
 
 - `v4.0.0` is the first Next.js release.
+- `v4.1.0` adds the blog. Keep its release behind `v4.0.0`.
+- Routine post publication uses the normal PR workflow. Add a release tag when
+  the portfolio version itself changes.
 - `v3` and the `portfolio-v3-gatsby` tag preserve the final Gatsby version.
 - `feat/nextjs-v4` is the migration branch with its own Vercel preview.

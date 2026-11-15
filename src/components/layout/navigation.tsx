@@ -14,7 +14,9 @@ export default function Navigation() {
           <li key={href}>
             <Link
               href={href}
-              aria-current={pathname === href ? 'page' : undefined}
+              aria-current={pathname === href
+                ? 'page'
+                : pathname.startsWith(`${href}/`) ? 'location' : undefined}
             >
               {label}
             </Link>

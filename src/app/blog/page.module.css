@@ -1,0 +1,53 @@
+.column {
+  max-width: 44rem;
+}
+
+.intro {
+  margin-bottom: 2rem;
+}
+
+.intro h1 {
+  margin: 0.5rem 0;
+}
+
+.intro p,
+.column time {
+  color: var(--muted);
+}
+
+.column time {
+  font-size: 0.875rem;
+}
+
+.posts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.posts li {
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.posts h2 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.posts p {
+  margin: 0;
+}
+
+.content h2 {
+  margin: 1.75rem 0 0.75rem;
+}
+
+.content pre {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  background: var(--surface);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
