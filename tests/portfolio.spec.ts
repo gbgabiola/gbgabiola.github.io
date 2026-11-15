@@ -121,21 +121,25 @@ test('blog posts link to the author, headings, and tag archives', async ({ page 
   await expect(breadcrumb.getByRole('link', { name: 'Tags' })).toHaveAttribute('href', '/blog/tags');
   const contents = article.getByRole('navigation', { name: 'In this post' });
   const opening = article.getByText('When I moved this portfolio', { exact: false });
-  await expect(contents).toBeVisible();
-  await expect(contents.getByRole('list')).toHaveCSS('list-style-type', 'none');
+  await expect(contents).toBeHidden();
+  await expect(opening).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
 
-  const mobileContents = await contents.boundingBox();
-  const mobileOpening = await opening.boundingBox();
-  if (!mobileContents || !mobileOpening) throw new Error('Article layout is missing');
-  expect(mobileContents.y + mobileContents.height).toBeLessThan(mobileOpening.y);
-
-  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.setViewportSize({ width: 1280, height: 540 });
+  await expect(contents).toBeVisible();
+  await expect(contents.getByRole('list')).toHaveCSS('list-style-type', 'none');
   const desktopContents = await contents.boundingBox();
   const desktopOpening = await opening.boundingBox();
   if (!desktopContents || !desktopOpening) throw new Error('Article layout is missing');
   expect(desktopContents.x).toBeGreaterThan(desktopOpening.x + desktopOpening.width);
   expect(Math.abs(desktopContents.y - desktopOpening.y)).toBeLessThan(2);
+
+  const stickyTop = await contents.evaluate((element) => Number.parseFloat(getComputedStyle(element).top));
+  await page.evaluate(({ start, offset }) => window.scrollTo(0, start - offset + 72), {
+    start: desktopContents.y,
+    offset: stickyTop,
+  });
+  await expect.poll(async () => (await contents.boundingBox())?.y).toBeCloseTo(stickyTop, 0);
 
   await contents.getByRole('link', { name: 'Test the edges' }).click();
   await expect(page).toHaveURL(/#post-test-the-edges$/);

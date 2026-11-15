@@ -102,7 +102,7 @@
 }
 
 .contents {
-  margin-bottom: 1.5rem;
+  display: none;
   padding: 1rem;
   border: 1px solid var(--border);
   border-radius: 0.65rem;
@@ -143,9 +143,13 @@
   }
 
   .contents {
+    position: sticky;
+    top: 6rem;
+    display: block;
     grid-column: 2;
     grid-row: 1;
-    margin-bottom: 0;
+    max-height: calc(100dvh - 7rem);
+    overflow-y: auto;
   }
 
   .articleBody {
