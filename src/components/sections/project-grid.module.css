@@ -4,6 +4,8 @@
   gap: 1.25rem;
 }
 .card {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--border);
   border-radius: 0.9rem;
   background: var(--surface);
@@ -13,14 +15,17 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 1.5;
+  aspect-ratio: 8 / 5;
   object-fit: cover;
   object-position: top;
 }
 .caption {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   padding: 1.25rem;
 }
-.caption h3 {
+.caption h2 {
   margin: 0 0 0.75rem;
   font-size: 1.25rem;
 }
@@ -30,7 +35,7 @@
   gap: 0.5rem 1rem;
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: auto 0 0;
   font-size: 0.9rem;
 }
 @media (max-width: 960px) {

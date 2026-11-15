@@ -18,7 +18,7 @@ export default function ProjectGrid({
             className={styles.image}
           />
           <div className={styles.caption}>
-            <h3>{project.name}</h3>
+            <h2>{project.name}</h2>
             <p>{project.summary}</p>
             <ul>
               <li><a href={project.href} aria-label={`Live site for ${project.name}`}>Live site</a></li>

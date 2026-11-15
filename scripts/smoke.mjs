@@ -46,12 +46,15 @@ for (const [path, title, content] of routes) {
   }
 
   if (path === '/works') {
-    assert.ok(html.includes('href="https://gbgabiola.github.io/uniflix"'), 'UniFlix uses an absolute HTTPS URL');
+    assert.ok(html.includes('href="https://github.com/gbgabiola?tab=repositories"'), 'Works links to more repositories');
+    for (const repo of ['caffeinawa', 'em-carpentry', 'fbcsi']) {
+      assert.ok(html.includes(`href="https://github.com/gbgabiola/${repo}"`), `Works links to ${repo} source`);
+    }
   }
 
   assert.equal((html.match(/<h1\b/g) || []).length, 1, `${path}: one primary heading`);
   if (path === '/' || path === '/works') {
-    for (const href of ['https://caffeinawa.pages.dev', 'https://gbgabiola.github.io/omnifood', 'https://gbgabiola.github.io/uniflix']) {
+    for (const href of ['https://caffeinawa.pages.dev/', 'https://em-carpentry.netlify.app/', 'https://fbcsi.onrender.com/']) {
       assert.ok(html.includes(`href="${href}"`), `${path}: project link ${href}`);
     }
   }
