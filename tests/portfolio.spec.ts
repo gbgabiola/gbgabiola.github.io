@@ -31,7 +31,7 @@ for (const viewport of viewportSizes) {
 test('footer shows the portfolio copyright and brand link', async ({ page }) => {
   await page.goto('/');
   const footer = page.getByRole('contentinfo');
-  await expect(footer).toContainText(/© \d{4} gbgabiola/);
+  await expect(footer).toContainText(/© 2018–\d{4} gbgabiola/);
   await expect(footer.getByRole('link', { name: 'gbgabiola' }))
     .toHaveAttribute('href', 'https://github.com/gbgabiola');
   await expect(footer).toContainText(/Portfolio v\d+\.\d+\.\d+/);
