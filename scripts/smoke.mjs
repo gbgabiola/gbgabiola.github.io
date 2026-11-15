@@ -38,8 +38,12 @@ for (const [path, title, content] of routes) {
   assert.ok(html.includes(content), `${path}: content`);
   assert.ok(html.includes(`>Portfolio v${version}</p>`), `${path}: portfolio version`);
 
-  const current = path.startsWith('/blog/') ? 'location' : 'page';
-  assert.ok(html.includes(`aria-current="${current}"`), `${path}: active navigation`);
+  if (path === '/') {
+    assert.match(html, /aria-label="G home" href="\/"/);
+  } else {
+    const current = path.startsWith('/blog/') ? 'location' : 'page';
+    assert.ok(html.includes(`aria-current="${current}"`), `${path}: active navigation`);
+  }
 
   if (['/', '/about', '/contact'].includes(path)) {
     assert.ok(

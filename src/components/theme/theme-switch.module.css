@@ -1,19 +1,65 @@
 .toggle {
-  padding: 0.6rem 0.8rem;
+  --segment: 2.3rem;
+  --thumb: 2.125rem;
+  --track-padding: 0.25rem;
+
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  grid-template-columns: repeat(2, var(--segment));
+  place-items: center;
+  flex: none;
+  min-height: 2.75rem;
+  padding: var(--track-padding);
   border: 1px solid var(--border);
-  border-radius: 0.6rem;
+  border-radius: 999px;
   background: var(--surface);
-  color: var(--foreground);
+  color: var(--muted);
   cursor: pointer;
-  font: inherit;
-  font-size: 0.875rem;
 }
-.light {
-  display: none;
+
+.toggle:hover {
+  border-color: var(--primary);
 }
-:global([data-theme='light']) .light {
-  display: inline;
+
+.toggle::before {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: calc(var(--track-padding) + (var(--segment) - var(--thumb)) / 2);
+  width: var(--thumb);
+  height: var(--thumb);
+  border-radius: 50%;
+  background: var(--foreground);
+  content: '';
+  transform: translateY(-50%);
+  transition: transform 160ms ease;
 }
-:global([data-theme='light']) .dark {
-  display: none;
+
+:global([data-theme='dark']) .toggle::before {
+  transform: translate(var(--segment), -50%);
+}
+
+.toggle svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+:global([data-theme='light']) .sun,
+:global([data-theme='dark']) .moon {
+  color: var(--background);
+}
+
+@media (max-width: 640px) {
+  .toggle {
+    --segment: 1.75rem;
+    --thumb: 1.625rem;
+
+    min-height: 2.25rem;
+  }
+
+  .toggle svg {
+    width: 1rem;
+    height: 1rem;
+  }
 }

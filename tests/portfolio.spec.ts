@@ -65,15 +65,47 @@ test('keyboard users can skip the header and open the Works page', async ({ page
   await expect(page).toHaveURL('/works');
 });
 
+test('header navigation sits beside the theme switch and the brand returns home', async ({ page }) => {
+  await page.goto('/about');
+  const header = page.getByRole('banner');
+  const nav = header.getByRole('navigation', { name: 'Main navigation' });
+  const brand = header.getByRole('link', { name: 'G home' });
+  const theme = header.getByRole('button', { name: 'Dark mode' });
+
+  await expect(nav.getByRole('link', { name: 'Home', exact: true })).toHaveCount(0);
+  await expect(nav.getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page');
+  for (const viewport of [{ width: 1280, height: 720 }, { width: 320, height: 568 }]) {
+    await page.setViewportSize(viewport);
+    const [brandBox, navBox, themeBox] = await Promise.all([
+      brand.boundingBox(),
+      nav.boundingBox(),
+      theme.boundingBox(),
+    ]);
+    if (!brandBox || !navBox || !themeBox) throw new Error('Header controls are missing');
+    expect(brandBox.x + brandBox.width).toBeLessThan(navBox.x);
+    expect(navBox.x + navBox.width).toBeLessThan(themeBox.x);
+    expect(Math.abs(navBox.y + navBox.height / 2 - themeBox.y - themeBox.height / 2)).toBeLessThan(2);
+  }
+
+  await brand.click();
+  await expect(page).toHaveURL('/');
+});
+
 test('theme persists across navigation and reload', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await page.getByRole('button', { name: 'Switch to light' }).click();
+  const theme = page.getByRole('button', { name: 'Dark mode' });
+  await expect(theme).toHaveAttribute('aria-pressed', 'true');
+  await theme.click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expect(theme).toHaveAttribute('aria-pressed', 'false');
   await page.getByRole('link', { name: 'Contact', exact: true }).click();
   await expect(page).toHaveURL('/contact');
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expect(theme).toHaveAttribute('aria-pressed', 'false');
+  await theme.click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 });
 
 test('portfolio routes pass automated accessibility checks', async ({ page }) => {
