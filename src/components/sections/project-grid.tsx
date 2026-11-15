@@ -21,7 +21,7 @@ export default function ProjectGrid({
             <h3>{project.name}</h3>
             <p>{project.summary}</p>
             <ul>
-              <li><a href={project.href} aria-label={`Visit ${project.name}`}>Live site</a></li>
+              <li><a href={project.href} aria-label={`Live site for ${project.name}`}>Live site</a></li>
               <li><a href={project.source} aria-label={`View source for ${project.name}`}>Source</a></li>
             </ul>
           </div>

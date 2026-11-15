@@ -8,3 +8,7 @@ coverage/
 *.log
 *.tsbuildinfo
 next-env.d.ts
+
+# Browser test output
+/playwright-report/
+/test-results/

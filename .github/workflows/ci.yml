@@ -4,7 +4,11 @@ on:
   pull_request:
     branches: [main, develop]
   push:
-    branches: [main, develop, feat/nextjs-v4]
+    branches: [main, develop, feat/nextjs-v4, feat/blog-v4.1]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -18,9 +22,9 @@ jobs:
       NEXT_TELEMETRY_DISABLED: 1
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: .nvmrc
           cache: npm
@@ -32,6 +36,8 @@ jobs:
       - run: npm run typecheck
 
       - run: npm run build
+
+      - run: npx playwright install --with-deps chromium
 
       - name: Check production routes
         shell: bash
@@ -50,3 +56,5 @@ jobs:
           done
 
           npm run test:smoke
+
+      - run: npm run test:browser
