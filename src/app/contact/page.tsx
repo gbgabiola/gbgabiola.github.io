@@ -15,7 +15,7 @@ export default function ContactPage() {
       <div className={styles.grid}>
         <section aria-labelledby="contact-heading">
           <p className="eyebrow">Contact</p>
-          <h1 id="contact-heading" className="display-heading">Let’s work together.</h1>
+          <h1 id="contact-heading" className="display-heading">Let’s talk.</h1>
           <p className="intro-copy">{profile.availability}</p>
           <a className={buttons.primary} href={`mailto:${profile.email}`}>
             Email me <span className={styles.arrow} aria-hidden="true">↗</span>

@@ -38,6 +38,16 @@
   text-underline-offset: 0.4em;
 }
 @media (max-width: 640px) {
+  .inner {
+    padding-block: 0.5rem;
+    gap: 0.45rem;
+  }
+
+  .brand,
+  .nav a {
+    font-size: 0.875rem;
+  }
+
   .nav {
     order: 3;
     width: 100%;

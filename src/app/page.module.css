@@ -61,6 +61,12 @@
   list-style: none;
 }
 
+@media (min-width: 721px) and (max-height: 600px) {
+  .photo {
+    width: min(100%, 42svh);
+  }
+}
+
 @media (max-width: 720px) {
   .hero {
     grid-template-columns: 1fr;
@@ -68,7 +74,23 @@
   }
 
   .photo {
-    width: min(100%, 17rem, 25svh);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
     justify-self: start;
+  }
+
+  .photo img {
+    width: min(7rem, 18svh);
+  }
+
+  .photo figcaption {
+    margin: 0;
+  }
+
+  .projects,
+  .projects ul {
+    column-gap: 0.75rem;
   }
 }

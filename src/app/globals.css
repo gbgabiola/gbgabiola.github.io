@@ -106,6 +106,24 @@ p {
   color: var(--muted);
   font-size: clamp(1rem, 2vw, 1.3rem);
 }
+@media (max-width: 720px), (max-height: 600px) {
+  .container:has(> .viewport-page) {
+    padding-block: 0.9rem;
+  }
+
+  .viewport-page {
+    gap: 1rem;
+  }
+
+  .display-heading {
+    font-size: clamp(2rem, 7vw, 3.5rem);
+  }
+
+  .intro-copy {
+    margin-block: 0.65rem;
+    line-height: 1.5;
+  }
+}
 .skip-link {
   position: fixed;
   z-index: 20;

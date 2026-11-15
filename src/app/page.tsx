@@ -15,11 +15,11 @@ export default function HomePage() {
     <div className="viewport-page">
       <section className={styles.hero} aria-labelledby="home-heading">
         <div>
-          <p className="eyebrow">{profile.role} · {profile.specialization}</p>
+          <p className="eyebrow">{profile.role}</p>
           <h1 id="home-heading" className="display-heading">{profile.name}</h1>
-          <p className="intro-copy">{profile.summary}</p>
+          <p className="intro-copy">I build full-stack web applications, from user interfaces to backend APIs.</p>
           <div className={styles.actions}>
-            <Link href="/works" className={buttons.primary}>Explore my work</Link>
+            <Link href="/works" className={buttons.primary}>View work</Link>
             <ResumeLink />
           </div>
           <p className={styles.availability}>
@@ -32,7 +32,7 @@ export default function HomePage() {
             alt={profile.name}
             width={360}
             height={360}
-            sizes="(max-width: 720px) 272px, 360px"
+            sizes="(max-width: 720px) 112px, 360px"
             preload
           />
           <figcaption>{profile.location}</figcaption>
