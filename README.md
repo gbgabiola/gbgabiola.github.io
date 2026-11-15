@@ -97,8 +97,10 @@ in Vercel and use Instant Rollback. Revert the faulty changes in Git through the
 normal PR flow so the branch and deployed site converge. Keep existing release
 tags on their original commits.
 
-- `v4.0.0` is the first Next.js release.
-- `v4.1.0` adds the blog. Keep its release behind `v4.0.0`.
+- `4.0.0` was the Next.js migration baseline before the blog was integrated.
+- `4.1.0` is the current release candidate and includes both the Next.js
+  migration and the blog. Create the `v4.1.0` release tag after verification
+  on the production domain.
 - Routine post publication uses the normal PR workflow. Add a release tag when
   the portfolio version itself changes.
 - `v3` and the `portfolio-v3-gatsby` tag preserve the final Gatsby version.
