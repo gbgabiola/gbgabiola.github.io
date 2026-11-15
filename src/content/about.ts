@@ -12,19 +12,19 @@ export const experiences: Experience[] = [
       'Samsung Electronic Philippines Corporation - Server System Design (CL2-2)',
     info: 'February 2025 - Present (Hybrid - Taguig City, Philippines)',
     description:
-      'Implemented internal Samsung npm packages to standardize cross-team frontend development. Automated CI/CD pipelines using GitHub Actions and Azure workflows for seamless containerized deployments via Kubernetes. Documented architecture using Swagger and implemented comprehensive testing to ensure robust backend reliability.',
+      'Built shared npm packages so frontend teams could use common tooling. Automated Kubernetes deployments with GitHub Actions and Azure workflows, and documented and tested backend APIs with Swagger and automated tests.',
   },
   {
     company: 'Vertere Global Solutions, Inc. - Programmer Analyst II',
     info: 'January 2024 - February 2025 (Hybrid - Makati City, Philippines)',
     description:
-      'Engineered robust backend and frontend upgrades to modern architectures, ensuring seamless digital workflows, policy processing, and performance optimizations for thousands of active financial agents.',
+      'Updated frontend and backend systems for policy processing and other digital workflows used by financial agents. The work included improving application performance.',
   },
   {
     company: 'Freelance Full Stack Developer',
     info: 'Present (Remote / Part-time)',
     description:
-      'As a Freelance Full-Stack Developer, I deliver end-to-end web applications by bridging the gap between pixel-perfect user experiences and robust backend architecture.',
+      'Build web applications part-time, from the user interface through the backend.',
   },
 ];
 

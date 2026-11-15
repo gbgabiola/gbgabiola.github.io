@@ -11,18 +11,20 @@ export default function ProjectGrid({
     <div className={styles.grid}>
       {projects.map((project) => (
         <article className={styles.card} key={project.href}>
-          <a href={project.href}>
-            <Image
-              src={project.image}
-              alt={`${project.name} website screenshot`}
-              sizes="(max-width: 640px) 100vw, (max-width: 960px) 50vw, 340px"
-              className={styles.image}
-            />
-            <div className={styles.caption}>
-              <h2>{project.name}</h2>
-              <span>View website</span>
-            </div>
-          </a>
+          <Image
+            src={project.image}
+            alt=""
+            sizes="(max-width: 640px) 100vw, (max-width: 960px) 50vw, 340px"
+            className={styles.image}
+          />
+          <div className={styles.caption}>
+            <h3>{project.name}</h3>
+            <p>{project.summary}</p>
+            <ul>
+              <li><a href={project.href} aria-label={`Visit ${project.name}`}>Live site</a></li>
+              <li><a href={project.source} aria-label={`View source for ${project.name}`}>Source</a></li>
+            </ul>
+          </div>
         </article>
       ))}
     </div>

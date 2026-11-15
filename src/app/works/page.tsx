@@ -15,7 +15,41 @@ export default function WorksPage() {
       <header className={styles.intro}>
         <h1 className="display-heading">Selected projects</h1>
       </header>
-      <ProjectGrid projects={projects} />
+      <article className={styles.featured} aria-labelledby="featured-project">
+        <header>
+          <p className="eyebrow">Featured project</p>
+          <h2 id="featured-project">Rebuilding this portfolio</h2>
+          <p>
+            As sole maintainer, I’m migrating my Gatsby portfolio to the
+            Next.js App Router while preserving the page URLs and light and
+            dark themes.
+          </p>
+        </header>
+        <dl>
+          <div>
+            <dt>Technical decision</dt>
+            <dd>
+              I kept About and Works as separate routes and made Home and
+              Contact compact enough to fit on common screens. The pages can
+              still scroll when readers enlarge text or use a shorter viewport.
+            </dd>
+          </div>
+          <div>
+            <dt>Result</dt>
+            <dd>
+              The Vercel preview serves the four portfolio pages from Next.js.
+              GitHub Actions builds the site and checks the production routes.
+            </dd>
+          </div>
+        </dl>
+        <a href="https://github.com/gbgabiola/gbgabiola.github.io">
+          View the portfolio source
+        </a>
+      </article>
+      <section aria-labelledby="other-projects">
+        <h2 id="other-projects">More projects</h2>
+        <ProjectGrid projects={projects} />
+      </section>
       <section className={styles.callout}>
         <h2>Have a project in mind?</h2>
         <p>Let’s discuss what you want to build.</p>

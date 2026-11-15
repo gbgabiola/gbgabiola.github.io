@@ -33,17 +33,6 @@ export default function AboutPage() {
       <section className={styles.section} aria-labelledby="about-heading">
         <h2 id="about-heading">How I work</h2>
         <p>{profile.summary}</p>
-        <p>
-          I work across frontend and backend development, with experience in
-          financial services workflows, shared frontend tooling, and automated
-          deployments. My goal is to turn business requirements into clear,
-          practical software that teams can maintain and improve.
-        </p>
-        <p>
-          I value the human side of engineering: understanding the people using
-          a product, collaborating with the team building it, and making
-          technical decisions that serve both.
-        </p>
         <ResumeLink />
       </section>
       <section className={styles.section} aria-labelledby="experience-heading">
