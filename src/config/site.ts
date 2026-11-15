@@ -1,7 +1,8 @@
-import { version } from '../../package.json';
+import { name, version } from '../../package.json';
 import { profile } from '@/content/profile';
 
 export const site = {
+  brand: name,
   version,
   url: 'https://genesisgabiola.vercel.app',
   title: `${profile.nickname} - ${profile.role}`,
