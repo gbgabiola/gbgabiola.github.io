@@ -1,0 +1,33 @@
+.primary,
+.secondary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--primary);
+  border-radius: 0.6rem;
+  text-decoration: none;
+  font-weight: 650;
+  text-align: center;
+}
+.primary {
+  background: var(--primary);
+  color: var(--background);
+}
+.secondary {
+  color: var(--primary);
+  background: transparent;
+}
+@media (max-width: 720px) {
+  .primary,
+  .secondary {
+    padding-inline: 0.6rem;
+    font-size: 0.85rem;
+  }
+}
+
+.primary:hover,
+.secondary:hover {
+  text-decoration: underline;
+}

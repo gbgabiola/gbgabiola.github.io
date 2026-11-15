@@ -1,0 +1,60 @@
+name: Next.js validation
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop, feat/nextjs-v4, feat/blog-v4.1]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run lint
+
+      - run: npm run typecheck
+
+      - run: npm run build
+
+      - run: npx playwright install --with-deps chromium
+
+      - name: Check production routes
+        shell: bash
+        run: |
+          npm start > /tmp/portfolio-next.log 2>&1 &
+          server_pid=$!
+
+          trap 'kill "$server_pid" || true' EXIT
+
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:3000/ > /dev/null; then
+              break
+            fi
+
+            sleep 1
+          done
+
+          npm run test:smoke
+
+      - run: npm run test:browser
