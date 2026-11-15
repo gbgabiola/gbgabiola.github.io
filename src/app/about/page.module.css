@@ -6,14 +6,16 @@
   margin-bottom: 3rem;
 }
 .profile h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  margin-bottom: 0.75rem;
 }
 .profile p {
   margin: 0.25rem 0;
   color: var(--muted);
 }
 .portrait {
-  border-radius: 50%;
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
   object-fit: cover;
 }
 .section {

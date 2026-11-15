@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 const base = process.env.SMOKE_BASE_URL || 'http://127.0.0.1:3000';
 
 const routes = [
-  ['/', 'Home', 'I am Genesis, a Software Engineer.'],
+  ['/', 'Home', '>Genesis Gabiola</h1>'],
   ['/about', 'About', 'Professional Experience'],
   ['/works', 'Works', 'Caffeinawa'],
   ['/contact', 'Contact', 'mailto:gbgabiola@gmail.com'],

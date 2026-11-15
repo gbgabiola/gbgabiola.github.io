@@ -75,8 +75,36 @@ p {
   max-width: var(--container);
   margin: auto;
   width: 100%;
-  padding: 3.5rem var(--gutter);
-  min-height: 65svh;
+  padding: clamp(2rem, 6vw, 4rem) var(--gutter);
+}
+.container:has(> .viewport-page) {
+  display: grid;
+  align-items: center;
+  padding-block: clamp(1rem, 4svh, 3rem);
+}
+.viewport-page {
+  display: grid;
+  gap: clamp(1rem, 4svh, 2.5rem);
+  min-width: 0;
+}
+.eyebrow {
+  margin: 0 0 0.65rem;
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+}
+.display-heading {
+  margin: 0;
+  font-size: clamp(2.5rem, 7.7vw, 6.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.07em;
+}
+.intro-copy {
+  max-width: 35ch;
+  margin: 1rem 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.3rem);
 }
 .skip-link {
   position: fixed;

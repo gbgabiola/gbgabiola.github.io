@@ -23,7 +23,7 @@ export default function AboutPage() {
           className={styles.portrait}
         />
         <div>
-          <h1>About {profile.name}</h1>
+          <h1 className="display-heading">About {profile.name}</h1>
           <p>
             {profile.role} · {profile.specialization}
           </p>

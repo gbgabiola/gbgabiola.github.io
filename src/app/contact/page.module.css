@@ -1,27 +1,52 @@
-.intro {
-  margin-bottom: 2.5rem;
-}
-.intro p {
-  color: var(--muted);
-}
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.5rem, 6vw, 5.5rem);
 }
-.card {
-  padding: 1.5rem;
+
+.arrow {
+  margin-inline-start: 0.6rem;
+}
+
+.address {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.details {
+  padding: clamp(1rem, 3vw, 2rem);
   border: 1px solid var(--border);
+  border-radius: 0.85rem;
   background: var(--surface);
-  border-radius: 1rem;
 }
-.card ul {
-  padding-left: 1.25rem;
+
+.details section + section {
+  border-top: 1px solid var(--border);
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
 }
-.card li {
-  margin-bottom: 0.5rem;
+
+.details h2 {
+  margin: 0 0 0.6rem;
+  font-size: 1.1rem;
 }
+
+.links,
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1rem;
+}
+
+.links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 @media (max-width: 720px) {
   .grid {
     grid-template-columns: 1fr;

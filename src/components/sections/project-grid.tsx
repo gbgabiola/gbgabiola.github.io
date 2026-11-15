@@ -19,7 +19,7 @@ export default function ProjectGrid({
               className={styles.image}
             />
             <div className={styles.caption}>
-              <h3>{project.name}</h3>
+              <h2>{project.name}</h2>
               <span>View website</span>
             </div>
           </a>

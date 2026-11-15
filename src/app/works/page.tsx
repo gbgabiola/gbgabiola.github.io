@@ -13,16 +13,9 @@ export default function WorksPage() {
   return (
     <>
       <header className={styles.intro}>
-        <h1>Selected projects</h1>
-        <p>
-          A selection of websites and applications I’ve worked on. Open a
-          project to explore it.
-        </p>
+        <h1 className="display-heading">Selected projects</h1>
       </header>
-      <section aria-labelledby="projects-heading">
-        <h2 id="projects-heading">Project gallery</h2>
-        <ProjectGrid projects={projects} />
-      </section>
+      <ProjectGrid projects={projects} />
       <section className={styles.callout}>
         <h2>Have a project in mind?</h2>
         <p>Let’s discuss what you want to build.</p>
