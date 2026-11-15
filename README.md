@@ -32,7 +32,18 @@ uses .ts/.tsx.
 
 The smoke test checks page titles, content, a single main heading per page, active
 navigation, project and resume links, 404 status, manifest, and Keybase verification.
-Browser interaction and external destination availability are separate checks.
+The Playwright suite checks viewport fit, keyboard navigation, theme persistence,
+and common accessibility issues against a production build. To run it locally,
+stop any previous test server and run:
+
+```sh
+npx playwright install chromium
+npm run build
+npm run test:browser
+```
+
+Before a release, test the external project links and résumé in a signed-out
+browser.
 
 ## Content
 
@@ -53,9 +64,28 @@ The site footer reads it directly from `package.json`. Update the manifest and
 lockfile together with `npm version <patch|minor|major> --no-git-tag-version`
 when preparing the next release.
 
-Promote changes through `develop` before merging to `main`. After the release
-lands, create an annotated `vMAJOR.MINOR.PATCH` tag on the production commit
-using the version in `package.json`, then push the tag to GitHub.
+1. Open a PR to `develop`. Review its Vercel preview and wait for the
+   `Next.js validation / validate` result.
+2. Open a PR from `develop` to `main` when the release is approved. Vercel owns
+   production deployment from `main`.
+3. Confirm Vercel deployed the expected commit. Run
+   `SMOKE_BASE_URL=https://genesisgabiola.vercel.app npm run test:smoke`.
+4. Tag the verified production commit with an annotated `vMAJOR.MINOR.PATCH`
+   tag matching `package.json` and publish short GitHub release notes.
+
+Use patch versions for fixes and routine content updates, minor versions for
+features such as the blog, and major versions for substantial rebuilds or
+incompatible public URL changes.
+
+For GitHub rulesets, target `main` and `develop`, require a pull request and the
+`validate` job from GitHub Actions, and block force pushes. Set the required
+approval count to zero for a solo maintainer. Verify the exact check name on a
+PR before enabling the rule.
+
+For a production regression, select the previous healthy production deployment
+in Vercel and use Instant Rollback. Revert the faulty changes in Git through the
+normal PR flow so the branch and deployed site converge. Keep existing release
+tags on their original commits.
 
 - `v4.0.0` is the first Next.js release.
 - `v3` and the `portfolio-v3-gatsby` tag preserve the final Gatsby version.
