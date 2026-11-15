@@ -119,10 +119,25 @@ test('blog posts link to the author, headings, and tag archives', async ({ page 
   const breadcrumb = article.getByRole('navigation', { name: 'Breadcrumb' });
   await expect(breadcrumb.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/');
   await expect(breadcrumb.getByRole('link', { name: 'Tags' })).toHaveAttribute('href', '/blog/tags');
-  await expect(article.getByRole('heading', { name: 'In this post' })).toBeVisible();
+  const contents = article.getByRole('navigation', { name: 'In this post' });
+  const opening = article.getByText('When I moved this portfolio', { exact: false });
+  await expect(contents).toBeVisible();
+  await expect(contents.getByRole('list')).toHaveCSS('list-style-type', 'none');
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
 
-  await article.getByRole('link', { name: 'Test the edges' }).click();
+  const mobileContents = await contents.boundingBox();
+  const mobileOpening = await opening.boundingBox();
+  if (!mobileContents || !mobileOpening) throw new Error('Article layout is missing');
+  expect(mobileContents.y + mobileContents.height).toBeLessThan(mobileOpening.y);
+
+  await page.setViewportSize({ width: 1280, height: 800 });
+  const desktopContents = await contents.boundingBox();
+  const desktopOpening = await opening.boundingBox();
+  if (!desktopContents || !desktopOpening) throw new Error('Article layout is missing');
+  expect(desktopContents.x).toBeGreaterThan(desktopOpening.x + desktopOpening.width);
+  expect(Math.abs(desktopContents.y - desktopOpening.y)).toBeLessThan(2);
+
+  await contents.getByRole('link', { name: 'Test the edges' }).click();
   await expect(page).toHaveURL(/#post-test-the-edges$/);
   await expect(article.getByRole('heading', { name: 'Test the edges' }))
     .toHaveAttribute('id', 'post-test-the-edges');

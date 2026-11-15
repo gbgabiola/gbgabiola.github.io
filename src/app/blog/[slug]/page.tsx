@@ -10,6 +10,7 @@ import { blogTags, formatPostDate, posts } from '@/content/posts';
 import { pageMetadata } from '@/lib/metadata';
 import BlogBreadcrumbs from '../breadcrumbs';
 import styles from '../page.module.css';
+import articleLayout from './article-layout';
 
 export const dynamicParams = false;
 
@@ -38,8 +39,8 @@ export default async function PostPage({ params }: Props) {
   );
 
   return (
-    <article className={styles.column}>
-      <header className={styles.intro}>
+    <article>
+      <header className={`${styles.column} ${styles.intro}`}>
         <Link href="/blog">← All posts</Link>
         <BlogBreadcrumbs />
         <h1>{post.title}</h1>
@@ -59,7 +60,7 @@ export default async function PostPage({ params }: Props) {
       <div className={styles.content}>
         <Markdown
           remarkPlugins={[[remarkToc, { heading: 'In this post', maxDepth: 3, prefix: 'post-' }]]}
-          rehypePlugins={[[rehypeSlug, { prefix: 'post-' }]]}
+          rehypePlugins={[[rehypeSlug, { prefix: 'post-' }], articleLayout]}
         >
           {content}
         </Markdown>
