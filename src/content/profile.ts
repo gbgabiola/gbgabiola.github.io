@@ -7,7 +7,12 @@ type Profile = {
   availability: string;
   email: string;
   resume: { viewUrl: `https://${string}`; downloadUrl: `https://${string}` };
-  socialLinks: { label: string; href: `https://${string}` }[];
+  socialLinks: {
+    platform: 'linkedin' | 'twitter' | 'github';
+    label: string;
+    username: string;
+    href: `https://${string}`;
+  }[];
 };
 
 export const profile = {
@@ -28,16 +33,22 @@ export const profile = {
   },
   socialLinks: [
     {
+      platform: 'linkedin',
       label: 'LinkedIn',
+      username: 'gbgabiola',
       href: 'https://www.linkedin.com/in/gbgabiola/',
     },
     {
-      label: 'GitHub',
-      href: 'https://github.com/gbgabiola',
+      platform: 'twitter',
+      label: 'Twitter',
+      username: '@gbgabiola',
+      href: 'https://twitter.com/gbgabiola',
     },
     {
-      label: 'Twitter',
-      href: 'https://twitter.com/gbgabiola',
+      platform: 'github',
+      label: 'GitHub',
+      username: 'gbgabiola',
+      href: 'https://github.com/gbgabiola',
     },
   ],
 } satisfies Profile;

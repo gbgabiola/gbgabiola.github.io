@@ -37,6 +37,20 @@ test('footer shows the portfolio copyright and brand link', async ({ page }) => 
   await expect(footer).toContainText(/Portfolio v\d+\.\d+\.\d+/);
 });
 
+test('Contact shows icons and the original account names', async ({ page }) => {
+  await page.goto('/contact');
+  const contact = page.getByRole('region', { name: 'Get in touch' });
+  await expect(contact.locator('svg[aria-hidden="true"]')).toHaveCount(4);
+
+  for (const [label, username] of [
+    ['LinkedIn', 'gbgabiola'],
+    ['Twitter', '@gbgabiola'],
+    ['GitHub', 'gbgabiola'],
+  ]) {
+    await expect(contact.getByRole('link', { name: `${label}: ${username}` })).toHaveText(username);
+  }
+});
+
 test('keyboard users can skip the header and open the Works page', async ({ page }) => {
   await page.goto('/');
   await page.keyboard.press('Tab');
