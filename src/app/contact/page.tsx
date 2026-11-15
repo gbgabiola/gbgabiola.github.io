@@ -1,7 +1,6 @@
 import { pageMetadata } from '@/lib/metadata';
 import { profile } from '@/content/profile';
 import ResumeLink from '@/components/ui/resume-link';
-import buttons from '@/components/ui/button.module.css';
 import styles from './page.module.css';
 
 export const metadata = pageMetadata(
@@ -12,33 +11,29 @@ export const metadata = pageMetadata(
 export default function ContactPage() {
   return (
     <div className="viewport-page">
+      <header>
+        <h1>Let’s build something useful.</h1>
+        <p className="intro-copy">{profile.availability} Tell me what you’re building.</p>
+      </header>
+
       <div className={styles.grid}>
-        <section aria-labelledby="contact-heading">
-          <h1 id="contact-heading" className="display-heading">Work with me.</h1>
-          <p className="intro-copy">{profile.availability}</p>
-          <a className={buttons.primary} href={`mailto:${profile.email}`}>
-            {profile.email} <span className={styles.arrow} aria-hidden="true">↗</span>
-          </a>
+        <section className={styles.card} aria-labelledby="contact-heading">
+          <h2 id="contact-heading">Get in touch</h2>
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
+          <ul className={styles.links}>
+            {profile.socialLinks.map(({ label, href }) => (
+              <li key={href}><a href={href}>{label}</a></li>
+            ))}
+          </ul>
         </section>
-        <div className={styles.details}>
-          <section aria-labelledby="profiles-heading">
-            <h2 id="profiles-heading">Social profiles</h2>
-            <ul className={styles.links}>
-              {profile.socialLinks.map(({ label, href }) => (
-                <li key={href}>
-                  <a href={href}>{label} <span aria-hidden="true">↗</span></a>
-                </li>
-              ))}
-            </ul>
-          </section>
-          <section aria-labelledby="resume-heading">
-            <h2 id="resume-heading">Resume</h2>
-            <div className={styles.actions}>
-              <ResumeLink />
-              <a href={profile.resume.viewUrl}>View online</a>
-            </div>
-          </section>
-        </div>
+
+        <section className={styles.card} aria-labelledby="resume-heading">
+          <h2 id="resume-heading">Experience at a glance</h2>
+          <div className={styles.actions}>
+            <ResumeLink />
+            <a href={profile.resume.viewUrl}>View online</a>
+          </div>
+        </section>
       </div>
     </div>
   );
