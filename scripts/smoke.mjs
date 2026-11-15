@@ -21,8 +21,11 @@ for (const [path, title, content] of routes) {
 
   assert.ok(html.includes(`<title>${title} | G - Software Engineer</title>`), `${path}: title`);
 
-  assert.ok(
-    html.includes(`rel="canonical" href="https://genesisgabiola.vercel.app${path}"`),
+  const canonical = html.match(/rel="canonical" href="([^"]+)"/)?.[1];
+  assert.ok(canonical, `${path}: canonical URL exists`);
+  assert.equal(
+    new URL(canonical).href,
+    new URL(path, 'https://genesisgabiola.vercel.app').href,
     `${path}: production canonical URL`,
   );
   assert.match(html, /property="og:image" content="https:\/\/genesisgabiola\.vercel\.app\/opengraph-image/);
