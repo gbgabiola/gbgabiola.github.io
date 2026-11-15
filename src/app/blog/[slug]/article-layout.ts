@@ -53,9 +53,7 @@ export default function articleLayout() {
       if (node.tagName === 'h2') parent = section;
     }
 
-    if (!sections.length) return;
-
-    tree.children = [
+    const contents: Element[] = sections.length ? [
       {
         type: 'element',
         tagName: 'nav',
@@ -69,6 +67,15 @@ export default function articleLayout() {
           },
           sectionList(sections),
         ],
+      },
+    ] : [];
+
+    tree.children = [
+      {
+        type: 'element',
+        tagName: 'aside',
+        properties: {},
+        children: contents,
       },
       {
         type: 'element',

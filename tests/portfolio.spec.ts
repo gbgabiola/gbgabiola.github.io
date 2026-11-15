@@ -119,9 +119,10 @@ test('blog posts link to the author, headings, and tag archives', async ({ page 
   const breadcrumb = article.getByRole('navigation', { name: 'Breadcrumb' });
   await expect(breadcrumb.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/');
   await expect(breadcrumb.getByRole('link', { name: 'Tags' })).toHaveAttribute('href', '/blog/tags');
-  const contents = article.getByRole('navigation', { name: 'In this post' });
+  const sidebar = article.getByRole('complementary', { name: 'Article navigation' });
+  const contents = sidebar.getByRole('navigation', { name: 'In this post' });
   const opening = article.getByRole('heading', { name: 'Introduction', exact: true });
-  await expect(contents).toBeHidden();
+  await expect(sidebar).toBeHidden();
   await expect(opening).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
 
@@ -130,18 +131,27 @@ test('blog posts link to the author, headings, and tag archives', async ({ page 
   await expect(contents.getByRole('list')).toHaveCSS('list-style-type', 'none');
   await expect(contents.getByRole('link', { name: 'Introduction', exact: true }))
     .toHaveAttribute('href', '#post-introduction');
-  const desktopContents = await contents.boundingBox();
-  const desktopOpening = await opening.boundingBox();
-  if (!desktopContents || !desktopOpening) throw new Error('Article layout is missing');
-  expect(desktopContents.x).toBeGreaterThan(desktopOpening.x + desktopOpening.width);
-  expect(Math.abs(desktopContents.y - desktopOpening.y)).toBeLessThan(2);
+  const backLink = sidebar.getByRole('link', { name: 'All posts', exact: false });
+  const title = article.getByRole('heading', { level: 1 });
+  const repeatedTitle = sidebar.getByText(await title.innerText(), { exact: true });
+  await expect(backLink).toHaveAttribute('href', '/blog');
 
-  const stickyTop = await contents.evaluate((element) => Number.parseFloat(getComputedStyle(element).top));
+  const [desktopSidebar, desktopOpening, desktopTitle, desktopBack, desktopRepeated, desktopContents] =
+    await Promise.all([sidebar, opening, title, backLink, repeatedTitle, contents].map((part) => part.boundingBox()));
+  if (!desktopSidebar || !desktopOpening || !desktopTitle || !desktopBack || !desktopRepeated || !desktopContents) {
+    throw new Error('Article layout is missing');
+  }
+  expect(desktopSidebar.x).toBeGreaterThan(desktopOpening.x + desktopOpening.width);
+  expect(desktopSidebar.y).toBeLessThan(desktopTitle.y);
+  expect(desktopBack.y).toBeLessThan(desktopRepeated.y);
+  expect(desktopRepeated.y).toBeLessThan(desktopContents.y);
+
+  const stickyTop = await sidebar.evaluate((element) => Number.parseFloat(getComputedStyle(element).top));
   await page.evaluate(({ start, offset }) => window.scrollTo(0, start - offset + 72), {
-    start: desktopContents.y,
+    start: desktopSidebar.y,
     offset: stickyTop,
   });
-  await expect.poll(async () => (await contents.boundingBox())?.y).toBeCloseTo(stickyTop, 0);
+  await expect.poll(async () => (await sidebar.boundingBox())?.y).toBeCloseTo(stickyTop, 0);
 
   await contents.getByRole('link', { name: 'Step 3: Automate SSH-Agent Launch' }).click();
   await expect(page).toHaveURL(/#post-step-3-automate-ssh-agent-launch$/);

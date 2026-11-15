@@ -39,9 +39,9 @@ export default async function PostPage({ params }: Props) {
   );
 
   return (
-    <article>
+    <article className={styles.article}>
       <header className={`${styles.column} ${styles.intro}`}>
-        <Link href="/blog">← All posts</Link>
+        <Link href="/blog" className={styles.mobileBack}>← All posts</Link>
         <BlogBreadcrumbs />
         <h1>{post.title}</h1>
         <div className={styles.byline}>
@@ -61,6 +61,13 @@ export default async function PostPage({ params }: Props) {
         <Markdown
           remarkPlugins={[remarkGfm]}
           components={{
+            aside: ({ children }) => (
+              <aside className={styles.sidebar} aria-label="Article navigation">
+                <Link href="/blog">← All posts</Link>
+                <p className={styles.sidebarTitle}>{post.title}</p>
+                {children}
+              </aside>
+            ),
             table: ({ children }) => (
               <div className={styles.tableScroll}>
                 <table>{children}</table>
