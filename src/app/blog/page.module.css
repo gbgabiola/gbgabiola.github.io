@@ -1,0 +1,159 @@
+.column {
+  max-width: 44rem;
+}
+
+.intro {
+  margin-bottom: 2rem;
+}
+
+.intro h1 {
+  margin: 0.5rem 0;
+}
+
+.intro p,
+.column time {
+  color: var(--muted);
+}
+
+.column time {
+  font-size: 0.875rem;
+}
+
+.posts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.posts li {
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.posts h2 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.posts p {
+  margin: 0;
+}
+
+.content h2 {
+  margin: 1.75rem 0 0.75rem;
+}
+
+.content pre {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  background: var(--surface);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.breadcrumb ol,
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumb {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.breadcrumb li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+
+.byline,
+.tagged {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.65rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.tagged {
+  margin-top: 0.45rem;
+}
+
+.tags a {
+  display: inline-block;
+  padding: 0.05rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  background: var(--surface);
+}
+
+.content {
+  max-width: 44rem;
+}
+
+.contents {
+  display: none;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  background: var(--surface);
+}
+
+.contents h2 {
+  margin: 0 0 0.6rem;
+  font-size: 1.125rem;
+}
+
+.contents ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contents li + li {
+  margin-top: 0.45rem;
+}
+
+.contents li ul {
+  margin-top: 0.45rem;
+  padding-inline-start: 0.9rem;
+}
+
+.articleBody > :first-child {
+  margin-top: 0;
+}
+
+@media (min-width: 900px) {
+  .content:has(> .contents) {
+    display: grid;
+    grid-template-columns: minmax(0, 44rem) minmax(12rem, 1fr);
+    align-items: start;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    max-width: none;
+  }
+
+  .contents {
+    position: sticky;
+    top: 6rem;
+    display: block;
+    grid-column: 2;
+    grid-row: 1;
+    max-height: calc(100dvh - 7rem);
+    overflow-y: auto;
+  }
+
+  .articleBody {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
