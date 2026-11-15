@@ -12,6 +12,9 @@ const routes = [
   ['/contact', 'Contact', 'mailto:gbgabiola@gmail.com'],
   ['/blog', 'Blog', 'Designing portfolio pages to fit the viewport'],
   ['/blog/portfolio-pages-that-fit', 'Designing portfolio pages to fit the viewport', 'Test the edges'],
+  ['/blog/tags', 'Blog tags', 'Accessibility'],
+  ['/blog/tags/css', 'Posts tagged CSS', 'Designing portfolio pages to fit the viewport'],
+  ['/blog/tags/accessibility', 'Posts tagged Accessibility', 'Designing portfolio pages to fit the viewport'],
 ];
 
 for (const [path, title, content] of routes) {
@@ -75,6 +78,9 @@ assert.ok((await missing.text()).includes('Page not found'));
 
 const missingPost = await fetch(new URL('/blog/unknown-post', base));
 assert.equal(missingPost.status, 404);
+
+const missingTag = await fetch(new URL('/blog/tags/unknown-tag', base));
+assert.equal(missingTag.status, 404);
 
 const manifestResponse = await fetch(new URL('/manifest.webmanifest', base));
 

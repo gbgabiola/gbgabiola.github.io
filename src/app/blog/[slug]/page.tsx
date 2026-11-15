@@ -3,8 +3,12 @@ import { join } from 'node:path';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Markdown from 'react-markdown';
-import { formatPostDate, posts } from '@/content/posts';
+import rehypeSlug from 'rehype-slug';
+import remarkToc from 'remark-toc';
+import { site } from '@/config/site';
+import { blogTags, formatPostDate, posts } from '@/content/posts';
 import { pageMetadata } from '@/lib/metadata';
+import BlogBreadcrumbs from '../breadcrumbs';
 import styles from '../page.module.css';
 
 export const dynamicParams = false;
@@ -37,11 +41,28 @@ export default async function PostPage({ params }: Props) {
     <article className={styles.column}>
       <header className={styles.intro}>
         <Link href="/blog">← All posts</Link>
+        <BlogBreadcrumbs />
         <h1>{post.title}</h1>
-        <time dateTime={post.date}>{formatPostDate(post.date)}</time>
+        <div className={styles.byline}>
+          <span>By <Link href="/about">{site.brand}</Link></span>
+          <time dateTime={post.date}>{formatPostDate(post.date)}</time>
+        </div>
+        <div className={styles.tagged}>
+          <span>Tagged:</span>
+          <ul className={styles.tags}>
+            {post.tags.map((tag) => (
+              <li key={tag}><Link href={`/blog/tags/${tag}`}>{blogTags[tag]}</Link></li>
+            ))}
+          </ul>
+        </div>
       </header>
       <div className={styles.content}>
-        <Markdown>{content}</Markdown>
+        <Markdown
+          remarkPlugins={[[remarkToc, { heading: 'In this post', maxDepth: 3, prefix: 'post-' }]]}
+          rehypePlugins={[[rehypeSlug, { prefix: 'post-' }]]}
+        >
+          {content}
+        </Markdown>
       </div>
     </article>
   );
