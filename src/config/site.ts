@@ -3,8 +3,8 @@ import { profile } from '@/content/profile';
 
 export const site = {
   version,
-  title: `${profile.name} - ${profile.role}`,
-  description: `${profile.name} is a Software Engineer specializing in Full Stack Development, building thoughtful interfaces and reliable web applications.`,
+  title: `${profile.nickname} - ${profile.role}`,
+  description: `Portfolio of ${profile.nickname}, a software engineer and full stack developer working across web interfaces and backend APIs.`,
   navigation: [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },

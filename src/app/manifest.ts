@@ -3,8 +3,8 @@ import { profile } from '@/content/profile';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${profile.name} Portfolio`,
-    short_name: profile.name,
+    name: `${profile.nickname} Portfolio`,
+    short_name: profile.nickname,
     start_url: '/',
     display: 'minimal-ui',
     background_color: '#171b21',

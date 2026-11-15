@@ -8,7 +8,7 @@ import styles from './page.module.css';
 
 export const metadata = pageMetadata(
   'About',
-  'Explore Genesis Gabiola’s professional experience, technical skills, and approach to full stack development.',
+  'Explore G’s professional experience and skills in full stack development.',
 );
 
 export default function AboutPage() {
@@ -17,13 +17,13 @@ export default function AboutPage() {
       <header className={styles.profile}>
         <Image
           src={photo}
-          alt={profile.name}
+          alt={`Portrait of ${profile.nickname}`}
           width={120}
           height={120}
           className={styles.portrait}
         />
         <div>
-          <h1 className="display-heading">About {profile.name}</h1>
+          <h1 className="display-heading">About {profile.nickname}</h1>
           <p>
             {profile.role} · {profile.specialization}
           </p>

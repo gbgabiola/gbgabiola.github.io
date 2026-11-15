@@ -1,4 +1,4 @@
-# Genesis Gabiola portfolio — v4
+# G’s portfolio — v4
 
 Next.js App Router, React, TypeScript, CSS Modules, and next-themes.
 Node 24 is required. npm is the package manager; commit package-lock.json.

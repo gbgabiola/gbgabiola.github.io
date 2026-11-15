@@ -11,9 +11,9 @@ export default function SiteHeader() {
         <Link
           href="/"
           className={styles.brand}
-          aria-label={`${profile.name} home`}
+          aria-label={`${profile.nickname} home`}
         >
-          {profile.name}
+          {profile.nickname}
         </Link>
         <Navigation />
         <ThemeSwitch />

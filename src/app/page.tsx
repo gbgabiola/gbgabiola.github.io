@@ -16,8 +16,8 @@ export default function HomePage() {
       <section className={styles.hero} aria-labelledby="home-heading">
         <div>
           <p className="eyebrow">{profile.role}</p>
-          <h1 id="home-heading" className="display-heading">{profile.name}</h1>
-          <p className="intro-copy">I build web interfaces and backend APIs.</p>
+          <h1 id="home-heading" className="display-heading">Hi, I’m {profile.nickname}.</h1>
+          <p className="intro-copy">{profile.specialization} building interfaces and APIs.</p>
           <div className={styles.actions}>
             <Link href="/works" className={buttons.primary}>View work</Link>
             <ResumeLink />
@@ -29,7 +29,7 @@ export default function HomePage() {
         <figure className={styles.photo}>
           <Image
             src={photo}
-            alt={profile.name}
+            alt={`Portrait of ${profile.nickname}`}
             width={360}
             height={360}
             sizes="(max-width: 720px) 112px, 360px"

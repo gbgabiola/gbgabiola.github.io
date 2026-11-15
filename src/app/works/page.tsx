@@ -6,7 +6,7 @@ import styles from './page.module.css';
 
 export const metadata = pageMetadata(
   'Works',
-  'Explore selected projects by Genesis Gabiola, including Caffeinawa, Omnifood, and UniFlix.',
+  'Explore G’s selected projects, including Caffeinawa, Omnifood, and UniFlix.',
 );
 
 export default function WorksPage() {

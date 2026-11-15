@@ -6,7 +6,7 @@ import styles from './page.module.css';
 
 export const metadata = pageMetadata(
   'Contact',
-  'Contact Genesis Gabiola about part-time remote opportunities and project collaborations, or download his resume.',
+  'Get in touch with G about part-time remote work and web projects.',
 );
 
 export default function ContactPage() {
@@ -14,7 +14,7 @@ export default function ContactPage() {
     <div className="viewport-page">
       <div className={styles.grid}>
         <section aria-labelledby="contact-heading">
-          <h1 id="contact-heading" className="display-heading">Let’s talk.</h1>
+          <h1 id="contact-heading" className="display-heading">Work with me.</h1>
           <p className="intro-copy">{profile.availability}</p>
           <a className={buttons.primary} href={`mailto:${profile.email}`}>
             {profile.email} <span className={styles.arrow} aria-hidden="true">↗</span>

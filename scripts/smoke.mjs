@@ -6,7 +6,7 @@ const { version } = JSON.parse(readFileSync(new URL('../package.json', import.me
 const base = process.env.SMOKE_BASE_URL || 'http://127.0.0.1:3000';
 
 const routes = [
-  ['/', 'Home', '>Genesis Gabiola</h1>'],
+  ['/', 'Home', 'Full Stack Developer'],
   ['/about', 'About', 'Professional Experience'],
   ['/works', 'Works', 'Caffeinawa'],
   ['/contact', 'Contact', 'mailto:gbgabiola@gmail.com'],
@@ -19,8 +19,9 @@ for (const [path, title, content] of routes) {
 
   const html = await response.text();
 
-  assert.ok(html.includes(`<title>${title} | Genesis Gabiola - Software Engineer</title>`), `${path}: title`);
+  assert.ok(html.includes(`<title>${title} | G - Software Engineer</title>`), `${path}: title`);
 
+  assert.doesNotMatch(html, /Genesis Gabiola/i, `${path}: public nickname`);
   assert.ok(html.includes(content), `${path}: content`);
   assert.ok(html.includes(`>Portfolio v${version}</p>`), `${path}: portfolio version`);
 
@@ -58,6 +59,7 @@ assert.equal(manifestResponse.status, 200);
 const manifest = await manifestResponse.json();
 
 assert.equal(manifest.start_url, '/');
+assert.equal(manifest.short_name, 'G');
 
 const verification = await fetch(new URL('/keybase.txt', base));
 

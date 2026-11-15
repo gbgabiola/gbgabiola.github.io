@@ -10,7 +10,7 @@ import './globals.css';
 export const metadata: Metadata = {
   title: { default: site.title, template: `%s | ${site.title}` },
   description: site.description,
-  authors: [{ name: profile.name }],
+  authors: [{ name: profile.nickname }],
   openGraph: {
     title: site.title,
     description: site.description,

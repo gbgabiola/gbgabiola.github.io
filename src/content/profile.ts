@@ -1,5 +1,5 @@
 type Profile = {
-  name: string;
+  nickname: string;
   role: string;
   specialization: string;
   location: string;
@@ -11,14 +11,14 @@ type Profile = {
 };
 
 export const profile = {
-  name: 'Genesis Gabiola',
+  nickname: 'G',
   role: 'Software Engineer',
-  specialization: 'Full Stack Development',
+  specialization: 'Full Stack Developer',
   location: 'San Fernando, Pampanga, Philippines',
   summary:
     'I build web applications that connect thoughtful user experiences with reliable backend systems.',
   availability:
-    'Open to part-time remote work and project collaborations.',
+    'I’m open to part-time remote work and web projects.',
   email: 'gbgabiola@gmail.com',
   resume: {
     viewUrl:
