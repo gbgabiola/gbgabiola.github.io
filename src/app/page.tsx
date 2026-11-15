@@ -30,9 +30,9 @@ export default function HomePage() {
           <Image
             src={photo}
             alt={`Portrait of ${profile.nickname}`}
-            width={360}
-            height={360}
-            sizes="(max-width: 720px) 112px, 360px"
+            width={280}
+            height={280}
+            sizes="(max-width: 720px) 112px, (max-height: 600px) 40svh, 280px"
             preload
           />
           <figcaption>{profile.location}</figcaption>

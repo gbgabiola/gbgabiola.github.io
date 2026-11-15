@@ -12,6 +12,7 @@
 .details {
   padding: clamp(1rem, 3vw, 2rem);
   border: 1px solid var(--border);
+  border-inline-start: 3px solid var(--primary);
   border-radius: 0.85rem;
   background: var(--surface);
 }
@@ -33,6 +34,10 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.4rem 1rem;
+}
+
+.links a {
+  font-weight: 600;
 }
 
 .links {

@@ -22,7 +22,7 @@ export default function ContactPage() {
         </section>
         <div className={styles.details}>
           <section aria-labelledby="profiles-heading">
-            <h2 id="profiles-heading">Find me online</h2>
+            <h2 id="profiles-heading">Social profiles</h2>
             <ul className={styles.links}>
               {profile.socialLinks.map(({ label, href }) => (
                 <li key={href}>

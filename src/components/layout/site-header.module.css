@@ -16,9 +16,20 @@
   gap: 1rem;
 }
 .brand {
-  color: var(--foreground);
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  color: var(--primary);
   font-weight: 750;
+  line-height: 1;
   text-decoration: none;
+}
+
+.brand:hover {
+  border-color: var(--primary);
 }
 .nav ul {
   display: flex;
@@ -43,7 +54,6 @@
     gap: 0.25rem;
   }
 
-  .brand,
   .nav a {
     font-size: 0.875rem;
   }
