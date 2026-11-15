@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { blogTags, posts } from '../src/content/posts.ts';
 
 const { version } = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 
@@ -10,12 +11,24 @@ const routes = [
   ['/about', 'About', 'Professional Experience'],
   ['/works', 'Works', 'Caffeinawa'],
   ['/contact', 'Contact', 'mailto:gbgabiola@gmail.com'],
-  ['/blog', 'Blog', 'Designing portfolio pages to fit the viewport'],
-  ['/blog/portfolio-pages-that-fit', 'Designing portfolio pages to fit the viewport', 'Test the edges'],
-  ['/blog/tags', 'Blog tags', 'Accessibility'],
-  ['/blog/tags/css', 'Posts tagged CSS', 'Designing portfolio pages to fit the viewport'],
-  ['/blog/tags/accessibility', 'Posts tagged Accessibility', 'Designing portfolio pages to fit the viewport'],
+  ['/blog', 'Blog', 'Notes on building for the web'],
+  ['/blog/tags', 'Blog tags', 'Browse blog posts by topic.'],
+  ...posts.map(({ slug, title }) => [`/blog/${slug}`, title, title]),
+  ...Object.entries(blogTags).map(([tag, label]) => [
+    `/blog/tags/${tag}`,
+    `Posts tagged ${label}`,
+    posts.find((post) => post.tags.includes(tag))?.title,
+  ]),
 ];
+
+function escapeHtml(value) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#x27;');
+}
 
 for (const [path, title, content] of routes) {
   const response = await fetch(new URL(path, base));
@@ -24,7 +37,7 @@ for (const [path, title, content] of routes) {
 
   const html = await response.text();
 
-  assert.ok(html.includes(`<title>${title} | G - Software Engineer</title>`), `${path}: title`);
+  assert.ok(html.includes(`<title>${escapeHtml(title)} | G - Software Engineer</title>`), `${path}: title`);
 
   const canonical = html.match(/rel="canonical" href="([^"]+)"/)?.[1];
   assert.ok(canonical, `${path}: canonical URL exists`);
@@ -38,7 +51,8 @@ for (const [path, title, content] of routes) {
     `${path}: social preview image metadata`,
   );
   assert.doesNotMatch(html, /Genesis Gabiola/i, `${path}: public nickname`);
-  assert.ok(html.includes(content), `${path}: content`);
+  const body = html.slice(html.indexOf('<body'));
+  if (content) assert.ok(body.includes(escapeHtml(content)), `${path}: content`);
   assert.ok(html.includes(`>Portfolio v${version}</p>`), `${path}: portfolio version`);
 
   if (path === '/') {
@@ -76,7 +90,7 @@ const missing = await fetch(new URL('/this-page-does-not-exist', base));
 assert.equal(missing.status, 404);
 assert.ok((await missing.text()).includes('Page not found'));
 
-const missingPost = await fetch(new URL('/blog/unknown-post', base));
+const missingPost = await fetch(new URL('/blog/portfolio-pages-that-fit', base));
 assert.equal(missingPost.status, 404);
 
 const missingTag = await fetch(new URL('/blog/tags/unknown-tag', base));

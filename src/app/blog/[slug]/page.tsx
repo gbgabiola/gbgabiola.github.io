@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Markdown from 'react-markdown';
 import rehypeSlug from 'rehype-slug';
+import remarkGfm from 'remark-gfm';
 import { site } from '@/config/site';
 import { blogTags, formatPostDate, posts } from '@/content/posts';
 import { pageMetadata } from '@/lib/metadata';
@@ -58,6 +59,14 @@ export default async function PostPage({ params }: Props) {
       </header>
       <div className={styles.content}>
         <Markdown
+          remarkPlugins={[remarkGfm]}
+          components={{
+            table: ({ children }) => (
+              <div className={styles.tableScroll}>
+                <table>{children}</table>
+              </div>
+            ),
+          }}
           rehypePlugins={[[rehypeSlug, { prefix: 'post-' }], articleLayout]}
         >
           {content}

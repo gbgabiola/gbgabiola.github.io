@@ -157,3 +157,23 @@
     grid-row: 1;
   }
 }
+
+.tableScroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.tableScroll table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableScroll th,
+.tableScroll td {
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--border);
+}
+
+.tableScroll th {
+  background: var(--surface);
+}

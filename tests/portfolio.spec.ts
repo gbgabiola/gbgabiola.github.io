@@ -110,7 +110,7 @@ test('theme persists across navigation and reload', async ({ page }) => {
 
 test('blog posts link to the author, headings, and tag archives', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 568 });
-  await page.goto('/blog/portfolio-pages-that-fit');
+  await page.goto('/blog/ensuring-persistent-ssh-agent-windows-git-bash');
 
   const article = page.getByRole('article');
   await expect(article.getByRole('link', { name: 'gbgabiola' })).toHaveAttribute('href', '/about');
@@ -120,7 +120,7 @@ test('blog posts link to the author, headings, and tag archives', async ({ page 
   await expect(breadcrumb.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/');
   await expect(breadcrumb.getByRole('link', { name: 'Tags' })).toHaveAttribute('href', '/blog/tags');
   const contents = article.getByRole('navigation', { name: 'In this post' });
-  const opening = article.getByText('When I moved this portfolio', { exact: false });
+  const opening = article.getByRole('heading', { name: 'Introduction', exact: true });
   await expect(contents).toBeHidden();
   await expect(opening).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
@@ -128,7 +128,8 @@ test('blog posts link to the author, headings, and tag archives', async ({ page 
   await page.setViewportSize({ width: 1280, height: 540 });
   await expect(contents).toBeVisible();
   await expect(contents.getByRole('list')).toHaveCSS('list-style-type', 'none');
-  await expect(contents.getByRole('link')).toHaveText(['Give the layout a minimum height', 'Test the edges']);
+  await expect(contents.getByRole('link', { name: 'Introduction', exact: true }))
+    .toHaveAttribute('href', '#post-introduction');
   const desktopContents = await contents.boundingBox();
   const desktopOpening = await opening.boundingBox();
   if (!desktopContents || !desktopOpening) throw new Error('Article layout is missing');
@@ -142,23 +143,23 @@ test('blog posts link to the author, headings, and tag archives', async ({ page 
   });
   await expect.poll(async () => (await contents.boundingBox())?.y).toBeCloseTo(stickyTop, 0);
 
-  await contents.getByRole('link', { name: 'Test the edges' }).click();
-  await expect(page).toHaveURL(/#post-test-the-edges$/);
-  await expect(article.getByRole('heading', { name: 'Test the edges' }))
-    .toHaveAttribute('id', 'post-test-the-edges');
+  await contents.getByRole('link', { name: 'Step 3: Automate SSH-Agent Launch' }).click();
+  await expect(page).toHaveURL(/#post-step-3-automate-ssh-agent-launch$/);
+  await expect(article.getByRole('heading', { name: 'Step 3: Automate SSH-Agent Launch' }))
+    .toHaveAttribute('id', 'post-step-3-automate-ssh-agent-launch');
 
-  await article.getByRole('link', { name: 'CSS', exact: true }).click();
-  await expect(page).toHaveURL('/blog/tags/css');
-  await expect(page.getByRole('heading', { name: 'Posts tagged CSS' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Designing portfolio pages to fit the viewport' }))
-    .toHaveAttribute('href', '/blog/portfolio-pages-that-fit');
+  await article.locator('header').getByRole('link', { name: 'Git', exact: true }).click();
+  await expect(page).toHaveURL('/blog/tags/git');
+  await expect(page.getByRole('heading', { name: 'Posts tagged Git' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Ensuring Persistent SSH-Agent on Windows with Git Bash' }))
+    .toHaveAttribute('href', '/blog/ensuring-persistent-ssh-agent-windows-git-bash');
   await page.getByRole('navigation', { name: 'Breadcrumb' }).getByRole('link', { name: 'Tags' }).click();
   await expect(page).toHaveURL('/blog/tags');
-  await expect(page.getByRole('link', { name: 'Accessibility' })).toHaveAttribute('href', '/blog/tags/accessibility');
+  await expect(page.getByRole('link', { name: 'Windows' })).toHaveAttribute('href', '/blog/tags/windows');
 });
 
 test('portfolio routes pass automated accessibility checks', async ({ page }) => {
-  for (const path of ['/', '/about', '/works', '/contact', '/blog', '/blog/portfolio-pages-that-fit']) {
+  for (const path of ['/', '/about', '/works', '/contact', '/blog', '/blog/ensuring-persistent-ssh-agent-windows-git-bash']) {
     await page.goto(path);
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
