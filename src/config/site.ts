@@ -11,7 +11,7 @@ export const site = {
   navigation: [
     { href: '/about', label: 'About' },
     { href: '/works', label: 'Works' },
-    { href: '/blog', label: 'Blog' },
+    { href: '/blog', label: 'Blog', prefetch: false },
     { href: '/contact', label: 'Contact' },
   ],
 };

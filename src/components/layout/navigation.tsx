@@ -10,10 +10,11 @@ export default function Navigation() {
   return (
     <nav className={styles.nav} aria-label="Main navigation">
       <ul>
-        {site.navigation.map(({ href, label }) => (
+        {site.navigation.map(({ href, label, prefetch }) => (
           <li key={href}>
             <Link
               href={href}
+              prefetch={prefetch}
               aria-current={pathname === href
                 ? 'page'
                 : pathname.startsWith(`${href}/`) ? 'location' : undefined}
