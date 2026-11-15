@@ -128,6 +128,7 @@ test('blog posts link to the author, headings, and tag archives', async ({ page 
   await page.setViewportSize({ width: 1280, height: 540 });
   await expect(contents).toBeVisible();
   await expect(contents.getByRole('list')).toHaveCSS('list-style-type', 'none');
+  await expect(contents.getByRole('link')).toHaveText(['Give the layout a minimum height', 'Test the edges']);
   const desktopContents = await contents.boundingBox();
   const desktopOpening = await opening.boundingBox();
   if (!desktopContents || !desktopOpening) throw new Error('Article layout is missing');

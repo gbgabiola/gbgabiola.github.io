@@ -59,10 +59,10 @@ and test signed out. Drive may show its own download confirmation page.
 Add a Markdown file in `src/content/blog/` and an entry in
 `src/content/posts.ts` with the matching slug, a title, an ISO date, a summary,
 and tags from `blogTags`. Use level-two headings in articles. The page supplies
-the main heading. Leave a blank `## In this post` section before the first
-topic heading to generate the table of contents. Posts and tag archives are
-built with the site and listed in the sitemap. Use a branch preview to check
-an article before publishing it.
+the main heading. The desktop table of contents is generated automatically
+from level-two and level-three headings. Posts and tag archives are built with
+the site and listed in the sitemap. Use a branch preview to check an article
+before publishing it.
 
 ## Deployment and version history
 

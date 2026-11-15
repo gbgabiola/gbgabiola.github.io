@@ -1,37 +1,80 @@
-import type { Root } from 'hast';
+import type { Element, Root } from 'hast';
+import { toString } from 'hast-util-to-string';
 import styles from '../page.module.css';
 
-const contentsHeading = 'post-in-this-post';
+type Section = {
+  id: string;
+  title: string;
+  children: Section[];
+};
+
+const contentsHeading = 'article-contents-heading';
+
+function sectionList(sections: Section[]): Element {
+  return {
+    type: 'element',
+    tagName: 'ul',
+    properties: { role: 'list' },
+    children: sections.map(({ id, title, children }) => ({
+      type: 'element',
+      tagName: 'li',
+      properties: {},
+      children: [
+        {
+          type: 'element',
+          tagName: 'a',
+          properties: { href: `#${id}` },
+          children: [{ type: 'text', value: title }],
+        },
+        ...(children.length ? [sectionList(children)] : []),
+      ],
+    })),
+  };
+}
 
 export default function articleLayout() {
   return (tree: Root) => {
-    const headingIndex = tree.children.findIndex(
-      (node) => node.type === 'element' && node.properties.id === contentsHeading,
-    );
-    const heading = tree.children[headingIndex];
-    if (heading?.type !== 'element') return;
+    const sections: Section[] = [];
+    let parent: Section | undefined;
 
-    const listIndex = tree.children.findIndex(
-      (node, index) => index > headingIndex && node.type === 'element',
-    );
-    const list = tree.children[listIndex];
-    if (list?.type !== 'element' || list.tagName !== 'ul') return;
+    for (const node of tree.children) {
+      if (node.type !== 'element' || (node.tagName !== 'h2' && node.tagName !== 'h3')) continue;
 
-    list.properties.role = 'list';
+      const id = node.properties.id;
+      const title = toString(node).trim();
+      if (typeof id !== 'string' || !title) continue;
+
+      const section = { id, title, children: [] };
+      if (node.tagName === 'h3' && parent) {
+        parent.children.push(section);
+      } else {
+        sections.push(section);
+      }
+      if (node.tagName === 'h2') parent = section;
+    }
+
+    if (!sections.length) return;
+
     tree.children = [
       {
         type: 'element',
         tagName: 'nav',
         properties: { ariaLabelledBy: [contentsHeading], className: [styles.contents] },
-        children: [heading, list],
+        children: [
+          {
+            type: 'element',
+            tagName: 'h2',
+            properties: { id: contentsHeading },
+            children: [{ type: 'text', value: 'In this post' }],
+          },
+          sectionList(sections),
+        ],
       },
       {
         type: 'element',
         tagName: 'div',
         properties: { className: [styles.articleBody] },
-        children: tree.children
-          .filter((_, index) => index !== headingIndex && index !== listIndex)
-          .filter((node) => node.type !== 'doctype'),
+        children: tree.children.filter((node) => node.type !== 'doctype'),
       },
     ];
   };

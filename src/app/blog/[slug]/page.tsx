@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Markdown from 'react-markdown';
 import rehypeSlug from 'rehype-slug';
-import remarkToc from 'remark-toc';
 import { site } from '@/config/site';
 import { blogTags, formatPostDate, posts } from '@/content/posts';
 import { pageMetadata } from '@/lib/metadata';
@@ -59,7 +58,6 @@ export default async function PostPage({ params }: Props) {
       </header>
       <div className={styles.content}>
         <Markdown
-          remarkPlugins={[[remarkToc, { heading: 'In this post', maxDepth: 3, prefix: 'post-' }]]}
           rehypePlugins={[[rehypeSlug, { prefix: 'post-' }], articleLayout]}
         >
           {content}

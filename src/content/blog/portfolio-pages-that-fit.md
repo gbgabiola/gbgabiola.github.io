@@ -1,7 +1,5 @@
 When I moved this portfolio from Gatsby to Next.js, I wanted visitors to see who I am, what I build, and where to go next as soon as they open the site. Home and Contact each have a short job. About and Works have more room for experience and project details.
 
-## In this post
-
 ## Give the layout a minimum height
 
 The site uses a column layout with a minimum height of one small viewport. The header and footer take the space they need, and the main area fills the space between them. That keeps short pages balanced without fixing their height.
