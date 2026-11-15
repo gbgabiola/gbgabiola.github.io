@@ -1,3 +1,4 @@
+import { site } from '@/config/site';
 import { profile } from '@/content/profile';
 import styles from './site-footer.module.css';
 
@@ -15,8 +16,7 @@ export default function SiteFooter() {
         ))}
       </ul>
       <p>
-        Built with <a href="https://nextjs.org/">Next.js</a> and{' '}
-        <a href="https://react.dev/">React</a>.
+        {`Portfolio v${site.version}`}
       </p>
     </footer>
   );

@@ -1,4 +1,7 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+
+const { version } = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 
 const base = process.env.SMOKE_BASE_URL || 'http://127.0.0.1:3000';
 
@@ -19,6 +22,7 @@ for (const [path, title, content] of routes) {
   assert.ok(html.includes(`<title>${title} | Genesis Gabiola - Software Engineer</title>`), `${path}: title`);
 
   assert.ok(html.includes(content), `${path}: content`);
+  assert.ok(html.includes(`>Portfolio v${version}</p>`), `${path}: portfolio version`);
 
   assert.ok(html.includes('aria-current="page"'), `${path}: active navigation`);
 

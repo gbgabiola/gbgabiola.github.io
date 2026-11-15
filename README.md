@@ -48,8 +48,15 @@ and test signed out. Drive may show its own download confirmation page.
 Vercel uses the Next.js preset, Node 24, npm ci, npm run build, and the default
 output handling. Keep vercel.json; it explicitly selects the Next.js adapter.
 
-- v2: historical GitHub Pages version.
-- v3: preserved Gatsby version.
-- feat/nextjs-v4: ongoing migration and preview deployment.
-- develop: integration branch.
-- main: production branch after the reviewed migration is merged.
+The application version follows [Semantic Versioning](https://semver.org/).
+The site footer reads it directly from `package.json`. Update the manifest and
+lockfile together with `npm version <patch|minor|major> --no-git-tag-version`
+when preparing the next release.
+
+Promote changes through `develop` before merging to `main`. After the release
+lands, create an annotated `vMAJOR.MINOR.PATCH` tag on the production commit
+using the version in `package.json`, then push the tag to GitHub.
+
+- `v4.0.0` is the first Next.js release.
+- `v3` and the `portfolio-v3-gatsby` tag preserve the final Gatsby version.
+- `feat/nextjs-v4` is the migration branch with its own Vercel preview.

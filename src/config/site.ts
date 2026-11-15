@@ -1,6 +1,8 @@
+import { version } from '../../package.json';
 import { profile } from '@/content/profile';
 
 export const site = {
+  version,
   title: `${profile.name} - ${profile.role}`,
   description: `${profile.name} is a Software Engineer specializing in Full Stack Development, building thoughtful interfaces and reliable web applications.`,
   navigation: [
