@@ -7,6 +7,7 @@ import ResumeLink from '@/components/ui/resume-link';
 import styles from './page.module.css';
 
 export const metadata = pageMetadata(
+  '/about',
   'About',
   'Explore G’s professional experience and skills in full stack development.',
 );

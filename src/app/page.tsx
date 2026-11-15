@@ -8,7 +8,7 @@ import ResumeLink from '@/components/ui/resume-link';
 import buttons from '@/components/ui/button.module.css';
 import styles from './page.module.css';
 
-export const metadata = pageMetadata('Home');
+export const metadata = pageMetadata('/', 'Home');
 
 export default function HomePage() {
   return (

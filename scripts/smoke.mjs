@@ -21,6 +21,11 @@ for (const [path, title, content] of routes) {
 
   assert.ok(html.includes(`<title>${title} | G - Software Engineer</title>`), `${path}: title`);
 
+  assert.ok(
+    html.includes(`rel="canonical" href="https://genesisgabiola.vercel.app${path}"`),
+    `${path}: production canonical URL`,
+  );
+  assert.match(html, /property="og:image" content="https:\/\/genesisgabiola\.vercel\.app\/opengraph-image/);
   assert.doesNotMatch(html, /Genesis Gabiola/i, `${path}: public nickname`);
   assert.ok(html.includes(content), `${path}: content`);
   assert.ok(html.includes(`>Portfolio v${version}</p>`), `${path}: portfolio version`);
@@ -67,3 +72,19 @@ assert.equal(verification.status, 200);
 assert.ok((await verification.text()).includes('keybase'));
 
 console.log('PASS 404, manifest, and Keybase verification');
+
+const sitemap = await fetch(new URL('/sitemap.xml', base));
+assert.equal(sitemap.status, 200);
+const sitemapXml = await sitemap.text();
+for (const [path] of routes) {
+  assert.ok(sitemapXml.includes(`<loc>https://genesisgabiola.vercel.app${path}</loc>`));
+}
+
+const robots = await fetch(new URL('/robots.txt', base));
+assert.equal(robots.status, 200);
+assert.match(await robots.text(), /Sitemap: https:\/\/genesisgabiola\.vercel\.app\/sitemap\.xml/);
+
+const previewImage = await fetch(new URL('/opengraph-image', base));
+assert.equal(previewImage.status, 200);
+assert.match(previewImage.headers.get('content-type'), /^image\/png/);
+console.log('PASS sitemap, robots, and social preview image');

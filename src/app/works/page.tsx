@@ -5,6 +5,7 @@ import ProjectGrid from '@/components/sections/project-grid';
 import styles from './page.module.css';
 
 export const metadata = pageMetadata(
+  '/works',
   'Works',
   'Explore G’s selected projects, including Caffeinawa, Omnifood, and UniFlix.',
 );
@@ -20,7 +21,7 @@ export default function WorksPage() {
           <p className="eyebrow">Featured project</p>
           <h2 id="featured-project">Rebuilding this portfolio</h2>
           <p>
-            As sole maintainer, I’m migrating my Gatsby portfolio to the
+            As sole maintainer, I rebuilt my Gatsby portfolio using the
             Next.js App Router while preserving the page URLs and light and
             dark themes.
           </p>
@@ -37,7 +38,7 @@ export default function WorksPage() {
           <div>
             <dt>Result</dt>
             <dd>
-              The Vercel preview serves the four portfolio pages from Next.js.
+              The Next.js build serves all four portfolio pages on Vercel.
               GitHub Actions builds the site and checks the production routes.
             </dd>
           </div>

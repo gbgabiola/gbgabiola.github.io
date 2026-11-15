@@ -8,6 +8,7 @@ import ThemeProvider from '@/components/theme/theme-provider';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: { default: site.title, template: `%s | ${site.title}` },
   description: site.description,
   authors: [{ name: profile.nickname }],

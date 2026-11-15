@@ -4,6 +4,7 @@ import ResumeLink from '@/components/ui/resume-link';
 import styles from './page.module.css';
 
 export const metadata = pageMetadata(
+  '/contact',
   'Contact',
   'Get in touch with G about part-time remote work and web projects.',
 );

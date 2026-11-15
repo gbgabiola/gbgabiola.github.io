@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { site } from '@/config/site';
 
 export function pageMetadata(
+  path: `/${string}`,
   title: string,
   description = site.description,
 ): Metadata {
@@ -9,7 +10,13 @@ export function pageMetadata(
   return {
     title: { absolute: fullTitle },
     description,
-    openGraph: { title: fullTitle, description, type: 'website' },
-    twitter: { card: 'summary', title: fullTitle, description },
+    alternates: { canonical: path },
+    openGraph: { title: fullTitle, description, url: path, type: 'website' },
+    twitter: {
+      card: 'summary_large_image',
+      title: fullTitle,
+      description,
+      images: ['/opengraph-image'],
+    },
   };
 }
