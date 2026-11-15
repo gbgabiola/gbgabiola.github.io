@@ -28,7 +28,10 @@ for (const [path, title, content] of routes) {
     new URL(path, 'https://genesisgabiola.vercel.app').href,
     `${path}: production canonical URL`,
   );
-  assert.match(html, /property="og:image" content="https:\/\/genesisgabiola\.vercel\.app\/opengraph-image/);
+  assert.ok(
+    /property="og:image" content="https:\/\/genesisgabiola\.vercel\.app\/opengraph-image/.test(html),
+    `${path}: social preview image metadata`,
+  );
   assert.doesNotMatch(html, /Genesis Gabiola/i, `${path}: public nickname`);
   assert.ok(html.includes(content), `${path}: content`);
   assert.ok(html.includes(`>Portfolio v${version}</p>`), `${path}: portfolio version`);
