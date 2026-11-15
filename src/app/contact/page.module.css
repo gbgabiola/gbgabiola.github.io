@@ -16,7 +16,6 @@
   font-size: clamp(1.05rem, 2vw, 1.4rem);
 }
 
-.links,
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -25,10 +24,25 @@
 }
 
 .links {
-  margin: 0.45rem 0 0;
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
   padding: 0;
   list-style: none;
   font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+.links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
 }
 
 @media (max-width: 600px) {
@@ -39,5 +53,31 @@
 
   .card {
     padding: 0.65rem;
+  }
+
+  .card h2 {
+    margin-bottom: 0.4rem;
+  }
+
+  .links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.35rem 0.2rem;
+  }
+
+  .links li:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .links li:not(:first-child) a {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-height: 500px) {
+  .links {
+    row-gap: 0.2rem;
   }
 }

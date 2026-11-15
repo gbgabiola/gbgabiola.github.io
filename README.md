@@ -90,3 +90,6 @@ tags on their original commits.
 - `v4.0.0` is the first Next.js release.
 - `v3` and the `portfolio-v3-gatsby` tag preserve the final Gatsby version.
 - `feat/nextjs-v4` is the migration branch with its own Vercel preview.
+
+Contact icons by [Font Awesome](https://fontawesome.com/) are used under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
