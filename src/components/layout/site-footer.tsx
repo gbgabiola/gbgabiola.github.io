@@ -7,7 +7,7 @@ export default function SiteFooter() {
   return (
     <footer className={styles.footer}>
       <p>
-        © {year}{' '}
+        © {site.establishedYear}–{year}{' '}
         <a className={styles.brand} href={`https://github.com/${site.brand}`}>
           {site.brand}
         </a>

@@ -3,6 +3,7 @@ import { profile } from '@/content/profile';
 
 export const site = {
   brand: name,
+  establishedYear: 2018,
   version,
   url: 'https://genesisgabiola.vercel.app',
   title: `${profile.nickname} - ${profile.role}`,
