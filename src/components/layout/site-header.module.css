@@ -10,14 +10,23 @@
   margin: auto;
   padding: 1rem var(--gutter);
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
   gap: 1rem;
 }
 .brand {
   display: inline-grid;
   place-items: center;
+  flex: none;
   min-width: 2.25rem;
   min-height: 2.25rem;
   border: 1px solid var(--border);
@@ -33,6 +42,8 @@
 }
 .nav ul {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 1.5rem;
   list-style: none;
   margin: 0;
@@ -50,21 +61,20 @@
 }
 @media (max-width: 640px) {
   .inner {
-    padding-block: 0.35rem;
-    gap: 0.25rem;
+    padding: 0.35rem min(var(--gutter), 3vw);
+    gap: 0.5rem;
+  }
+
+  .controls {
+    gap: 0.35rem;
   }
 
   .nav a {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
   }
 
-  .nav {
-    order: 3;
-    width: 100%;
-  }
   .nav ul {
-    justify-content: space-between;
-    gap: 0.5rem;
+    gap: 0.25rem 0.45rem;
   }
 }
 

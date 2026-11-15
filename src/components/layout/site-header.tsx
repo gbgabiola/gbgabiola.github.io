@@ -15,8 +15,10 @@ export default function SiteHeader() {
         >
           {profile.nickname}
         </Link>
-        <Navigation />
-        <ThemeSwitch />
+        <div className={styles.controls}>
+          <Navigation />
+          <ThemeSwitch />
+        </div>
       </div>
     </header>
   );

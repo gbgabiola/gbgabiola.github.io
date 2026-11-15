@@ -36,7 +36,11 @@ for (const [path, title, content] of routes) {
   assert.ok(html.includes(content), `${path}: content`);
   assert.ok(html.includes(`>Portfolio v${version}</p>`), `${path}: portfolio version`);
 
-  assert.ok(html.includes('aria-current="page"'), `${path}: active navigation`);
+  if (path === '/') {
+    assert.match(html, /aria-label="G home" href="\/"/);
+  } else {
+    assert.ok(html.includes('aria-current="page"'), `${path}: active navigation`);
+  }
 
   if (['/', '/about', '/contact'].includes(path)) {
     assert.ok(
