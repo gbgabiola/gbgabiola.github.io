@@ -9,12 +9,6 @@
   margin-inline-start: 0.6rem;
 }
 
-.address {
-  margin: 0.5rem 0 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
 .details {
   padding: clamp(1rem, 3vw, 2rem);
   border: 1px solid var(--border);
@@ -50,5 +44,30 @@
 @media (max-width: 720px) {
   .grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .details {
+    padding: 0.75rem;
+  }
+
+  .details section + section {
+    margin-top: 0.65rem;
+    padding-top: 0.65rem;
+  }
+
+  .actions {
+    column-gap: 0.5rem;
+  }
+}
+
+@media (min-width: 721px) and (max-height: 500px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .details {
+    padding: 0.85rem;
   }
 }

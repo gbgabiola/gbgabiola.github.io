@@ -18,7 +18,7 @@ export const profile = {
   summary:
     'I build web applications that connect thoughtful user experiences with reliable backend systems.',
   availability:
-    'Open to part-time remote opportunities and project collaborations.',
+    'Open to part-time remote work and project collaborations.',
   email: 'gbgabiola@gmail.com',
   resume: {
     viewUrl:

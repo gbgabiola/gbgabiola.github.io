@@ -82,7 +82,7 @@
   }
 
   .photo img {
-    width: min(7rem, 18svh);
+    width: clamp(4.5rem, 13svh, 7rem);
   }
 
   .photo figcaption {
@@ -92,5 +92,11 @@
   .projects,
   .projects ul {
     column-gap: 0.75rem;
+  }
+}
+
+@media (min-width: 721px) and (max-height: 500px) {
+  .actions {
+    margin-top: 0.75rem;
   }
 }

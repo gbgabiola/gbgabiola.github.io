@@ -124,6 +124,19 @@ p {
     line-height: 1.5;
   }
 }
+@media (min-width: 721px) and (max-height: 500px) {
+  .container:has(> .viewport-page) {
+    padding-block: 0.7rem;
+  }
+
+  .display-heading {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+  }
+
+  .intro-copy {
+    font-size: 1rem;
+  }
+}
 .skip-link {
   position: fixed;
   z-index: 20;

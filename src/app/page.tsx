@@ -17,13 +17,13 @@ export default function HomePage() {
         <div>
           <p className="eyebrow">{profile.role}</p>
           <h1 id="home-heading" className="display-heading">{profile.name}</h1>
-          <p className="intro-copy">I build full-stack web applications, from user interfaces to backend APIs.</p>
+          <p className="intro-copy">I build web interfaces and backend APIs.</p>
           <div className={styles.actions}>
             <Link href="/works" className={buttons.primary}>View work</Link>
             <ResumeLink />
           </div>
           <p className={styles.availability}>
-            <Link href="/contact">{profile.availability}</Link>
+            <Link href="/contact">Available for part-time work</Link>
           </p>
         </div>
         <figure className={styles.photo}>
