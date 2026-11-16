@@ -34,11 +34,11 @@ The smoke test checks page titles, content, a single main heading per page,
 project and resume links, 404 status, the manifest, and Keybase and Google ownership
 files. Each request has a 15-second deadline. The Playwright suite checks viewport
 fit, active and keyboard navigation, theme persistence, and common accessibility
-issues against a production build. To run it locally,
-stop any previous test server and run:
+issues against a production build. A focused WebKit test also checks keyboard
+scrolling for overflowing article tables. Stop any previous test server and run:
 
 ```sh
-npx playwright install chromium
+npx playwright install chromium webkit
 npm run build
 npm run test:browser
 ```
