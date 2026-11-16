@@ -7,9 +7,11 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run validate:blog && next build",
+    "validate:blog": "node scripts/validate-blog.mjs",
     "start": "next start",
     "lint": "eslint .",
+    "test:content": "node --test scripts/validate-blog.test.mjs",
     "test:smoke": "node scripts/smoke.mjs",
     "typecheck": "next typegen && tsc --noEmit",
     "test:browser": "playwright test"

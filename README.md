@@ -60,9 +60,10 @@ Add a Markdown file in `src/content/blog/` and an entry in
 `src/content/posts.ts` with the matching slug, a title, an ISO date, a summary,
 and tags from `blogTags`. Use level-two headings in articles. The page supplies
 the main heading. The desktop table of contents is generated automatically
-from level-two and level-three headings. Posts and tag archives are built with
-the site and listed in the sitemap. Use a branch preview to check an article
-before publishing it.
+from level-two and level-three headings. Run `npm run validate:blog` to check
+the catalog and Markdown files before opening a PR. The production build runs
+the same check. Posts and tag archives are built with the site and listed in
+the sitemap. Use a branch preview to check an article before publishing it.
 
 ## Deployment and version history
 

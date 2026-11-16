@@ -35,6 +35,8 @@ jobs:
 
       - run: npm run typecheck
 
+      - run: npm run test:content
+
       - run: npm run build
 
       - run: npx playwright install --with-deps chromium
