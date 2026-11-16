@@ -135,3 +135,8 @@ assert.ok(robotsLines.includes(`Sitemap: ${new URL('/sitemap.xml', productionOri
 const previewImage = await request('/opengraph-image');
 assert.match(previewImage.headers.get('content-type'), /^image\/png/);
 console.log('PASS sitemap, robots, and social preview image');
+
+const feed = await request('/feed.xml');
+assert.match(feed.headers.get('content-type'), /^application\/rss\+xml\b/, '/feed.xml: RSS content type');
+assert.match(feed.body.toString('utf8'), /<rss\b[^>]*version="2\.0"/, '/feed.xml: RSS 2.0 document');
+console.log('PASS blog RSS feed');

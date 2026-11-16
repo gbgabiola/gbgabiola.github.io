@@ -65,6 +65,7 @@ from level-two and level-three headings. Run `npm run validate:blog` to check
 the catalog and Markdown files before opening a PR. The production build runs
 the same check. Posts and tag archives are built with the site and listed in
 the sitemap. Use a branch preview to check an article before publishing it.
+The blog’s `/feed.xml` feed includes every published post.
 
 ## Deployment and version history
 
