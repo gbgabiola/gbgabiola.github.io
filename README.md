@@ -72,7 +72,7 @@ output handling. Keep vercel.json; it explicitly selects the Next.js adapter.
 The application version follows [Semantic Versioning](https://semver.org/).
 The site footer reads it directly from `package.json`. Update the manifest and
 lockfile together with `npm version <patch|minor|major> --no-git-tag-version`
-when preparing the next release.
+in the same pull request as the changes being released.
 
 1. Open a PR to `develop`. Review its Vercel preview and wait for the
    `Next.js validation / validate` result.
