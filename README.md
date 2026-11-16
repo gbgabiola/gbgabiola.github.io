@@ -79,7 +79,7 @@ when preparing the next release.
 2. Open a PR from `develop` to `main` when the release is approved. Vercel owns
    production deployment from `main`.
 3. Confirm Vercel deployed the expected commit. Run
-   `SMOKE_BASE_URL=https://genesisgabiola.vercel.app npm run test:smoke`.
+   `SMOKE_BASE_URL=https://gbgabiola.vercel.app npm run test:smoke`.
 4. Tag the verified production commit with an annotated `vMAJOR.MINOR.PATCH`
    tag matching `package.json` and publish short GitHub release notes.
 
@@ -98,9 +98,8 @@ normal PR flow so the branch and deployed site converge. Keep existing release
 tags on their original commits.
 
 - `4.0.0` was the Next.js migration baseline before the blog was integrated.
-- `4.1.0` is the current release candidate and includes both the Next.js
-  migration and the blog. Create the `v4.1.0` release tag after verification
-  on the production domain.
+- [`4.1.0`](https://github.com/gbgabiola/gbgabiola.github.io/releases/tag/v4.1.0)
+  includes both the Next.js migration and the blog.
 - Routine post publication uses the normal PR workflow. Add a release tag when
   the portfolio version itself changes.
 - `v3` and the `portfolio-v3-gatsby` tag preserve the final Gatsby version.

@@ -6,6 +6,8 @@ const { version } = JSON.parse(readFileSync(new URL('../package.json', import.me
 
 const base = process.env.SMOKE_BASE_URL || 'http://127.0.0.1:3000';
 
+const productionOrigin = 'https://gbgabiola.vercel.app';
+
 const routes = [
   ['/', 'Home', 'Full Stack Developer'],
   ['/about', 'About', 'Professional Experience'],
@@ -43,13 +45,14 @@ for (const [path, title, content] of routes) {
   assert.ok(canonical, `${path}: canonical URL exists`);
   assert.equal(
     new URL(canonical).href,
-    new URL(path, 'https://genesisgabiola.vercel.app').href,
+    new URL(path, productionOrigin).href,
     `${path}: production canonical URL`,
   );
-  assert.ok(
-    /property="og:image" content="https:\/\/genesisgabiola\.vercel\.app\/opengraph-image/.test(html),
-    `${path}: social preview image metadata`,
-  );
+  const socialImage = html.match(/property="og:image" content="([^"]+)"/)?.[1];
+  assert.ok(socialImage, `${path}: social preview image metadata exists`);
+  const socialImageUrl = new URL(socialImage);
+  assert.equal(socialImageUrl.origin, productionOrigin, `${path}: social preview image origin`);
+  assert.equal(socialImageUrl.pathname, '/opengraph-image', `${path}: social preview image path`);
   assert.doesNotMatch(html, /Genesis Gabiola/i, `${path}: public nickname`);
   const body = html.slice(html.indexOf('<body'));
   if (content) assert.ok(body.includes(escapeHtml(content)), `${path}: content`);
@@ -116,12 +119,13 @@ const sitemap = await fetch(new URL('/sitemap.xml', base));
 assert.equal(sitemap.status, 200);
 const sitemapXml = await sitemap.text();
 for (const [path] of routes) {
-  assert.ok(sitemapXml.includes(`<loc>https://genesisgabiola.vercel.app${path}</loc>`));
+  assert.ok(sitemapXml.includes(`<loc>${new URL(path, productionOrigin).href}</loc>`));
 }
 
 const robots = await fetch(new URL('/robots.txt', base));
 assert.equal(robots.status, 200);
-assert.match(await robots.text(), /Sitemap: https:\/\/genesisgabiola\.vercel\.app\/sitemap\.xml/);
+const robotsLines = (await robots.text()).split(/\r?\n/);
+assert.ok(robotsLines.includes(`Sitemap: ${new URL('/sitemap.xml', productionOrigin).href}`));
 
 const previewImage = await fetch(new URL('/opengraph-image', base));
 assert.equal(previewImage.status, 200);

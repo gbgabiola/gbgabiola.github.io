@@ -5,7 +5,7 @@ export const site = {
   brand: name,
   establishedYear: 2018,
   version,
-  url: 'https://genesisgabiola.vercel.app',
+  url: 'https://gbgabiola.vercel.app',
   title: `${profile.nickname} - ${profile.role}`,
   description: `Portfolio of ${profile.nickname}, a software engineer and full stack developer working across web interfaces and backend APIs.`,
   navigation: [
