@@ -76,6 +76,11 @@ The site footer reads it directly from `package.json`. Update the manifest and
 lockfile together with `npm version <patch|minor|major> --no-git-tag-version`
 in the same pull request as the changes being released.
 
+Dependabot checks npm monthly and groups minor and patch updates into one
+open PR against `develop`. Review major upgrades separately for compatibility.
+GitHub security update PRs target the default branch when that repository setting
+is enabled.
+
 1. Open a PR to `develop`. Review its Vercel preview and wait for the
    `Next.js validation / validate` result.
 2. Open a PR from `develop` to `main` when the release is approved. Vercel owns
