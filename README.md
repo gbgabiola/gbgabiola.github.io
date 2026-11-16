@@ -30,10 +30,11 @@ Type checking generates Next.js route types first, so it works in a clean checko
 next-env.d.ts and .next are generated and ignored. TypeScript is strict; app source
 uses .ts/.tsx.
 
-The smoke test checks page titles, content, a single main heading per page, active
-navigation, project and resume links, 404 status, manifest, and Keybase verification.
-The Playwright suite checks viewport fit, keyboard navigation, theme persistence,
-and common accessibility issues against a production build. To run it locally,
+The smoke test checks page titles, content, a single main heading per page,
+project and resume links, 404 status, the manifest, and Keybase and Google ownership
+files. Each request has a 15-second deadline. The Playwright suite checks viewport
+fit, active and keyboard navigation, theme persistence, and common accessibility
+issues against a production build. To run it locally,
 stop any previous test server and run:
 
 ```sh

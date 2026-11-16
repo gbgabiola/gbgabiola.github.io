@@ -5,6 +5,7 @@ import { blogTags, posts } from '../src/content/posts.ts';
 const { version } = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 
 const base = process.env.SMOKE_BASE_URL || 'http://127.0.0.1:3000';
+const requestTimeoutMs = 15_000;
 
 const productionOrigin = 'https://gbgabiola.vercel.app';
 
@@ -32,12 +33,26 @@ function escapeHtml(value) {
     .replaceAll("'", '&#x27;');
 }
 
+async function request(path, expectedStatus = 200) {
+  const url = new URL(path, base);
+  const signal = AbortSignal.timeout(requestTimeoutMs);
+
+  try {
+    const response = await fetch(url, { signal, redirect: 'manual' });
+    assert.equal(response.status, expectedStatus, url.href);
+
+    return { body: Buffer.from(await response.arrayBuffer()), headers: response.headers };
+  } catch (error) {
+    if (signal.aborted) {
+      throw new Error('Smoke request timed out after ' + requestTimeoutMs + ' ms: ' + url.href, { cause: error });
+    }
+    throw new Error('Smoke request failed: ' + url.href, { cause: error });
+  }
+}
+
 for (const [path, title, content] of routes) {
-  const response = await fetch(new URL(path, base));
-
-  assert.equal(response.status, 200, path);
-
-  const html = await response.text();
+  const { body: responseBody } = await request(path);
+  const html = responseBody.toString('utf8');
 
   assert.ok(html.includes(`<title>${escapeHtml(title)} | G - Software Engineer</title>`), `${path}: title`);
 
@@ -57,13 +72,6 @@ for (const [path, title, content] of routes) {
   const body = html.slice(html.indexOf('<body'));
   if (content) assert.ok(body.includes(escapeHtml(content)), `${path}: content`);
   assert.ok(html.includes(`>Portfolio v${version}</p>`), `${path}: portfolio version`);
-
-  if (path === '/') {
-    assert.match(html, /aria-label="G home" href="\/"/);
-  } else {
-    const current = path.startsWith('/blog/') ? 'location' : 'page';
-    assert.ok(html.includes(`aria-current="${current}"`), `${path}: active navigation`);
-  }
 
   if (['/', '/about', '/contact'].includes(path)) {
     assert.ok(
@@ -88,46 +96,37 @@ for (const [path, title, content] of routes) {
   console.log(`PASS ${path}`);
 }
 
-const missing = await fetch(new URL('/this-page-does-not-exist', base));
+const missing = await request('/this-page-does-not-exist', 404);
+assert.ok(missing.body.toString('utf8').includes('Page not found'));
 
-assert.equal(missing.status, 404);
-assert.ok((await missing.text()).includes('Page not found'));
+await request('/blog/portfolio-pages-that-fit', 404);
+await request('/blog/tags/unknown-tag', 404);
 
-const missingPost = await fetch(new URL('/blog/portfolio-pages-that-fit', base));
-assert.equal(missingPost.status, 404);
-
-const missingTag = await fetch(new URL('/blog/tags/unknown-tag', base));
-assert.equal(missingTag.status, 404);
-
-const manifestResponse = await fetch(new URL('/manifest.webmanifest', base));
-
-assert.equal(manifestResponse.status, 200);
-
-const manifest = await manifestResponse.json();
-
+const manifestResponse = await request('/manifest.webmanifest');
+const manifest = JSON.parse(manifestResponse.body.toString('utf8'));
 assert.equal(manifest.start_url, '/');
 assert.equal(manifest.short_name, 'G');
 
-const verification = await fetch(new URL('/keybase.txt', base));
+const keybase = await request('/keybase.txt');
+assert.ok(keybase.body.toString('utf8').includes('keybase'));
 
-assert.equal(verification.status, 200);
-assert.ok((await verification.text()).includes('keybase'));
+const googlePath = '/google88fb68dc55bbcb2f.html';
+const google = await request(googlePath);
+const verificationFile = readFileSync(new URL('../public' + googlePath, import.meta.url));
+assert.ok(google.body.equals(verificationFile), googlePath + ': Google verification file differs from the repository');
 
-console.log('PASS 404, manifest, and Keybase verification');
+console.log('PASS 404, manifest, Keybase, and Google ownership verification');
 
-const sitemap = await fetch(new URL('/sitemap.xml', base));
-assert.equal(sitemap.status, 200);
-const sitemapXml = await sitemap.text();
+const sitemap = await request('/sitemap.xml');
+const sitemapXml = sitemap.body.toString('utf8');
 for (const [path] of routes) {
   assert.ok(sitemapXml.includes(`<loc>${new URL(path, productionOrigin).href}</loc>`));
 }
 
-const robots = await fetch(new URL('/robots.txt', base));
-assert.equal(robots.status, 200);
-const robotsLines = (await robots.text()).split(/\r?\n/);
+const robots = await request('/robots.txt');
+const robotsLines = robots.body.toString('utf8').split(/\r?\n/);
 assert.ok(robotsLines.includes(`Sitemap: ${new URL('/sitemap.xml', productionOrigin).href}`));
 
-const previewImage = await fetch(new URL('/opengraph-image', base));
-assert.equal(previewImage.status, 200);
+const previewImage = await request('/opengraph-image');
 assert.match(previewImage.headers.get('content-type'), /^image\/png/);
 console.log('PASS sitemap, robots, and social preview image');
