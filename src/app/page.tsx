@@ -33,7 +33,7 @@ export default function HomePage() {
           alt={`Portrait of ${profile.nickname}`}
           width={280}
           height={280}
-          sizes="(max-width: 720px) 112px, (max-height: 600px) 40svh, 280px"
+          sizes="(max-width: 375px) 4rem, (max-width: 720px) clamp(4rem, 13svh, 7rem), (max-height: 600px) 40svh, 280px"
           preload
           className={styles.portrait}
         />
