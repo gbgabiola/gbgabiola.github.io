@@ -85,9 +85,15 @@ is enabled.
    `Next.js validation / validate` result.
 2. Open a PR from `develop` to `main` when the release is approved. Vercel owns
    production deployment from `main`.
-3. Confirm Vercel deployed the expected commit. Run
-   `SMOKE_BASE_URL=https://gbgabiola.vercel.app npm run test:smoke`.
-4. Tag the verified production commit with an annotated `vMAJOR.MINOR.PATCH`
+3. In Vercel, confirm the production domain points to the **Ready** deployment
+   for the expected `main` commit and copy its full commit SHA.
+4. In GitHub Actions, open **Production smoke → Run workflow**, select
+   `main`, and paste the deployment SHA. Wait for it to pass. The workflow
+   compares the supplied SHA with the checkout and checks the site’s public
+   responses and footer version. Check the deployment SHA in Vercel because
+   builds can share a version. To run the smoke test locally from that commit,
+   use `SMOKE_BASE_URL=https://gbgabiola.vercel.app npm run test:smoke`.
+5. Tag the verified production commit with an annotated `vMAJOR.MINOR.PATCH`
    tag matching `package.json` and publish short GitHub release notes.
 
 Use patch versions for fixes and routine content updates, minor versions for
