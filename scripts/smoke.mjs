@@ -51,8 +51,13 @@ async function request(path, expectedStatus = 200) {
 }
 
 for (const [path, title, content] of routes) {
-  const { body: responseBody } = await request(path);
+  const { body: responseBody, headers } = await request(path);
   const html = responseBody.toString('utf8');
+
+  const policies = (headers.get('content-security-policy') ?? '').split(/[;,]/);
+  assert.ok(policies.some((policy) => policy.trim() === "frame-ancestors 'none'"), path + ': framing policy');
+  assert.equal(headers.get('referrer-policy'), 'strict-origin-when-cross-origin', path + ': referrer policy');
+  assert.equal(headers.get('x-content-type-options'), 'nosniff', path + ': MIME sniffing policy');
 
   assert.ok(html.includes(`<title>${escapeHtml(title)} | G - Software Engineer</title>`), `${path}: title`);
 
