@@ -73,8 +73,8 @@ Vercel uses the Next.js preset, Node 24, npm ci, npm run build, and the default
 output handling. Keep vercel.json; it explicitly selects the Next.js adapter.
 
 The application version follows [Semantic Versioning](https://semver.org/).
-The site footer reads it directly from `package.json`. Update the manifest and
-lockfile together with `npm version <patch|minor|major> --no-git-tag-version`
+Release checks compare the version in page metadata with `package.json`.
+Update the manifest and lockfile together with `npm version <patch|minor|major> --no-git-tag-version`
 in the same pull request as the changes being released.
 
 Dependabot checks npm monthly and groups minor and patch updates into one
@@ -91,7 +91,7 @@ is enabled.
 4. In GitHub Actions, open **Production smoke → Run workflow**, select
    `main`, and paste the deployment SHA. Wait for it to pass. The workflow
    compares the supplied SHA with the checkout and checks the site’s public
-   responses and footer version. Check the deployment SHA in Vercel because
+   responses and version metadata. Check the deployment SHA in Vercel because
    builds can share a version. To run the smoke test locally from that commit,
    use `SMOKE_BASE_URL=https://gbgabiola.vercel.app npm run test:smoke`.
 5. Tag the verified production commit with an annotated `vMAJOR.MINOR.PATCH`

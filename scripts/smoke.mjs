@@ -76,7 +76,7 @@ for (const [path, title, content] of routes) {
   assert.doesNotMatch(html, /Genesis Gabiola/i, `${path}: public nickname`);
   const body = html.slice(html.indexOf('<body'));
   if (content) assert.ok(body.includes(escapeHtml(content)), `${path}: content`);
-  assert.ok(html.includes(`>Portfolio v${version}</p>`), `${path}: portfolio version`);
+  assert.ok(html.includes(`<meta name="portfolio-version" content="${version}"/>`), `${path}: portfolio version`);
 
   if (['/', '/about', '/contact'].includes(path)) {
     assert.ok(

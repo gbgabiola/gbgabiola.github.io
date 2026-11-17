@@ -28,13 +28,15 @@ for (const viewport of viewportSizes) {
   });
 }
 
-test('footer shows the portfolio copyright and brand link', async ({ page }) => {
+test('footer shows copyright and links to GitHub and contact without a version label', async ({ page }) => {
   await page.goto('/');
   const footer = page.getByRole('contentinfo');
+  const links = footer.getByRole('navigation', { name: 'Footer' });
+
   await expect(footer).toContainText(/© 2018–\d{4} gbgabiola/);
-  await expect(footer.getByRole('link', { name: 'gbgabiola' }))
-    .toHaveAttribute('href', 'https://github.com/gbgabiola');
-  await expect(footer).toContainText(/Portfolio v\d+\.\d+\.\d+/);
+  await expect(links.getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', 'https://github.com/gbgabiola');
+  await expect(links.getByRole('link', { name: 'Get in touch' })).toHaveAttribute('href', '/contact');
+  await expect(footer).not.toContainText(/Portfolio v\d+\.\d+\.\d+/);
 });
 
 test('Contact shows icons and the original account names', async ({ page }) => {

@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: { default: site.title, template: `%s | ${site.title}` },
   description: site.description,
   authors: [{ name: profile.nickname }],
+  other: { 'portfolio-version': site.version },
   openGraph: {
     title: site.title,
     description: site.description,
