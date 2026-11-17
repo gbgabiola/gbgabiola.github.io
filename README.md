@@ -1,5 +1,7 @@
 # G’s portfolio and blog — v4
 
+[![Repository views](https://hits.sh/github.com/gbgabiola/gbgabiola.github.io.svg?label=Repository%20views)](https://hits.sh/github.com/gbgabiola/gbgabiola.github.io/)
+
 Next.js App Router, React, TypeScript, CSS Modules, and next-themes.
 Node 24 is required. npm is the package manager; commit package-lock.json.
 

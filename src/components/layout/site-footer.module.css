@@ -40,6 +40,8 @@
   text-decoration: none;
 }
 
+.brand:hover,
+.brand:focus-visible,
 .links a:hover,
 .links a:focus-visible {
   color: var(--primary);

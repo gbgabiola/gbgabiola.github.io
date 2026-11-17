@@ -34,6 +34,7 @@ test('footer shows copyright and links to GitHub and contact without a version l
   const links = footer.getByRole('navigation', { name: 'Footer' });
 
   await expect(footer).toContainText(/© 2018–\d{4} gbgabiola/);
+  await expect(footer.getByRole('link', { name: 'gbgabiola' })).toHaveAttribute('href', 'https://github.com/gbgabiola');
   await expect(links.getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', 'https://github.com/gbgabiola');
   await expect(links.getByRole('link', { name: 'Get in touch' })).toHaveAttribute('href', '/contact');
   await expect(footer).not.toContainText(/Portfolio v\d+\.\d+\.\d+/);
