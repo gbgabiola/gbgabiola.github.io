@@ -1,12 +1,6 @@
 import type { Element, Root } from 'hast';
-import { toString } from 'hast-util-to-string';
 import styles from '../page.module.css';
-
-type Section = {
-  id: string;
-  title: string;
-  children: Section[];
-};
+import { collectArticleSections, type Section } from './article-sections';
 
 const contentsHeading = 'article-contents-heading';
 
@@ -34,24 +28,7 @@ function sectionList(sections: Section[]): Element {
 
 export default function articleLayout() {
   return (tree: Root) => {
-    const sections: Section[] = [];
-    let parent: Section | undefined;
-
-    for (const node of tree.children) {
-      if (node.type !== 'element' || (node.tagName !== 'h2' && node.tagName !== 'h3')) continue;
-
-      const id = node.properties.id;
-      const title = toString(node).trim();
-      if (typeof id !== 'string' || !title) continue;
-
-      const section = { id, title, children: [] };
-      if (node.tagName === 'h3' && parent) {
-        parent.children.push(section);
-      } else {
-        sections.push(section);
-      }
-      if (node.tagName === 'h2') parent = section;
-    }
+    const sections = collectArticleSections(tree);
 
     const contents: Element[] = sections.length ? [
       {
