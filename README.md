@@ -81,8 +81,9 @@ Release checks compare the version in page metadata with `package.json`.
 Update the manifest and lockfile together with `npm version <patch|minor|major> --no-git-tag-version`
 in the same pull request as the changes being released.
 
-Dependabot checks npm monthly and groups minor and patch updates into one
-open PR against `develop`. Review major upgrades separately for compatibility.
+Dependabot checks npm and GitHub Actions monthly. It groups minor and patch
+updates into one open PR per ecosystem against `develop`. Review major upgrades
+separately for compatibility.
 GitHub security update PRs target the default branch when that repository setting
 is enabled.
 
