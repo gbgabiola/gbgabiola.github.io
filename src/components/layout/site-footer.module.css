@@ -23,6 +23,7 @@
 .brand {
   color: var(--foreground);
   font-weight: 650;
+  text-decoration: none;
 }
 
 .links {

@@ -1,9 +1,10 @@
 # G’s portfolio and blog — v4
 
-[![Repository views](https://hits.sh/github.com/gbgabiola/gbgabiola.github.io.svg?label=Repository%20views)](https://hits.sh/github.com/gbgabiola/gbgabiola.github.io/)
+[![README views](https://hits.sh/github.com/gbgabiola/gbgabiola.github.io.svg?label=README%20views&color=006a60)](https://hits.sh/github.com/gbgabiola/gbgabiola.github.io/)
 
 Next.js App Router, React, TypeScript, CSS Modules, and next-themes.
-Node 24 is required. npm is the package manager; commit package-lock.json.
+Use Node 26. The patch version for local development and CI is pinned in
+`.nvmrc`. npm is the package manager; commit `package-lock.json`.
 
 ## Development
 
@@ -71,8 +72,9 @@ The blog’s `/feed.xml` feed includes every published post.
 
 ## Deployment and version history
 
-Vercel uses the Next.js preset, Node 24, npm ci, npm run build, and the default
-output handling. Keep vercel.json; it explicitly selects the Next.js adapter.
+Vercel uses the Next.js preset, Node 26 from `engines.node`, `npm ci`,
+`npm run build`, and the default output handling. Vercel manages Node 26 patch
+updates. Keep `vercel.json` to explicitly select the Next.js adapter.
 
 The application version follows [Semantic Versioning](https://semver.org/).
 Release checks compare the version in page metadata with `package.json`.

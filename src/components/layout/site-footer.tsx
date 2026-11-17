@@ -11,7 +11,7 @@ export default function SiteFooter() {
       <div className={styles.inner}>
         <p className={styles.copyright}>
           © {site.establishedYear}–{year}{' '}
-          <a className={styles.brand} href={githubUrl}>{site.brand}</a>
+          <Link className={styles.brand} href="/">{site.brand}</Link>
         </p>
         <nav aria-label="Footer" className={styles.links}>
           <a href={githubUrl}>
