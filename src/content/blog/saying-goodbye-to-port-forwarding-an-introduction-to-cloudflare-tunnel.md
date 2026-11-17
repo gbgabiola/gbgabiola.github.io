@@ -1,56 +1,51 @@
-For developers and self-hosters alike, exposing a local application to the public internet has traditionally meant dealing with the headache of port forwarding, managing public static IPs, and punching holes through local home or corporate firewalls.
+[Cloudflare Tunnel](https://developers.cloudflare.com/tunnel/) lets you connect a local application to Cloudflare without forwarding an inbound port to your origin. A published hostname can still make the application reachable from the internet. Decide who should have access before creating that route.
 
-[Cloudflare Tunnel](https://developers.cloudflare.com/tunnel/) completely flips this model on its head. Instead of opening your network up to inbound vulnerabilities, it utilizes an outbound-only connection to anchor your private server directly to **Cloudflare’s global network**.
-
-___
+---
 
 ## How It Works: The Magic of `cloudflared`
 
-Normally, exposing a service looks like a game of telephone: an external user requests your public IP, your router redirects the port, and the traffic reaches your application.
+The `cloudflared` process runs near your application and opens outbound connections to Cloudflare. Requests to the published hostname arrive at Cloudflare, pass through the tunnel, and reach the local service you selected.
 
-With Cloudflare Tunnel, you install a lightweight, open-source daemon on your machine called [cloudflared](https://blog.cloudflare.com/ridiculously-easy-to-use-tunnels/). Rather than listening for connections, `cloudflared` initiates an **outbound-only, post-quantum encrypted connection** to Cloudflare data centers.
-
-```
-[ Your Local App ] ──(Outbound Only)──> [ cloudflared ] ──> [ Cloudflare Edge ] <── [ Internet Users ]
+```text
+Browser → Cloudflare edge → established tunnel → cloudflared → local app
 ```
 
-Because the connection starts inside your network and reaches out, your router blocks all arbitrary inbound traffic. You don't need a public IP, and you never have to open a single port on your firewall.
+The tunnel does not require inbound port forwarding. Keep the origin’s existing firewall and access controls in place. Other public routes to the origin remain separate.
 
-___
+---
 
 ## Key Benefits of Going Portless
 
-- **Zero Inbound Open Ports:** Malicious actors scanning random IP addresses won't find your server because it doesn't expose a public IP to the world.
-- **Instant Security Overlays:** Because traffic passes through the Cloudflare edge first, your local web apps automatically get protected by **DDoS mitigation, Web Application Firewalls (WAF), and CDN caching**.
-- **Free Built-in SSL:** Cloudflare automatically provisions and renews TLS certificates for your custom subdomains.
-- **Zero Trust Ready:** You can easily layer Cloudflare Access on top of your tunnel, creating an instant login portal (using Google, GitHub, or OneID) before anyone can even touch your local environment.
+- You can publish an HTTP service without exposing its origin address through an inbound port forward.
+- Cloudflare can provide TLS at the edge and apply security or caching policies according to your configuration.
+- Cloudflare Access can require authentication for a published hostname. An outbound tunnel alone does not decide who can open that hostname.
 
-___
+---
 
 ## Two Ways to Get Started
 
-Depending on your project, Cloudflare offers two main flavors of tunnels:
-
 ### 1. Quick Tunnels (Best for rapid testing)
 
-If you just want to share a local project with a colleague for the afternoon, you don't even need a Cloudflare account. Simply install cloudflared and type:
+Use a public Quick Tunnel for a temporary demo you are comfortable sharing with anyone who has the URL. With a local server running on port `8080`, run:
 
 ```bash
 cloudflared tunnel --url http://localhost:8080
 ```
 
-Cloudflare will spin up a temporary, randomized URL under trycloudflare.com that securely tunnels straight to your local port. It stays active until you close your terminal.
+The command creates a temporary `trycloudflare.com` address while `cloudflared` runs. Use the [Quick Tunnels guide](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/) for development limits and available access options.
 
 ### 2. Named Tunnels (Best for permanent infrastructure)
 
-For a home lab, staging site, or permanent application, you can manage "Named Tunnels" for free using the **Cloudflare Zero Trust Dashboard**.
+For an internal app, first create a Cloudflare Access application for the intended hostname and add a policy that allows the intended users. Without that protection, a published route is available to anyone who can reach the hostname. [Cloudflare Access setup for self-hosted apps](https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/self-hosted-public-app/)
 
-1. Navigate to the **Access > Tunnels** section in your dashboard.
-2. Create a new tunnel, select your operating system, and run the generated installation script on your server.
-3. Map a custom subdomain (e.g., `://yourdomain.com`) directly to your internal port (e.g., `localhost:3000`).
+1. In the Cloudflare dashboard, go to **Networking → Tunnels** and create or select a tunnel. Install the connector using Cloudflare’s instructions for your operating system. Keep the tunnel token private.
+2. Under **Routes**, add a **Published application** route. Map a hostname you manage, such as `app.example.com`, to the origin, such as `http://localhost:3000`.
+3. For a protected app, check that an approved user can sign in and that an unauthenticated visitor cannot reach the origin through the published hostname. Follow Cloudflare’s guidance for validating Access tokens at the origin or connector.
 
-___
+[Create a tunnel and publish an application](https://developers.cloudflare.com/tunnel/get-started/)
+
+---
 
 ## The Verdict
 
-Cloudflare Tunnel shifts the burden of perimeter security away from your local router and onto an enterprise-grade global edge network. Whether you are hosting a local development container or deploying a secure portal for remote employees, it provides peace of mind without complex configuration.
+Use a Quick Tunnel for a short-lived demo or a named tunnel for a stable hostname. Configure and test Access before publishing an internal service.

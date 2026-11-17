@@ -1,22 +1,18 @@
-Have you ever needed to combine two separate Git repositories into one? Whether you are consolidating a legacy codebase into a **monorepo** or pulling an isolated microservice back into a parent project, the goal is always the same: **move the child repo into a subfolder while preserving every single commit history**.
+Importing a repository into a subfolder can keep its commit history available from the parent repository. Git filter-repo rewrites the imported paths throughout history. Git subtree keeps the original child commits and places the imported files under a prefix in the parent.
 
-If you just copy and paste the files, you lose the project's entire timeline. If you use basic `git merge` commands, files spill into your root directory and trigger messy conflicts.
-
-In this guide, we will cover the **two best ways** to merge repositories cleanly. We'll start with the modern gold standard (`git-filter-repo`) and then look at a native Git alternative if you can't install external tools.
+Before using either method, start with a clean working tree in the parent repository and create a branch for the import. Choose an unused destination such as `imported-project/`. The examples assume the child branch is `main`. Substitute its actual name if it differs.
 
 ## Method 1: The Gold Standard (git-filter-repo)
 
-The absolute cleanest, most foolproof way to combine repositories is using `git-filter-repo`.
-
-Instead of merging the child repo at the root level and shuffling files around afterward, `git-filter-repo` **rewrites the child repository's history beforehand**. It alters past commits so they look like they always happened inside your target subfolder. When you finally pull it into your parent repo, it snaps into place perfectly with **zero merge conflicts** and **zero root directory spillover**.
+Use this method when you want the imported commits to show files under the new subfolder throughout their history. Rewriting paths changes commit IDs in the disposable clone.
 
 ### Step 1: Install `git-filter-repo`
-Because this is an external extension officially recommended by Git, you will need to install it first:
-- **Mac (Homebrew):** `brew install git-filter-repo`
-- **Windows / Linux (Pip):** `pip install git-filter-repo`
+
+Follow the [git-filter-repo installation instructions](https://github.com/newren/git-filter-repo/blob/main/INSTALL.md) for your platform.
 
 ### Step 2: Create a Temporary Clone of the Child Repo
-Because `git-filter-repo` physically rewrites history, **never run it on your original source repository**. Clone a fresh, disposable copy instead:
+
+Work in a fresh clone so the rewrite cannot affect your original checkout.
 
 ```bash
 git clone git@github.com:username/child-repo.git child-repo-temp
@@ -24,78 +20,72 @@ cd child-repo-temp
 ```
 
 ### Step 3: Shift the Layout Natively
-Run the filtering tool to push the entire history into your desired target subfolder name (e.g., `imported-project`):
 
 ```bash
 git filter-repo --to-subdirectory-filter imported-project
 ```
-_If you look at this temporary directory now, you'll see that the root level is perfectly clean, and every single file lives inside `imported-project/`._
+
+Review the resulting tree. If you need to map old commit IDs to rewritten ones, keep the clone’s `.git/filter-repo/commit-map`.
 
 ### Step 4: Merge Into Your Parent Repository
-Open your terminal, navigate over to your **main parent repository**, and pull the rewritten history in:
+
+Switch to the parent repository and its import branch. Fetch the rewritten branch and stop before creating the merge commit so you can inspect the result.
 
 ```bash
 cd /path/to/main-parent-repo
-
-# 1. Link your local temporary child directory as a source
 git remote add local-child /path/to/child-repo-temp
-
-# 2. Fetch the prepared history data
 git fetch local-child
+git merge --no-commit --allow-unrelated-histories local-child/main
+```
 
-# 3. Merge the histories seamlessly
-git merge local-child/main --allow-unrelated-histories -m "Merge child repo into imported-project/"
+`--allow-unrelated-histories` lets Git combine repositories that started independently. Overlapping files or directory paths can still cause conflicts. Inspect `git status` and the staged diff. If the overlap is unexpected, run `git merge --abort` and retry with a different prefix. For an intentional overlap, resolve and stage the specific files, then commit the merge.
 
-# 4. Clean up the temporary remote path
+```bash
+git commit -m "Merge child repo into imported-project/"
+git log --graph --oneline
 git remote remove local-child
 ```
 
 ### Why this is the best way:
-Because the files were pre-nested inside `imported-project/` before touching your main repo, running standard commands like `git log --follow imported-project/some-file.txt` will work perfectly out-of-the-box.
+
+Rewritten commits use `imported-project/` in their trees. For example, `git log --full-history -- imported-project/some-file.txt` can trace changes at that path. Use `git log --follow -- imported-project/some-file.txt` to investigate renames in a single file’s history.
 
 ---
 
 ## Method 2: The Native Git Alternative (`git subtree`)
 
-If you are working in a restricted corporate environment where you cannot install `git-filter-repo`, the best built-in alternative is **`git subtree`**.
-
-Unlike manual file-moving scripts that rely on unstable terminal wildcards (`*`), which frequently crash on Mac/Zsh or Windows, `git subtree` is built natively into Git. It automatically maps an external repository directly into a subfolder.
+Use `git subtree` if your Git installation includes it and you want to keep the child commits’ original IDs.
 
 ### Step-by-Step Native Guide
-Open your terminal, navigate directly to your **main parent repository**, and execute these commands:
+
+From the parent’s import branch, add the child directly under an unused prefix. Omit `--squash` to retain the child history.
 
 ```bash
-# 1. Add the child repository as a temporary remote source
 git remote add temp-source git@github.com:username/child-repo.git
-git fetch temp-source
-
-# 2. Pull the child repo directly into a subfolder
-# (Change 'imported-project' to your desired directory name)
 git subtree add --prefix=imported-project temp-source main
-
-# 3. Clean up the temporary tracking connection
-git remote remove temp-source
 ```
 
-### The Catch with `git subtree`
-While this method is fast and requires no external tools, it acts as a complex, synthesized merge layout. Because of this architectural shift, standard logging features get slightly obscured.
+Git subtree fetches the branch and creates an import commit. Check the files and history before removing the temporary remote. If the prefix exists, choose an unused one before retrying `subtree add`.
 
-If you run `git log --follow imported-project/file.txt` later and notice your history looks hidden, you will need to append a specific flag to force Git to look past the subtree merge point:
+### The Catch with `git subtree`
+
+The child’s older commits still store paths at the original repository root. A log filtered to `imported-project/file.txt` may therefore omit those commits. Immediately after the import, inspect the child-side parent using the file’s original path.
 
 ```bash
-git log --follow --full-history imported-project/file.txt
+git log HEAD^2 -- file.txt
+git remote remove temp-source
 ```
 
 ---
 
 ## Comparison: Which should you choose?
 
-| Feature                | Method 1: `git-filter-repo` (Recommended) | Method 2: `git subtree` (Built-in)      |
-| :--------------------- | :---------------------------------------- | :-------------------------------------- |
-| **Installation**       | Requires Python/Homebrew                  | **None (Native to Git)**                |
-| **Workspace Safety**   | **Perfect (No ghost files or clutter)**   | **Perfect (No ghost files or clutter)** |
-| **Merge Conflicts**    | **Zero Risk**                             | **Zero Risk**                           |
-| **`git log --follow`** | **Works flawlessly out-of-the-box**       | Requires extra flags (`--full-history`) |
+| Decision | `git-filter-repo` | `git subtree` |
+| :--- | :--- | :--- |
+| Paths in imported history | Rewritten under the destination prefix | Original paths in child commits |
+| Child commit IDs | Change during the rewrite | Retained without `--squash` |
+| Destination checks | Review the rewritten tree and resolve or abort overlap | Use an unused prefix for `subtree add` |
 
 ## Summary
-If you have the ability to install tools on your machine, always choose **`git-filter-repo`**. It provides the absolute cleanest history tree and avoids workspace stability issues entirely. If you need a quick, no-install fix right now, **`git subtree`** is your best native friend.
+
+Choose git-filter-repo when historical paths should reflect the new layout. Choose subtree when retaining original child commit IDs matters. Inspect the imported files and both histories on the import branch before opening a PR.

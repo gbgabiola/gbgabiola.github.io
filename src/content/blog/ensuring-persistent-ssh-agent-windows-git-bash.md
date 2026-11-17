@@ -1,55 +1,61 @@
 ## Introduction
 
-Securing your Git workflow with SSH keys is a crucial aspect of software development. However, ensuring that the SSH-Agent persists across Git commits in Windows using Git Bash can be a bit challenging. In this article, we'll explore a step-by-step guide to achieve this, enhancing the security and efficiency of your Git operations.
-
+Git Bash on Windows can use the Windows OpenSSH Authentication Agent. The service runs independently of Git Bash, so you can use the same loaded key across terminal windows.
 
 ## Step 1: Install Git Bash
 
-If you haven't already, make sure to install Git Bash on your Windows machine. You can download it from the official [Git](https://git-scm.com/downloads) website. During the installation, ensure that you select the option to use Git from the Windows Command Prompt.
-
+Install [Git for Windows](https://git-scm.com/downloads/win) and check that the Windows OpenSSH Client is installed. The examples use the usual Windows OpenSSH location. Adjust the path if Windows is installed elsewhere. [Windows OpenSSH setup](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse)
 
 ## Step 2: Configure SSH Keys
 
-Generate SSH keys using the ssh-keygen command in Git Bash. If you already have keys, skip this step. Add the generated SSH key to your SSH-Agent using the ssh-add command.
+Reuse an existing key if appropriate. To create a key, run the following in PowerShell as your normal user. Choose a passphrase and use a different filename if the suggested path already holds a key.
 
-```sh
-$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-$ eval "$(ssh-agent -s)"
-$ ssh-add ~/.ssh/your_private_key
+```powershell
+ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
+Add the `.pub` file’s contents as an authentication key in your GitHub account. Keep the private key on your machine. [Add a public key to GitHub](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
 
 ## Step 3: Automate SSH-Agent Launch
 
-To ensure that SSH-Agent starts with every Git Bash session, modify the .bashrc file. If the file doesn't exist, create it. Add the following lines:
+In an administrator PowerShell window, configure and start the Windows service.
 
-```sh
-# Start SSH-Agent and add keys
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval "$(ssh-agent -s)"
-  ssh-add ~/.ssh/your_private_key
-fi
+```powershell
+Set-Service -Name ssh-agent -StartupType Automatic
+Start-Service -Name ssh-agent
 ```
 
+Switch back to a non-elevated PowerShell window to add the private key. Replace the filename if you used a different key.
+
+```powershell
+& "$env:WINDIR\System32\OpenSSH\ssh-add.exe" "$env:USERPROFILE\.ssh\id_ed25519"
+& "$env:WINDIR\System32\OpenSSH\ssh-add.exe" -l
+```
+
+The list should show the loaded key’s fingerprint. Windows manages the agent service, so new Git Bash windows can use it without starting another agent. [GitHub’s Windows ssh-agent instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=windows)
 
 ## Step 4: Configure Git to Use SSH
 
-Make sure your Git configuration is set to use SSH:
+From the repository in Git Bash, configure Git to use the same Windows OpenSSH client. `--local` limits the setting to this repository and lets the client read your normal SSH configuration.
 
-```sh
-$ git config --global core.sshCommand "ssh -i ~/.ssh/your_private_key -F /dev/null"
+```bash
+git config --local core.sshCommand "C:/Windows/System32/OpenSSH/ssh.exe"
+git config --get core.sshCommand
+git remote -v
 ```
 
+Check that the GitHub remote uses an SSH URL such as `git@github.com:owner/repo.git`. An HTTPS remote continues to use HTTPS authentication.
 
 ## Step 5: Test Your Configuration
 
-Verify that the SSH-Agent persists by opening a new Git Bash window and running:
+Open a new Git Bash window and test with the Windows client.
 
-```sh
-$ ssh -T git@github.com
+```bash
+/c/Windows/System32/OpenSSH/ssh.exe -T git@github.com
 ```
 
+If prompted to trust the host, compare the fingerprint with GitHub’s published fingerprints first. A successful response names your GitHub account and explains that GitHub provides no shell access. The command exits with status `1` even when authentication succeeds. [GitHub SSH connection test](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection) · [GitHub SSH fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints)
 
 ## Conclusion
 
-By following these steps, you ensure that the SSH-Agent launches automatically with every Git Bash session, providing a seamless and secure Git experience on Windows. This setup not only enhances security but also streamlines your workflow, allowing you to focus on what you do best—coding.
+The Windows agent can serve multiple Git Bash windows. Set the SSH client per repository when you want that repository to use the Windows agent.

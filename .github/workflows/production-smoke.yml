@@ -1,0 +1,54 @@
+name: Production smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      deployment_sha:
+        description: Full Git commit SHA from the ready Vercel production deployment
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+
+      - name: Confirm production commit
+        shell: bash
+        env:
+          DEPLOYMENT_SHA: ${{ inputs.deployment_sha }}
+        run: |
+          if [[ "$GITHUB_REF" != refs/heads/main ]]; then
+            echo 'Run this workflow from main.' >&2
+            exit 1
+          fi
+
+          checked_out_sha=$(git rev-parse HEAD)
+          if [[ "$checked_out_sha" != "$DEPLOYMENT_SHA" ]]; then
+            printf 'Expected the full Vercel deployment SHA to match the checked-out commit %s.\n' "$checked_out_sha" >&2
+            exit 1
+          fi
+
+          printf 'Checking production against commit %s.\n' "$checked_out_sha"
+
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+
+      - name: Smoke-test deployed production
+        shell: bash
+        env:
+          SMOKE_BASE_URL: https://gbgabiola.vercel.app
+        run: |
+          version=$(node -p 'require("./package.json").version')
+          printf 'Checking %s for Portfolio v%s.\n' "$SMOKE_BASE_URL" "$version"
+          npm run test:smoke

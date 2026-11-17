@@ -11,6 +11,7 @@ import { pageMetadata } from '@/lib/metadata';
 import BlogBreadcrumbs from '../breadcrumbs';
 import styles from '../page.module.css';
 import articleLayout from './article-layout';
+import ScrollableTable from './scrollable-table';
 
 export const dynamicParams = false;
 
@@ -68,11 +69,7 @@ export default async function PostPage({ params }: Props) {
                 {children}
               </aside>
             ),
-            table: ({ children }) => (
-              <div className={styles.tableScroll}>
-                <table>{children}</table>
-              </div>
-            ),
+            table: ({ children }) => <ScrollableTable>{children}</ScrollableTable>,
           }}
           rehypePlugins={[[rehypeSlug, { prefix: 'post-' }], articleLayout]}
         >

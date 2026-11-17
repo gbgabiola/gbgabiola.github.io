@@ -28,13 +28,20 @@ for (const viewport of viewportSizes) {
   });
 }
 
-test('footer shows the portfolio copyright and brand link', async ({ page }) => {
-  await page.goto('/');
+test('footer links to Home, GitHub, and Contact without a version label', async ({ page }) => {
+  await page.goto('/contact');
   const footer = page.getByRole('contentinfo');
+  const home = footer.getByRole('link', { name: 'gbgabiola' });
+  const links = footer.getByRole('navigation', { name: 'Footer' });
+
   await expect(footer).toContainText(/© 2018–\d{4} gbgabiola/);
-  await expect(footer.getByRole('link', { name: 'gbgabiola' }))
-    .toHaveAttribute('href', 'https://github.com/gbgabiola');
-  await expect(footer).toContainText(/Portfolio v\d+\.\d+\.\d+/);
+  await expect(home).toHaveAttribute('href', '/');
+  await expect(links.getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', 'https://github.com/gbgabiola');
+  await expect(links.getByRole('link', { name: 'Get in touch' })).toHaveAttribute('href', '/contact');
+  await expect(footer).not.toContainText(/Portfolio v\d+\.\d+\.\d+/);
+
+  await home.click();
+  await expect(page).toHaveURL('/');
 });
 
 test('Contact shows icons and the original account names', async ({ page }) => {
@@ -73,7 +80,6 @@ test('header navigation sits beside the theme switch and the brand returns home'
   const theme = header.getByRole('button', { name: 'Dark mode' });
 
   await expect(nav.getByRole('link', { name: 'Home', exact: true })).toHaveCount(0);
-  await expect(nav.getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page');
   for (const viewport of [{ width: 1280, height: 720 }, { width: 320, height: 568 }]) {
     await page.setViewportSize(viewport);
     const [brandBox, navBox, themeBox] = await Promise.all([
@@ -89,6 +95,36 @@ test('header navigation sits beside the theme switch and the brand returns home'
 
   await brand.click();
   await expect(page).toHaveURL('/');
+  await expect(nav.locator('a[aria-current]')).toHaveCount(0);
+});
+
+test('main navigation identifies the current page or blog section', async ({ page }) => {
+  await page.goto('/');
+  const nav = page.getByRole('navigation', { name: 'Main navigation' });
+  const activeLink = nav.locator('a[aria-current]');
+  await expect(activeLink).toHaveCount(0);
+
+  for (const [label, path] of [
+    ['About', '/about'],
+    ['Works', '/works'],
+    ['Contact', '/contact'],
+    ['Blog', '/blog'],
+  ]) {
+    await nav.getByRole('link', { name: label, exact: true }).click();
+    await expect(page).toHaveURL(path);
+    await expect(activeLink).toHaveAttribute('href', path);
+    await expect(activeLink).toHaveAttribute('aria-current', 'page');
+  }
+
+  for (const path of [
+    '/blog/ensuring-persistent-ssh-agent-windows-git-bash',
+    '/blog/tags',
+    '/blog/tags/git',
+  ]) {
+    await page.goto(path);
+    await expect(activeLink).toHaveAttribute('href', '/blog');
+    await expect(activeLink).toHaveAttribute('aria-current', 'location');
+  }
 });
 
 test('theme persists across navigation and reload', async ({ page }) => {

@@ -35,9 +35,11 @@ jobs:
 
       - run: npm run typecheck
 
+      - run: npm run test:content
+
       - run: npm run build
 
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium webkit
 
       - name: Check production routes
         shell: bash

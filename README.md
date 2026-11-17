@@ -1,7 +1,10 @@
 # G’s portfolio and blog — v4
 
+[![README views](https://hits.sh/github.com/gbgabiola/gbgabiola.github.io.svg?label=README%20views&color=006a60)](https://hits.sh/github.com/gbgabiola/gbgabiola.github.io/)
+
 Next.js App Router, React, TypeScript, CSS Modules, and next-themes.
-Node 24 is required. npm is the package manager; commit package-lock.json.
+Use Node 26. The patch version for local development and CI is pinned in
+`.nvmrc`. npm is the package manager; commit `package-lock.json`.
 
 ## Development
 
@@ -30,14 +33,15 @@ Type checking generates Next.js route types first, so it works in a clean checko
 next-env.d.ts and .next are generated and ignored. TypeScript is strict; app source
 uses .ts/.tsx.
 
-The smoke test checks page titles, content, a single main heading per page, active
-navigation, project and resume links, 404 status, manifest, and Keybase verification.
-The Playwright suite checks viewport fit, keyboard navigation, theme persistence,
-and common accessibility issues against a production build. To run it locally,
-stop any previous test server and run:
+The smoke test checks page titles, content, a single main heading per page,
+project and resume links, 404 status, the manifest, and Keybase and Google ownership
+files. Each request has a 15-second deadline. The Playwright suite checks viewport
+fit, active and keyboard navigation, theme persistence, and common accessibility
+issues against a production build. A focused WebKit test also checks keyboard
+scrolling for overflowing article tables. Stop any previous test server and run:
 
 ```sh
-npx playwright install chromium
+npx playwright install chromium webkit
 npm run build
 npm run test:browser
 ```
@@ -60,27 +64,41 @@ Add a Markdown file in `src/content/blog/` and an entry in
 `src/content/posts.ts` with the matching slug, a title, an ISO date, a summary,
 and tags from `blogTags`. Use level-two headings in articles. The page supplies
 the main heading. The desktop table of contents is generated automatically
-from level-two and level-three headings. Posts and tag archives are built with
-the site and listed in the sitemap. Use a branch preview to check an article
-before publishing it.
+from level-two and level-three headings. Run `npm run validate:blog` to check
+the catalog and Markdown files before opening a PR. The production build runs
+the same check. Posts and tag archives are built with the site and listed in
+the sitemap. Use a branch preview to check an article before publishing it.
+The blog’s `/feed.xml` feed includes every published post.
 
 ## Deployment and version history
 
-Vercel uses the Next.js preset, Node 24, npm ci, npm run build, and the default
-output handling. Keep vercel.json; it explicitly selects the Next.js adapter.
+Vercel uses the Next.js preset, Node 26 from `engines.node`, `npm ci`,
+`npm run build`, and the default output handling. Vercel manages Node 26 patch
+updates. Keep `vercel.json` to explicitly select the Next.js adapter.
 
 The application version follows [Semantic Versioning](https://semver.org/).
-The site footer reads it directly from `package.json`. Update the manifest and
-lockfile together with `npm version <patch|minor|major> --no-git-tag-version`
+Release checks compare the version in page metadata with `package.json`.
+Update the manifest and lockfile together with `npm version <patch|minor|major> --no-git-tag-version`
 in the same pull request as the changes being released.
+
+Dependabot checks npm monthly and groups minor and patch updates into one
+open PR against `develop`. Review major upgrades separately for compatibility.
+GitHub security update PRs target the default branch when that repository setting
+is enabled.
 
 1. Open a PR to `develop`. Review its Vercel preview and wait for the
    `Next.js validation / validate` result.
 2. Open a PR from `develop` to `main` when the release is approved. Vercel owns
    production deployment from `main`.
-3. Confirm Vercel deployed the expected commit. Run
-   `SMOKE_BASE_URL=https://gbgabiola.vercel.app npm run test:smoke`.
-4. Tag the verified production commit with an annotated `vMAJOR.MINOR.PATCH`
+3. In Vercel, confirm the production domain points to the **Ready** deployment
+   for the expected `main` commit and copy its full commit SHA.
+4. In GitHub Actions, open **Production smoke → Run workflow**, select
+   `main`, and paste the deployment SHA. Wait for it to pass. The workflow
+   compares the supplied SHA with the checkout and checks the site’s public
+   responses and version metadata. Check the deployment SHA in Vercel because
+   builds can share a version. To run the smoke test locally from that commit,
+   use `SMOKE_BASE_URL=https://gbgabiola.vercel.app npm run test:smoke`.
+5. Tag the verified production commit with an annotated `vMAJOR.MINOR.PATCH`
    tag matching `package.json` and publish short GitHub release notes.
 
 Use patch versions for fixes and routine content updates, minor versions for
