@@ -37,6 +37,7 @@ test('footer links to Home, GitHub, and Contact without a version label', async 
   await expect(footer).toContainText(/© 2018–\d{4} gbgabiola/);
   await expect(home).toHaveAttribute('href', '/');
   await expect(links.getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', 'https://github.com/gbgabiola');
+  await expect(links.getByRole('link', { name: 'Article', exact: true })).toHaveAttribute('href', '/blog');
   await expect(links.getByRole('link', { name: 'Get in touch' })).toHaveAttribute('href', '/contact');
   await expect(footer).not.toContainText(/Portfolio v\d+\.\d+\.\d+/);
 
@@ -142,6 +143,35 @@ test('theme persists across navigation and reload', async ({ page }) => {
   await expect(theme).toHaveAttribute('aria-pressed', 'false');
   await theme.click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+});
+
+test('theme switch remains distinguishable with forced colors and reduced motion', async ({ page }) => {
+  await page.emulateMedia({ forcedColors: 'active', reducedMotion: 'reduce' });
+  await page.goto('/');
+  const theme = page.getByRole('button', { name: 'Dark mode' });
+
+  for (const dark of [true, false]) {
+    await expect(theme).toHaveAttribute('aria-pressed', String(dark));
+    const styles = await theme.evaluate((button) => {
+      const thumb = getComputedStyle(button, '::before');
+      const dark = button.getAttribute('aria-pressed') === 'true';
+      const icon = button.querySelectorAll('svg')[dark ? 1 : 0];
+      return {
+        thumbAdjustment: thumb.forcedColorAdjust,
+        thumbColor: thumb.backgroundColor,
+        iconAdjustment: getComputedStyle(icon).forcedColorAdjust,
+        iconColor: getComputedStyle(icon).color,
+        transitionDuration: thumb.transitionDuration,
+      };
+    });
+    expect(styles.thumbAdjustment).toBe('none');
+    expect(styles.iconAdjustment).toBe('none');
+    expect(styles.thumbColor).not.toBe('rgba(0, 0, 0, 0)');
+    expect(styles.iconColor).not.toBe(styles.thumbColor);
+    expect(styles.transitionDuration).toBe('0s');
+    await theme.focus();
+    await page.keyboard.press('Space');
+  }
 });
 
 test('blog posts link to the author, headings, and tag archives', async ({ page }) => {

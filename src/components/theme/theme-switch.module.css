@@ -30,7 +30,7 @@
   width: var(--thumb);
   height: var(--thumb);
   border-radius: 50%;
-  background: var(--foreground);
+  background: var(--primary);
   content: '';
   transform: translateY(-50%);
   transition: transform 160ms ease;
@@ -61,5 +61,18 @@
   .toggle svg {
     width: 1rem;
     height: 1rem;
+  }
+}
+
+@media (forced-colors: active) {
+  .toggle::before {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
+
+  :global([data-theme='light']) .sun,
+  :global([data-theme='dark']) .moon {
+    forced-color-adjust: none;
+    color: HighlightText;
   }
 }
