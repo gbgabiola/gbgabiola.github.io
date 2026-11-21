@@ -63,3 +63,16 @@
     height: 1rem;
   }
 }
+
+@media (forced-colors: active) {
+  .toggle::before {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
+
+  :global([data-theme='light']) .sun,
+  :global([data-theme='dark']) .moon {
+    forced-color-adjust: none;
+    color: HighlightText;
+  }
+}
