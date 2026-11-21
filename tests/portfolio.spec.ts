@@ -37,7 +37,7 @@ test('footer links to Home, GitHub, and Contact without a version label', async 
   await expect(footer).toContainText(/© 2018–\d{4} gbgabiola/);
   await expect(home).toHaveAttribute('href', '/');
   await expect(links.getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', 'https://github.com/gbgabiola');
-  await expect(links.getByRole('link', { name: 'Article', exact: true })).toHaveAttribute('href', '/blog');
+  await expect(links.getByRole('link', { name: 'Articles', exact: true })).toHaveAttribute('href', '/blog');
   await expect(links.getByRole('link', { name: 'Get in touch' })).toHaveAttribute('href', '/contact');
   await expect(footer).not.toContainText(/Portfolio v\d+\.\d+\.\d+/);
 
