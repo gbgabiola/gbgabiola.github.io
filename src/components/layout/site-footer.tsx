@@ -17,7 +17,7 @@ export default function SiteFooter() {
           <a href={githubUrl}>
             GitHub <span aria-hidden="true">↗</span>
           </a>
-          <Link href="/blog" prefetch={false}>Article</Link>
+          <Link href="/blog" prefetch={false}>Articles</Link>
           <Link href="/contact">Get in touch</Link>
         </nav>
       </div>
