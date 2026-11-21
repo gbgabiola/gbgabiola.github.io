@@ -30,7 +30,7 @@
   width: var(--thumb);
   height: var(--thumb);
   border-radius: 50%;
-  background: var(--foreground);
+  background: var(--primary);
   content: '';
   transform: translateY(-50%);
   transition: transform 160ms ease;
