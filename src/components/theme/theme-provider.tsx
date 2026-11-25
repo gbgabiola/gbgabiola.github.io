@@ -11,8 +11,8 @@ export default function PortfolioThemeProvider({
   return (
     <ThemeProvider
       attribute="data-theme"
-      defaultTheme="dark"
-      enableSystem={false}
+      defaultTheme="system"
+      enableSystem
     >
       {children}
     </ThemeProvider>
