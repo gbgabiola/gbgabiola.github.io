@@ -1,25 +1,12 @@
-'use client';
+import styles from './system-theme-indicator.module.css';
 
-import { useTheme } from 'next-themes';
-import { useSyncExternalStore } from 'react';
-import styles from './theme-switch.module.css';
-
-const subscribe = () => () => {};
-
-export default function ThemeSwitch() {
-  const { resolvedTheme, setTheme } = useTheme();
-  // The saved theme is available only in the browser.
-  const hydrated = useSyncExternalStore(subscribe, () => true, () => false);
-  const dark = !hydrated || resolvedTheme !== 'light';
-
+export default function SystemThemeIndicator() {
   return (
-    <button
-      className={styles.toggle}
-      type="button"
-      aria-label="Dark mode"
-      aria-pressed={dark}
-      title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-      onClick={() => setTheme(dark ? 'light' : 'dark')}
+    <span
+      className={styles.indicator}
+      role="img"
+      aria-label="System theme"
+      title="Follows your system's light or dark appearance"
     >
       <svg
         className={styles.sun}
@@ -46,6 +33,6 @@ export default function ThemeSwitch() {
       >
         <path d="M20.5 15A8.5 8.5 0 0 1 9 3.5 8.5 8.5 0 1 0 20.5 15Z" />
       </svg>
-    </button>
+    </span>
   );
 }

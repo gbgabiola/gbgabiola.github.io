@@ -73,12 +73,12 @@ test('keyboard users can skip the header and open the Works page', async ({ page
   await expect(page).toHaveURL('/works');
 });
 
-test('header navigation sits beside the theme switch and the brand returns home', async ({ page }) => {
+test('header navigation sits beside the system theme indicator and the brand returns home', async ({ page }) => {
   await page.goto('/about');
   const header = page.getByRole('banner');
   const nav = header.getByRole('navigation', { name: 'Main navigation' });
   const brand = header.getByRole('link', { name: 'G home' });
-  const theme = header.getByRole('button', { name: 'Dark mode' });
+  const theme = header.getByRole('img', { name: 'System theme' });
 
   await expect(nav.getByRole('link', { name: 'Home', exact: true })).toHaveCount(0);
   for (const viewport of [{ width: 1280, height: 720 }, { width: 320, height: 568 }]) {
@@ -128,34 +128,65 @@ test('main navigation identifies the current page or blog section', async ({ pag
   }
 });
 
-test('theme persists across navigation and reload', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  const theme = page.getByRole('button', { name: 'Dark mode' });
-  await expect(theme).toHaveAttribute('aria-pressed', 'true');
-  await theme.click();
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-  await expect(theme).toHaveAttribute('aria-pressed', 'false');
-  await page.getByRole('link', { name: 'Contact', exact: true }).click();
-  await expect(page).toHaveURL('/contact');
-  await page.reload();
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-  await expect(theme).toHaveAttribute('aria-pressed', 'false');
-  await theme.click();
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-});
+for (const initialScheme of ['light', 'dark'] as const) {
+  test('theme follows the system and ignores saved overrides in ' + initialScheme + ' mode', async ({ page }) => {
+    const alternateScheme = initialScheme === 'dark' ? 'light' : 'dark';
+    await page.emulateMedia({ colorScheme: initialScheme });
+    await page.addInitScript((savedTheme) => localStorage.setItem('theme', savedTheme), alternateScheme);
+    await page.goto('/');
+    const indicator = page.getByRole('img', { name: 'System theme' });
 
-test('theme switch remains distinguishable with forced colors and reduced motion', async ({ page }) => {
-  await page.emulateMedia({ forcedColors: 'active', reducedMotion: 'reduce' });
-  await page.goto('/');
-  const theme = page.getByRole('button', { name: 'Dark mode' });
+    for (const scheme of [initialScheme, alternateScheme]) {
+      await page.emulateMedia({ colorScheme: scheme });
+      await expect(page.locator('html')).toHaveCSS('color-scheme', scheme);
+      await expect(page.locator('body')).toHaveCSS('background-color',
+        scheme === 'dark' ? 'rgb(23, 27, 33)' : 'rgb(250, 250, 248)');
+      await expect.poll(() => indicator.evaluate((element) => {
+        const transform = getComputedStyle(element, '::before').transform;
+        return new DOMMatrixReadOnly(transform).m41 > 0;
+      })).toBe(scheme === 'dark');
+    }
 
-  for (const dark of [true, false]) {
-    await expect(theme).toHaveAttribute('aria-pressed', String(dark));
-    const styles = await theme.evaluate((button) => {
-      const thumb = getComputedStyle(button, '::before');
-      const dark = button.getAttribute('aria-pressed') === 'true';
-      const icon = button.querySelectorAll('svg')[dark ? 1 : 0];
+    await page.getByRole('link', { name: 'Contact', exact: true }).click();
+    await expect(page).toHaveURL('/contact');
+    await page.reload();
+    await expect(page.locator('html')).toHaveCSS('color-scheme', alternateScheme);
+    await expect(page.locator('body')).toHaveCSS('background-color',
+      alternateScheme === 'dark' ? 'rgb(23, 27, 33)' : 'rgb(250, 250, 248)');
+  });
+
+  test('system theme works without JavaScript in ' + initialScheme + ' mode', async ({ browser, baseURL }) => {
+    const context = await browser.newContext({
+      baseURL,
+      javaScriptEnabled: false,
+      colorScheme: initialScheme,
+    });
+    try {
+      const page = await context.newPage();
+      await page.goto('/');
+      await expect(page.locator('html')).toHaveCSS('color-scheme', initialScheme);
+      await expect(page.locator('body')).toHaveCSS('background-color',
+        initialScheme === 'dark' ? 'rgb(23, 27, 33)' : 'rgb(250, 250, 248)');
+      await expect(page.getByRole('img', { name: 'System theme' })).toBeVisible();
+    } finally {
+      await context.close();
+    }
+  });
+}
+
+test('system theme indicator remains distinguishable with forced colors and reduced motion', async ({ page }) => {
+  await page.emulateMedia({ forcedColors: 'active', reducedMotion: 'reduce', colorScheme: 'dark' });
+  await page.goto('/');
+  const indicator = page.getByRole('img', { name: 'System theme' });
+
+  for (const scheme of ['dark', 'light'] as const) {
+    await page.emulateMedia({ colorScheme: scheme });
+    await expect.poll(() => page.evaluate(() =>
+      matchMedia('(prefers-color-scheme: dark)').matches)).toBe(scheme === 'dark');
+    const styles = await indicator.evaluate((element) => {
+      const thumb = getComputedStyle(element, '::before');
+      const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+      const icon = element.querySelectorAll('svg')[dark ? 1 : 0];
       return {
         thumbAdjustment: thumb.forcedColorAdjust,
         thumbColor: thumb.backgroundColor,
@@ -169,8 +200,6 @@ test('theme switch remains distinguishable with forced colors and reduced motion
     expect(styles.thumbColor).not.toBe('rgba(0, 0, 0, 0)');
     expect(styles.iconColor).not.toBe(styles.thumbColor);
     expect(styles.transitionDuration).toBe('0s');
-    await theme.focus();
-    await page.keyboard.press('Space');
   }
 });
 

@@ -4,7 +4,6 @@ import { site } from '@/config/site';
 import { profile } from '@/content/profile';
 import SiteHeader from '@/components/layout/site-header';
 import SiteFooter from '@/components/layout/site-footer';
-import ThemeProvider from '@/components/theme/theme-provider';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -28,18 +27,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body>
-        <ThemeProvider>
-          <a className="skip-link" href="#main">
-            Skip to content
-          </a>
-          <SiteHeader />
-          <main id="main" className="container" tabIndex={-1}>
-            {children}
-          </main>
-          <SiteFooter />
-        </ThemeProvider>
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
+        <SiteHeader />
+        <main id="main" className="container" tabIndex={-1}>
+          {children}
+        </main>
+        <SiteFooter />
       </body>
     </html>
   );

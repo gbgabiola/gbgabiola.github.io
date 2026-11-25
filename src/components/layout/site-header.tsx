@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { profile } from '@/content/profile';
 import Navigation from './navigation';
-import ThemeSwitch from '@/components/theme/theme-switch';
+import SystemThemeIndicator from '@/components/theme/system-theme-indicator';
 import styles from './site-header.module.css';
 
 export default function SiteHeader() {
@@ -17,7 +17,7 @@ export default function SiteHeader() {
         </Link>
         <div className={styles.controls}>
           <Navigation />
-          <ThemeSwitch />
+          <SystemThemeIndicator />
         </div>
       </div>
     </header>

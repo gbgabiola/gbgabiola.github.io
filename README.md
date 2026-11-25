@@ -2,9 +2,12 @@
 
 [![README views](https://hits.sh/github.com/gbgabiola/gbgabiola.github.io.svg?label=README%20views&color=006a60)](https://hits.sh/github.com/gbgabiola/gbgabiola.github.io/)
 
-Next.js App Router, React, TypeScript, CSS Modules, and next-themes.
+Next.js App Router, React, TypeScript, and CSS Modules.
 Use Node 26. The patch version for local development and CI is pinned in
 `.nvmrc`. npm is the package manager; commit `package-lock.json`.
+
+The site follows the system's light or dark appearance automatically. The header
+sun/moon indicator reflects that preference.
 
 ## Development
 
@@ -36,7 +39,7 @@ uses .ts/.tsx.
 The smoke test checks page titles, content, a single main heading per page,
 project and resume links, 404 status, the manifest, and Keybase and Google ownership
 files. Each request has a 15-second deadline. The Playwright suite checks viewport
-fit, active and keyboard navigation, theme persistence, and common accessibility
+fit, active and keyboard navigation, system theme changes, and common accessibility
 issues against a production build. A focused WebKit test also checks keyboard
 scrolling for overflowing article tables. Stop any previous test server and run:
 
