@@ -12,16 +12,14 @@
   --container: 1120px;
   --gutter: clamp(1.25rem, 4vw, 2rem);
 }
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: light;
-    --background: #fafaf8;
-    --surface: #fff;
-    --foreground: #1b2530;
-    --muted: #4f5d6c;
-    --primary: #006a60;
-    --border: #cbd2d8;
-  }
+:root[data-theme='light'] {
+  color-scheme: light;
+  --background: #fafaf8;
+  --surface: #fff;
+  --foreground: #1b2530;
+  --muted: #4f5d6c;
+  --primary: #006a60;
+  --border: #cbd2d8;
 }
 body {
   display: flex;

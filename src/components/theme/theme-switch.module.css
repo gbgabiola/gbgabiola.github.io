@@ -1,9 +1,7 @@
-.indicator {
+.toggle {
   --segment: 2.3rem;
   --thumb: 2.125rem;
   --track-padding: 0.25rem;
-  --sun-color: var(--muted);
-  --moon-color: var(--background);
 
   position: relative;
   isolation: isolate;
@@ -17,9 +15,14 @@
   border-radius: 999px;
   background: var(--surface);
   color: var(--muted);
+  cursor: pointer;
 }
 
-.indicator::before {
+.toggle:hover {
+  border-color: var(--primary);
+}
+
+.toggle::before {
   position: absolute;
   z-index: -1;
   top: 50%;
@@ -29,67 +32,47 @@
   border-radius: 50%;
   background: var(--primary);
   content: '';
-  transform: translate(var(--segment), -50%);
+  transform: translateY(-50%);
   transition: transform 160ms ease;
 }
 
-.indicator svg {
+:global([data-theme='dark']) .toggle::before {
+  transform: translate(var(--segment), -50%);
+}
+
+.toggle svg {
   width: 1.25rem;
   height: 1.25rem;
 }
 
-.sun {
-  color: var(--sun-color);
-}
-
-.moon {
-  color: var(--moon-color);
-}
-
-@media (prefers-color-scheme: light) {
-  .indicator {
-    --sun-color: var(--background);
-    --moon-color: var(--muted);
-  }
-
-  .indicator::before {
-    transform: translateY(-50%);
-  }
+:global([data-theme='light']) .sun,
+:global([data-theme='dark']) .moon {
+  color: var(--background);
 }
 
 @media (max-width: 640px) {
-  .indicator {
+  .toggle {
     --segment: 1.75rem;
     --thumb: 1.625rem;
 
     min-height: 2.25rem;
   }
 
-  .indicator svg {
+  .toggle svg {
     width: 1rem;
     height: 1rem;
   }
 }
 
 @media (forced-colors: active) {
-  .indicator {
-    --sun-color: GrayText;
-    --moon-color: HighlightText;
-  }
-
-  .indicator::before {
+  .toggle::before {
     forced-color-adjust: none;
     background: Highlight;
   }
 
-  .indicator svg {
+  :global([data-theme='light']) .sun,
+  :global([data-theme='dark']) .moon {
     forced-color-adjust: none;
-  }
-}
-
-@media (forced-colors: active) and (prefers-color-scheme: light) {
-  .indicator {
-    --sun-color: HighlightText;
-    --moon-color: GrayText;
+    color: HighlightText;
   }
 }
