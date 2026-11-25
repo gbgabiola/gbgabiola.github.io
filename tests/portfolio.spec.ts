@@ -129,6 +129,7 @@ test('main navigation identifies the current page or blog section', async ({ pag
 });
 
 test('theme persists across navigation and reload', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto('/');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   const theme = page.getByRole('button', { name: 'Dark mode' });
@@ -146,7 +147,7 @@ test('theme persists across navigation and reload', async ({ page }) => {
 });
 
 test('theme switch remains distinguishable with forced colors and reduced motion', async ({ page }) => {
-  await page.emulateMedia({ forcedColors: 'active', reducedMotion: 'reduce' });
+  await page.emulateMedia({ forcedColors: 'active', reducedMotion: 'reduce', colorScheme: 'dark' });
   await page.goto('/');
   const theme = page.getByRole('button', { name: 'Dark mode' });
 
@@ -242,4 +243,16 @@ test('portfolio routes pass automated accessibility checks', async ({ page }) =>
       .analyze();
     expect(results.violations, path).toEqual([]);
   }
+});
+
+test('theme follows system changes until overridden', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light' });
+  await page.goto('/');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await page.getByRole('button', { name: 'Dark mode' }).click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 });
