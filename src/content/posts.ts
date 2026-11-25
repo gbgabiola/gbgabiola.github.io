@@ -62,6 +62,13 @@ export const posts: readonly Post[] = [
     summary: "Find the process using a port and stop it, with a graceful shutdown step before using SIGKILL.",
     tags: ['command-line'],
   },
+  {
+    slug: 'building-a-system-aware-theme-switch-in-nextjs',
+    title: 'Building a System-Aware Theme Switch in Next.js',
+    date: '2026-11-21',
+    summary: 'Build a sun and moon theme switch with next-themes, system defaults, saved choices, and accessible styling.',
+    tags: ['nextjs'],
+  },
 ];
 
 const dateFormatter = new Intl.DateTimeFormat('en', {
