@@ -69,6 +69,13 @@ export const posts: readonly Post[] = [
     summary: 'Build a sun and moon theme switch with next-themes, system defaults, saved choices, and accessible styling.',
     tags: ['nextjs'],
   },
+  {
+    slug: 'managing-dotfiles-for-ubuntu-and-wsl',
+    title: 'Managing Dotfiles for Ubuntu and WSL',
+    date: '2026-11-28',
+    summary: 'Set up shared shell and Git configuration with symlinks, local overrides, backups, and a restore workflow.',
+    tags: ['command-line', 'git', 'windows'],
+  },
 ];
 
 const dateFormatter = new Intl.DateTimeFormat('en', {
