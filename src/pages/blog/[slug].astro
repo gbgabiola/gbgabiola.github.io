@@ -1,0 +1,75 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Layout from '@/layouts/Base.astro';
+import Breadcrumbs from '@/components/blog/Breadcrumbs.astro';
+import { blogTags, formatPostDate } from '@/content/posts';
+import { site } from '@/config/site';
+import styles from '@/styles/blog.module.css';
+export async function getStaticPaths() {
+  return (await getCollection('blog')).map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+interface Props {
+  entry: CollectionEntry<'blog'>;
+}
+const { entry } = Astro.props;
+const post = entry.data;
+const { Content } = await render(entry);
+---
+
+<Layout title={post.title} description={post.summary}>
+  <article class={styles.article}>
+    <header class={`${styles.column} ${styles.intro}`}>
+      <a href="/blog" class={styles.mobileBack}>
+        ← All posts
+      </a>
+      <Breadcrumbs />
+      <h1>{post.title}</h1>
+      <div class={styles.byline}>
+        <span>
+          By <a href="/about">{site.brand}</a>
+        </span>
+        <time datetime={post.date}>{formatPostDate(post.date)}</time>
+      </div>
+      <div class={styles.tagged}>
+        <span>Tagged:</span>
+        <ul class={styles.tags}>
+          {post.tags.map((tag) => (
+            <li>
+              <a href={`/blog/tags/${tag}`}>{blogTags[tag]}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </header>
+    <div class={styles.content}>
+      <Content />
+    </div>
+  </article>
+</Layout>
+<script>
+  document
+    .querySelectorAll<HTMLElement>('[data-scrollable-table]')
+    .forEach((wrapper) => {
+      const table = wrapper.querySelector('table');
+      if (!table) return;
+      const update = () => {
+        const overflow = wrapper.scrollWidth > wrapper.clientWidth;
+        if (overflow) {
+          wrapper.tabIndex = 0;
+          wrapper.setAttribute('role', 'region');
+          wrapper.setAttribute('aria-label', 'Scrollable table');
+        } else {
+          wrapper.removeAttribute('tabindex');
+          wrapper.removeAttribute('role');
+          wrapper.removeAttribute('aria-label');
+        }
+      };
+      const observer = new ResizeObserver(update);
+      observer.observe(wrapper);
+      observer.observe(table);
+      update();
+    });
+</script>

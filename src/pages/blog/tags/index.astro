@@ -1,0 +1,23 @@
+---
+import Layout from '@/layouts/Base.astro';
+import Breadcrumbs from '@/components/blog/Breadcrumbs.astro';
+import { blogTags } from '@/content/posts';
+import styles from '@/styles/blog.module.css';
+---
+
+<Layout title="Blog tags" description="Browse blog posts by topic.">
+  <div class={styles.column}>
+    <header class={styles.intro}>
+      <a href="/blog">← All posts</a>
+      <Breadcrumbs current={{ label: 'Tags', isTagsIndex: true }} />
+      <h1>Tags</h1>
+    </header>
+    <ul class={styles.tags}>
+      {Object.entries(blogTags).map(([slug, label]) => (
+        <li>
+          <a href={`/blog/tags/${slug}`}>{label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Layout>

@@ -1,10 +1,10 @@
-name: Next.js validation
+name: Portfolio validation
 
 on:
   pull_request:
     branches: [main, develop]
   push:
-    branches: [main, develop, feat/nextjs-v4, feat/blog-v4.1]
+    branches: [main, develop, feat/nextjs-v4, feat/blog-v4.1, feat/astro-v5]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -17,9 +17,6 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-
-    env:
-      NEXT_TELEMETRY_DISABLED: 1
 
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
@@ -44,7 +41,7 @@ jobs:
       - name: Check production routes
         shell: bash
         run: |
-          npm start > /tmp/portfolio-next.log 2>&1 &
+          npm start > /tmp/portfolio-build.log 2>&1 &
           server_pid=$!
 
           trap 'kill "$server_pid" || true' EXIT

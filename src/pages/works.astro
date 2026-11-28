@@ -1,0 +1,22 @@
+---
+import { projects } from '@/content/projects';
+import ProjectGrid from '@/components/sections/project-grid.astro';
+import styles from '@/styles/works.module.css';
+
+import Layout from '@/layouts/Base.astro';
+---
+
+<Layout
+  title="Works"
+  description="Explore G’s featured projects, including Caffeinawa, EM Carpentry, and FBCSI."
+>
+  <header class={styles.intro}>
+    <h1 class="display-heading">Featured projects</h1>
+  </header>
+  <ProjectGrid projects={projects} />
+  <p class={styles.more}>
+    <a href="https://github.com/gbgabiola?tab=repositories">
+      See more projects on GitHub <span aria-hidden="true">↗</span>
+    </a>
+  </p>
+</Layout>

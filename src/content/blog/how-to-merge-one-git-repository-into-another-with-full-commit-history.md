@@ -1,3 +1,10 @@
+---
+title: "How to Merge One Git Repository Into Another (With Full Commit History)"
+date: "2026-10-24"
+summary: "Compare git-filter-repo and Git subtree for combining repositories while preserving their commits."
+tags: ["git"]
+---
+
 Importing a repository into a subfolder can keep its commit history available from the parent repository. Git filter-repo rewrites the imported paths throughout history. Git subtree keeps the original child commits and places the imported files under a prefix in the parent.
 
 Before using either method, start with a clean working tree in the parent repository and create a branch for the import. Choose an unused destination such as `imported-project/`. The examples assume the child branch is `main`. Substitute its actual name if it differs.

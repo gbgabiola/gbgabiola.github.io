@@ -15,7 +15,7 @@ const routes = [
   ['/works', 'Works', 'Caffeinawa'],
   ['/contact', 'Contact', 'mailto:gbgabiola@gmail.com'],
   ['/blog', 'Blog', 'Notes on building for the web'],
-  ['/blog/tags', 'Blog tags', 'Browse blog posts by topic.'],
+  ['/blog/tags', 'Blog tags', 'Tags'],
   ...posts.map(({ slug, title }) => [`/blog/${slug}`, title, title]),
   ...Object.entries(blogTags).map(([tag, label]) => [
     `/blog/tags/${tag}`,
@@ -76,7 +76,7 @@ for (const [path, title, content] of routes) {
   assert.doesNotMatch(html, /Genesis Gabiola/i, `${path}: public nickname`);
   const body = html.slice(html.indexOf('<body'));
   if (content) assert.ok(body.includes(escapeHtml(content)), `${path}: content`);
-  assert.ok(html.includes(`<meta name="portfolio-version" content="${version}"/>`), `${path}: portfolio version`);
+  assert.ok(html.includes(`name="portfolio-version" content="${version}"`), `${path}: portfolio version`);
 
   if (['/', '/about', '/contact'].includes(path)) {
     assert.ok(
@@ -103,6 +103,7 @@ for (const [path, title, content] of routes) {
 
 const missing = await request('/this-page-does-not-exist', 404);
 assert.ok(missing.body.toString('utf8').includes('Page not found'));
+assert.match(missing.body.toString('utf8'), /<meta name="robots" content="noindex"/);
 
 await request('/blog/portfolio-pages-that-fit', 404);
 await request('/blog/tags/unknown-tag', 404);

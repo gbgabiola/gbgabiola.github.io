@@ -1,9 +1,20 @@
 import { defineConfig, globalIgnores } from 'eslint/config';
-import nextVitals from 'eslint-config-next/core-web-vitals';
-import nextTypeScript from 'eslint-config-next/typescript';
-
+import astro from 'eslint-plugin-astro';
+import tseslint from 'typescript-eslint';
 export default defineConfig([
-  ...nextVitals,
-  ...nextTypeScript,
-  globalIgnores(['.next/**', 'out/**', 'next-env.d.ts']),
+  globalIgnores([
+    'dist/**',
+    '.wrangler/**',
+    '.astro/**',
+    '.next/**',
+    'node_modules/**',
+    'test-results/**',
+    'playwright-report/**',
+  ]),
+  ...tseslint.configs.recommended,
+  ...astro.configs.recommended,
+  {
+    files: ['**/*.astro'],
+    languageOptions: { parserOptions: { parser: tseslint.parser } },
+  },
 ]);

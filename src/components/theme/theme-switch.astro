@@ -1,0 +1,81 @@
+---
+import styles from './theme-switch.module.css';
+---
+
+<button
+  class={styles.toggle}
+  type="button"
+  aria-label="Dark mode"
+  aria-pressed="false"
+  title="Change theme"
+  data-theme-switch
+>
+  <svg
+    class={styles.sun}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" />
+  </svg>
+  <svg
+    class={styles.moon}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.75"
+    stroke-linejoin="round"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M20.5 15A8.5 8.5 0 0 1 9 3.5 8.5 8.5 0 1 0 20.5 15Z" />
+  </svg>
+</button>
+<script>
+  const preference = window.matchMedia('(prefers-color-scheme: dark)');
+  let selected = 'system';
+  try {
+    selected = localStorage.getItem('theme') || 'system';
+  } catch {}
+  if (!['light', 'dark', 'system'].includes(selected)) selected = 'system';
+
+  function applyTheme() {
+    const dark =
+      selected === 'system' ? preference.matches : selected === 'dark';
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+    document
+      .querySelectorAll<HTMLButtonElement>('[data-theme-switch]')
+      .forEach((button) => {
+        button.setAttribute('aria-pressed', String(dark));
+        button.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
+      });
+  }
+
+  document
+    .querySelectorAll<HTMLButtonElement>('[data-theme-switch]')
+    .forEach((button) => {
+      button.addEventListener('click', () => {
+        selected =
+          document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        try {
+          localStorage.setItem('theme', selected);
+        } catch {}
+        applyTheme();
+      });
+    });
+  preference.addEventListener('change', applyTheme);
+  window.addEventListener('storage', (event) => {
+    if (event.key !== 'theme' && event.key !== null) return;
+    selected = ['light', 'dark'].includes(event.newValue || '')
+      ? event.newValue!
+      : 'system';
+    applyTheme();
+  });
+  applyTheme();
+</script>

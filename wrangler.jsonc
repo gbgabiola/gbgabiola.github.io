@@ -1,0 +1,10 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "gbgabiola-portfolio",
+  "compatibility_date": "2026-11-28",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page",
+  },
+}

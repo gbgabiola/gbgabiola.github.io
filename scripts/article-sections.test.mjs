@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import rehypeSlug from 'rehype-slug';
-import { collectArticleSections } from '../src/app/blog/[slug]/article-sections.ts';
+import { collectArticleSections } from '../src/lib/article-sections.ts';
 
 function text(value) {
   return { type: 'text', value };

@@ -1,0 +1,29 @@
+---
+import styles from '@/styles/blog.module.css';
+interface Props {
+  current?: { label: string; isTagsIndex?: boolean };
+}
+const { current } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class={styles.breadcrumb}>
+  <ol>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <span aria-hidden="true">/</span>
+      {current?.isTagsIndex ? (
+        <span aria-current="page">Tags</span>
+      ) : (
+        <a href="/blog/tags">Tags</a>
+      )}
+    </li>
+    {current && !current.isTagsIndex && (
+      <li>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{current.label}</span>
+      </li>
+    )}
+  </ol>
+</nav>

@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import { profile } from '@/content/profile';
+import { projects } from '@/content/projects';
+import photo from '@/assets/images/my-image.jpg';
+import ResumeLink from '@/components/ui/resume-link.astro';
+import buttons from '@/components/ui/button.module.css';
+import styles from '@/styles/home.module.css';
+
+import Layout from '@/layouts/Base.astro';
+---
+
+<Layout
+  title="Home"
+  description="Portfolio of G, a software engineer and full stack developer working across web interfaces and backend APIs."
+>
+  <div class="viewport-page">
+    <section class={styles.hero} aria-labelledby="home-heading">
+      <div>
+        <p class="eyebrow">{profile.specialization}</p>
+        <h1 id="home-heading">
+          I’m {profile.nickname}, a {profile.role}.
+        </h1>
+        <p class="intro-copy">
+          I build thoughtful web interfaces and reliable APIs.
+        </p>
+        <p class={styles.availability}>
+          <a href="/contact">Open to part-time work</a>
+        </p>
+        <div class={styles.actions}>
+          <a href="/works" class={buttons.primary}>
+            View work
+          </a>
+          <ResumeLink />
+        </div>
+      </div>
+      <Image
+        src={photo}
+        alt={`Portrait of ${profile.nickname}`}
+        width={280}
+        widths={[64, 112, 224, 280, 560]}
+        height={280}
+        sizes="(max-width: 375px) 4rem, (max-width: 720px) clamp(4rem, 13svh, 7rem), (max-height: 600px) 40svh, 280px"
+        loading="eager"
+        fetchpriority="high"
+        class={styles.portrait}
+      />
+    </section>
+
+    <section class={styles.projects} aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Selected projects</h2>
+      <ul>
+        {projects.map(({ name, image, href }) => (
+          <li>
+            <a href={href}>
+              <Image
+                src={image}
+                alt=""
+                widths={[80, 160, 340, 680]}
+                sizes="(min-width: 721px) and (min-height: 800px) min(29vw, 340px), 80px"
+              />
+              <span>
+                {name} <span aria-hidden="true">↗</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Layout>

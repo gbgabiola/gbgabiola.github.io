@@ -1,0 +1,22 @@
+---
+import Layout from '@/layouts/Base.astro';
+import PostList from '@/components/blog/PostList.astro';
+import { posts } from '@/content/posts';
+import styles from '@/styles/blog.module.css';
+---
+
+<Layout
+  title="Blog"
+  description="Notes from G on building web applications and maintaining this portfolio."
+>
+  <div class={styles.column}>
+    <header class={styles.intro}>
+      <h1>Blog</h1>
+      <p>Notes on building for the web and maintaining this portfolio.</p>
+      <a href="/blog/tags">Browse tags</a>
+      <span aria-hidden="true"> · </span>
+      <a href="/feed.xml">RSS feed</a>
+    </header>
+    <PostList posts={posts} />
+  </div>
+</Layout>

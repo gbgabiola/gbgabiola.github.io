@@ -1,3 +1,10 @@
+---
+title: "How to Connect PayMongo in a NestJS and Next.js Monorepo"
+date: "2026-10-31"
+summary: "Connect a Next.js checkout to a NestJS backend that creates PayMongo payment intents and handles webhooks."
+tags: ["nextjs", "nestjs", "payments"]
+---
+
 This walkthrough uses a single GCash payment in PayMongo test mode. NestJS owns the order total and confirms the payment. Next.js starts checkout and redirects the customer to authorize it. The examples assume your application already has authenticated orders and a way to store payment attempts.
 
 ## 1. Configure Environment Variables

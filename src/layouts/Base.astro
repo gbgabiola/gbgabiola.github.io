@@ -1,0 +1,72 @@
+---
+import { site } from '@/config/site';
+import { sitePath } from '@/lib/site-path';
+import Header from '@/components/layout/site-header.astro';
+import Footer from '@/components/layout/site-footer.astro';
+import '@/styles/global.css';
+interface Props {
+  title: string;
+  description?: string;
+  noindex?: boolean;
+}
+const { title, description = site.description, noindex = false } = Astro.props;
+const fullTitle = `${title} | ${site.title}`;
+const canonical = new URL(sitePath(Astro.url.pathname), site.url).href;
+const socialImage = new URL('/opengraph-image', site.url).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="G" />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="portfolio-version" content={site.version} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      href={new URL('/feed.xml', site.url).href}
+      title="gbgabiola Blog"
+    />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:creator" content="@gbgabiola" />
+    <script is:inline>
+      (() => {
+        let theme = 'system';
+        try {
+          theme = localStorage.getItem('theme') || 'system';
+        } catch {}
+        const dark =
+          theme === 'dark' ||
+          (theme !== 'light' &&
+            matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <Header />
+    <main id="main" class="container" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
