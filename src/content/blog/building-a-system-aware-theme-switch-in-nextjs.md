@@ -1,6 +1,13 @@
-This portfolio starts with the visitor's system appearance and lets them choose a different theme with the sun/moon switch. That choice survives navigation and reloads. This guide walks through the same Next.js App Router implementation, including the teal pill, hydration handling, and accessibility styles.
+---
+title: "Building a System-Aware Theme Switch in Next.js"
+date: "2026-11-21"
+summary: "Build a sun and moon theme switch with next-themes, system defaults, saved choices, and accessible styling."
+tags: ["nextjs"]
+---
 
-The examples assume an existing Next.js application with React, TypeScript, CSS Modules, and the `@/` import alias pointing to `src/`. The portfolio uses `next-themes` 0.4.6.
+The Next.js version of this portfolio starts with the visitor's system appearance and lets them choose a different theme with the sun/moon switch. That choice survives navigation and reloads. This guide walks through the same Next.js App Router implementation, including the teal pill, hydration handling, and accessibility styles.
+
+The examples assume an existing Next.js application with React, TypeScript, CSS Modules, and the `@/` import alias pointing to `src/`. That version uses `next-themes` 0.4.6.
 
 ## Define the theme behavior
 

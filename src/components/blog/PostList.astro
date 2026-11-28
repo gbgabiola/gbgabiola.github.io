@@ -1,0 +1,24 @@
+---
+import { formatPostDate } from '@/content/posts';
+import styles from '@/styles/blog.module.css';
+interface Props {
+  posts: readonly import('@/content/posts').Post[];
+}
+const { posts } = Astro.props;
+---
+
+<ul class={styles.posts}>
+  {[...posts]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .map((post) => (
+      <li>
+        <article>
+          <time datetime={post.date}>{formatPostDate(post.date)}</time>
+          <h2>
+            <a href={`/blog/${post.slug}`}>{post.title}</a>
+          </h2>
+          <p>{post.summary}</p>
+        </article>
+      </li>
+    ))}
+</ul>

@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+import { profile } from '@/content/profile';
+import { experiences, skillGroups, interests } from '@/content/about';
+import photo from '@/assets/images/my-image.jpg';
+import ResumeLink from '@/components/ui/resume-link.astro';
+import styles from '@/styles/about.module.css';
+
+import Layout from '@/layouts/Base.astro';
+---
+
+<Layout
+  title="About"
+  description="Explore G’s professional experience and skills in full stack development."
+>
+  <header class={styles.profile}>
+    <Image
+      src={photo}
+      alt={`Portrait of ${profile.nickname}`}
+      width={120}
+      widths={[120, 240]}
+      sizes="120px"
+      height={120}
+      class={styles.portrait}
+    />
+    <div>
+      <h1 class="display-heading">About {profile.nickname}</h1>
+      <p>
+        {profile.role} · {profile.specialization}
+      </p>
+      <p>{profile.location}</p>
+    </div>
+  </header>
+  <section class={styles.section} aria-labelledby="about-heading">
+    <h2 id="about-heading">How I work</h2>
+    <p>{profile.summary}</p>
+    <ResumeLink />
+  </section>
+  <section class={styles.section} aria-labelledby="experience-heading">
+    <h2 id="experience-heading">Professional Experience</h2>
+    <ol class={styles.timeline}>
+      {experiences.map((experience) => (
+        <li>
+          <article>
+            <h3>{experience.company}</h3>
+            <p class={styles.period}>{experience.info}</p>
+            <p>{experience.description}</p>
+          </article>
+        </li>
+      ))}
+    </ol>
+  </section>
+  <section class={styles.section} aria-labelledby="skills-heading">
+    <h2 id="skills-heading">Technical skills</h2>
+    <div class={styles.skills}>
+      {skillGroups.map((group) => (
+        <section>
+          <h3>{group.title}</h3>
+          <ul>
+            {group.items.map((skill) => (
+              <li>{skill}</li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </section>
+  <section aria-labelledby="interests-heading">
+    <h2 id="interests-heading">Beyond the code</h2>
+    <ul>
+      {interests.map((interest) => (
+        <li>{interest}</li>
+      ))}
+    </ul>
+  </section>
+</Layout>

@@ -1,3 +1,10 @@
+---
+title: "Saying Goodbye to Port Forwarding: An Introduction to Cloudflare Tunnel"
+date: "2026-11-07"
+summary: "Learn how Cloudflare Tunnel exposes a local service and when to choose a quick or named tunnel."
+tags: ["cloudflare", "networking", "deployment"]
+---
+
 [Cloudflare Tunnel](https://developers.cloudflare.com/tunnel/) lets you connect a local application to Cloudflare without forwarding an inbound port to your origin. A published hostname can still make the application reachable from the internet. Decide who should have access before creating that route.
 
 ---

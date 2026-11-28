@@ -4,7 +4,10 @@
 
 [View portfolio](https://gbgabiola.vercel.app)
 
-Built with Next.js, React, TypeScript, CSS Modules, and next-themes.
+Built with Astro, TypeScript, and CSS Modules. Pages and Markdown articles
+build to static HTML. Small browser scripts handle theme preferences and
+keyboard access to overflowing article tables.
+
 The theme follows the system preference until the visitor selects a theme.
 Manual choices persist across visits.
 
@@ -28,6 +31,7 @@ npm run build
 ```
 
 Run `npm start`, then `npm run test:smoke` in another terminal.
+The local preview serves the generated `dist/` files and applies `public/_headers`.
 Stop the server before running browser tests.
 
 ```sh
@@ -35,29 +39,72 @@ npx playwright install --with-deps chromium webkit
 npm run test:browser
 ```
 
+Prettier is configured for Astro, TypeScript, and styles. Format changed files
+with `npx prettier --write <files>`.
+
 ## Content
 
 - `src/content/profile.ts` contains contact details and résumé links.
 - `src/content/about.ts` contains experience and skills.
 - `src/content/projects.ts` contains featured projects.
-- `src/config/site.ts` contains site metadata and navigation.
+- `src/config/site.ts` contains the canonical URL, metadata, and navigation.
+- `src/content.config.ts` defines the blog collection and metadata schema.
 
 Keep résumé files publicly readable and check downloads while signed out.
 
 ## Blog
 
-1. Add a Markdown file in `src/content/blog/`.
-2. Add its matching slug, title, ISO date, summary, and tags in `src/content/posts.ts`.
-3. Use level-two and level-three headings. The page generates the title and table of contents.
-4. Run `npm run validate:blog` and review the branch preview before publishing.
+1. Add a lowercase, hyphen-separated Markdown filename in `src/content/blog/`.
+   Its filename becomes the article URL.
+2. Include frontmatter in that same file:
 
-Published posts appear in the sitemap and `/feed.xml`.
+```yaml
+---
+title: "Article title"
+date: "2026-12-05"
+summary: "A short description for the blog index and search previews."
+tags: ["git"]
+---
+```
 
-## Deployment and releases
+3. Use existing tag keys from `src/content/posts.ts`, or register a new tag there.
+4. Write the article below the frontmatter. Use level-two and level-three headings;
+   the page generates the title, byline, tag links, and table of contents.
+5. Run `npm run validate:blog`, build, and review the branch preview.
 
-Vercel deploys `main` using Node 26, `npm ci`, and `npm run build`.
+No separate post catalog entry is needed. Articles automatically appear in
+`/blog`, tag archives, `/sitemap.xml`, and `/feed.xml`.
+The Next.js theme-switch article documents the previous implementation.
 
-1. Open a PR to `develop` and wait for CI and the Vercel preview.
+## Hosting
+
+The output is portable static files in `dist/`; no server adapter is required.
+
+**Vercel:** `vercel.json` selects Astro, `npm ci`, `npm run build`, and `dist/`.
+It retains security headers, feed content types, and immutable asset caching.
+Existing production remains on Vercel while the rebuild is reviewed.
+
+**Cloudflare Workers Static Assets:** `wrangler.jsonc` configures extensionless
+URLs and the custom 404 page. `public/_headers` supplies response headers. A rewrite in `public/_redirects`
+keeps the Google ownership response at its original `.html` filename.
+Connect the review branch using build command `npm run build` and deploy command
+`npx wrangler@4.169.0 deploy`. Use the pinned Node version for builds.
+Alternatively, build locally and deploy the same `dist/` with Wrangler.
+No Worker script, database, or runtime rendering is needed.
+
+Before changing the production hostname, update `site.url` and the production
+smoke workflow URL together, verify redirects from the previous hostname, and
+recheck canonical URLs, sitemap submission, RSS links, and ownership verification.
+Preview deployments intentionally keep the current production canonical URL.
+
+## Releases
+
+The `feat/astro-v5` branch prepares portfolio version `5.0.0` for review.
+It does not publish a release or change production hosting.
+
+After review:
+
+1. Open a PR to `develop` and wait for validation and the deployment preview.
 2. Merge `develop` into `main` through a PR, preserving commit history.
 3. Confirm the ready production deployment matches the expected `main` SHA.
 4. Run the **Production smoke** workflow from `main` with that deployment SHA.

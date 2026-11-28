@@ -1,3 +1,10 @@
+---
+title: "Ensuring Persistent SSH-Agent on Windows with Git Bash"
+date: "2026-10-10"
+summary: "Set up Git Bash to start an SSH agent and load your key for Git operations on Windows."
+tags: ["git", "windows"]
+---
+
 ## Introduction
 
 Git Bash on Windows can use the Windows OpenSSH Authentication Agent. The service runs independently of Git Bash, so you can use the same loaded key across terminal windows.

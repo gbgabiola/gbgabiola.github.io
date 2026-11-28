@@ -1,0 +1,32 @@
+---
+import Layout from '@/layouts/Base.astro';
+import Breadcrumbs from '@/components/blog/Breadcrumbs.astro';
+import PostList from '@/components/blog/PostList.astro';
+import { blogTags, posts } from '@/content/posts';
+import styles from '@/styles/blog.module.css';
+export function getStaticPaths() {
+  return Object.entries(blogTags).map(([tag, label]) => ({
+    params: { tag },
+    props: { tag, label },
+  }));
+}
+interface Props {
+  tag: keyof typeof blogTags;
+  label: string;
+}
+const { tag, label } = Astro.props;
+---
+
+<Layout
+  title={`Posts tagged ${label}`}
+  description={`Blog posts about ${label}.`}
+>
+  <div class={styles.column}>
+    <header class={styles.intro}>
+      <a href="/blog">← All posts</a>
+      <Breadcrumbs current={{ label }} />
+      <h1>Posts tagged {label}</h1>
+    </header>
+    <PostList posts={posts.filter((post) => post.tags.includes(tag))} />
+  </div>
+</Layout>

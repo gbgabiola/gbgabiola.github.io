@@ -17,10 +17,13 @@ test('accepts a published post with a matching Markdown file and a valid leap da
 });
 
 test('rejects duplicate and unsafe slugs', () => {
-  assert.deepEqual(validateBlog([post, post, { ...post, slug: '../../private' }], tags, files), [
-    'Post "first-post": duplicate slug',
-    'Post "../../private": use lowercase letters, digits, and single hyphens for the slug',
-  ]);
+  assert.deepEqual(
+    validateBlog([post, post, { ...post, slug: '../../private' }], tags, files),
+    [
+      'Post "first-post": duplicate slug',
+      'Post "../../private": use lowercase letters, digits, and single hyphens for the slug',
+    ],
+  );
 });
 
 test('rejects impossible dates, blank metadata, and invalid tags', () => {
@@ -32,8 +35,8 @@ test('rejects impossible dates, blank metadata, and invalid tags', () => {
     tags: ['toString', 'git', 'git'],
   };
   assert.deepEqual(validateBlog([invalid], tags, files), [
-    'Post "first-post": title is blank',
-    'Post "first-post": summary is blank',
+    'Post "first-post": title must be a nonblank string',
+    'Post "first-post": summary must be a nonblank string',
     'Post "first-post": "2026-02-30" is not a valid YYYY-MM-DD date',
     'Post "first-post": unknown tag "toString"',
     'Post "first-post": duplicate tag "git"',
@@ -41,18 +44,39 @@ test('rejects impossible dates, blank metadata, and invalid tags', () => {
 });
 
 test('requires date-only ISO syntax and at least one tag', () => {
-  assert.deepEqual(validateBlog([{ ...post, date: '2024-2-29', tags: [] }], tags, files), [
-    'Post "first-post": "2024-2-29" is not a valid YYYY-MM-DD date',
-    'Post "first-post": add at least one tag',
-  ]);
+  assert.deepEqual(
+    validateBlog([{ ...post, date: '2024-2-29', tags: [] }], tags, files),
+    [
+      'Post "first-post": "2024-2-29" is not a valid YYYY-MM-DD date',
+      'Post "first-post": add at least one tag',
+    ],
+  );
 });
 
 test('reports missing, blank, and unregistered Markdown files together', () => {
   const anotherPost = { ...post, slug: 'second-post' };
-  const mismatchedFiles = new Map([['first-post.md', '  \n'], ['unregistered.md', '## Intro']]);
+  const mismatchedFiles = new Map([
+    ['first-post.md', '  \n'],
+    ['unregistered.md', '## Intro'],
+  ]);
   assert.deepEqual(validateBlog([post, anotherPost], tags, mismatchedFiles), [
     'first-post.md: Markdown file is blank',
     'second-post.md: missing Markdown file',
     'unregistered.md: has no matching post in the catalog',
   ]);
+});
+test('reports malformed frontmatter fields without throwing', () => {
+  assert.deepEqual(
+    validateBlog(
+      [{ ...post, title: undefined, summary: 42, date: null, tags: 'git' }],
+      tags,
+      files,
+    ),
+    [
+      'Post "first-post": title must be a nonblank string',
+      'Post "first-post": summary must be a nonblank string',
+      'Post "first-post": null is not a valid YYYY-MM-DD date',
+      'Post "first-post": tags must be an array',
+    ],
+  );
 });

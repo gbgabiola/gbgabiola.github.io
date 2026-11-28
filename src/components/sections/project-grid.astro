@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import styles from './project-grid.module.css';
+interface Props {
+  projects: readonly import('@/content/projects').Project[];
+}
+const { projects } = Astro.props;
+---
+
+<div class={styles.grid}>
+  {projects.map((project) => (
+    <article class={styles.card}>
+      <Image
+        src={project.image}
+        alt=""
+        widths={[340, 640, 960, 1280]}
+        sizes="(max-width: 640px) 100vw, (max-width: 960px) 50vw, 340px"
+        class={styles.image}
+      />
+      <div class={styles.caption}>
+        <h2>{project.name}</h2>
+        <p>{project.summary}</p>
+        <ul>
+          <li>
+            <a href={project.href} aria-label={`Live site for ${project.name}`}>
+              Live site
+            </a>
+          </li>
+          <li>
+            <a
+              href={project.source}
+              aria-label={`View source for ${project.name}`}
+            >
+              Source
+            </a>
+          </li>
+        </ul>
+      </div>
+    </article>
+  ))}
+</div>

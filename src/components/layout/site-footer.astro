@@ -1,0 +1,25 @@
+---
+import { site } from '@/config/site';
+import styles from './site-footer.module.css';
+
+const year = new Date().getUTCFullYear();
+const githubUrl = `https://github.com/${site.brand}`;
+---
+
+<footer class={styles.footer}>
+  <div class={styles.inner}>
+    <p class={styles.copyright}>
+      © {site.establishedYear}–{year}{' '}
+      <a class={styles.brand} href="/">
+        {site.brand}
+      </a>
+    </p>
+    <nav aria-label="Footer" class={styles.links}>
+      <a href={githubUrl}>
+        GitHub <span aria-hidden="true">↗</span>
+      </a>
+      <a href="/blog">Articles</a>
+      <a href="/contact">Get in touch</a>
+    </nav>
+  </div>
+</footer>

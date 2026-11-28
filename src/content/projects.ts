@@ -1,11 +1,11 @@
-import type { StaticImageData } from 'next/image';
+import type { ImageMetadata } from 'astro';
 import caffeinawa from '@/assets/images/caffeinawa.jpg';
 import emCarpentry from '@/assets/images/em-carpentry.jpg';
 import fbcsi from '@/assets/images/fbcsi.jpg';
 
 export type Project = {
   name: string;
-  image: StaticImageData;
+  image: ImageMetadata;
   summary: string;
   href: `https://${string}`;
   source: `https://${string}`;

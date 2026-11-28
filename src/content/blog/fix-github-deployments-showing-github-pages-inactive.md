@@ -1,3 +1,10 @@
+---
+title: "Fix: GitHub Deployments Showing \"github-pages inactive\""
+date: "2026-10-17"
+summary: "Switch GitHub Pages to the Actions deployment source and trigger a fresh deployment."
+tags: ["github", "deployment"]
+---
+
 If your repository shows `github-pages inactive` after switching publishing methods, use the Pages settings and the latest deploy run to check what actually published. This guide assumes you want a custom GitHub Actions workflow to deploy the site.
 
 ## Step 1: Switch Your Source to Actions

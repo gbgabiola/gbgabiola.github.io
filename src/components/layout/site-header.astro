@@ -1,0 +1,18 @@
+---
+import { profile } from '@/content/profile';
+import Navigation from './navigation.astro';
+import ThemeSwitch from '@/components/theme/theme-switch.astro';
+import styles from './site-header.module.css';
+---
+
+<header class={styles.header}>
+  <div class={styles.inner}>
+    <a href="/" class={styles.brand} aria-label={`${profile.nickname} home`}>
+      {profile.nickname}
+    </a>
+    <div class={styles.controls}>
+      <Navigation />
+      <ThemeSwitch />
+    </div>
+  </div>
+</header>

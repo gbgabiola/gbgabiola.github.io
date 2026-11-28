@@ -1,3 +1,10 @@
+---
+title: "Managing Dotfiles for Ubuntu and WSL"
+date: "2026-11-28"
+summary: "Set up shared shell and Git configuration with symlinks, local overrides, backups, and a restore workflow."
+tags: ["command-line", "git", "windows"]
+---
+
 Setting up a development environment involves small choices that accumulate over time, including shell behavior, Git aliases, editor settings, and terminal profiles. I keep those settings in a dotfiles repository so I can review changes and reuse the shared configuration on another machine.
 
 My setup targets Ubuntu on WSL 2. Native Ubuntu uses the same Linux installation path. The repository also contains reference settings for Windows Terminal and VS Code. This guide follows the installer and scripts in my repository. [Dotfiles source](https://github.com/gbgabiola/dotfiles)

@@ -1,3 +1,10 @@
+---
+title: "How to Force Kill Any Process Running on a Specific Port"
+date: "2026-11-14"
+summary: "Find the process using a port and stop it, with a graceful shutdown step before using SIGKILL."
+tags: ["command-line"]
+---
+
 If a TCP development server reports `EADDRINUSE: address already in use :::3001`, another process may already be listening on that port. On systems with `lsof`, find the listener and identify it before deciding whether to stop it.
 
 ---

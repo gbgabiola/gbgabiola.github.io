@@ -1,0 +1,21 @@
+---
+import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import styles from '@/styles/contact.module.css';
+interface Props {
+  definition: IconDefinition;
+}
+const { definition } = Astro.props;
+const [width, height, , , data] = definition.icon;
+---
+
+<svg
+  viewBox={`0 0 ${width} ${height}`}
+  class={styles.icon}
+  fill="currentColor"
+  aria-hidden="true"
+  focusable="false"
+>
+  {[data].flat().map((path) => (
+    <path d={path} />
+  ))}
+</svg>
